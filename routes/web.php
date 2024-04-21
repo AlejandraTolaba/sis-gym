@@ -11,10 +11,14 @@
 |
 */
 
+App::setLocale("es");
+
 Route::get('/', function () {
     return view('layouts.admin');
 });
 
 Auth::routes();
+
+Route::resource('activities','ActivityController');
 
 Route::get('/home', 'HomeController@index')->name('home');

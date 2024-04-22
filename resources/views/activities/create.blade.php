@@ -4,7 +4,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-lg-8 col-md-12 col-md-offset-2" id="accordion">
+            <div class="col-lg-8 col-md-12 offset-md-2" id="accordion">
                 <div class="card card-success card-outline">
                     <div class="card-header">
                         <div class="row">
@@ -30,14 +30,38 @@
                                                 <strong> {{ $errors->first('name', ':message') }} </strong>
                                             </span>
                                     </div>
-                                
-                                    <div class="row">
-                                        <div class="col-md-12 text-center mt-3">
-                                            <!-- <a href="{{ URL::previous() }}" class="btn btn-secondary">Cancelar</a> -->
-                                            <a href="{{ route('activities.index') }}" class="btn btn-secondary">Cancelar</a>
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
-                                        </div>
+
+                                    <label for="">Elija los planes de la actividad e ingrese precio: </label>
+
+                                    <div class="form-row align-items-center">
+                                        @foreach ($plans as $plan)
+                                            <div class="col-md-4 offset-md-2 text-center">
+                                                <div class="form-check mb-2">          
+                                                    <input class="form-check-input" type="checkbox" id="checkbox-{{$plan->id}}" name="checkbox-{{$plan->id}}" value="{{ $plan->id }}">
+                                                    <label class="form-check-label" for="checkbox-{{$plan->id}}">
+                                                    {{ $plan->name }}
+                                                    </label>               
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mr-auto">
+                                                <label class="sr-only" for="inlineFormInputGroup">Precio</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">$</div>
+                                                    </div>
+                                                    <input type="number" step = "any" class="form-control" id="price" name="price-{{$plan->id}}" id="inlineFormInputGroup">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>                 
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-md-12 text-center mt-3">
+                                        <!-- <a href="{{ URL::previous() }}" class="btn btn-secondary">Cancelar</a> -->
+                                        <a href="{{ route('activities.index') }}" class="btn btn-secondary">Cancelar</a>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
                                     </div>
+                                </div>
                                 </div>
                                 <!-- /.card-body -->
                             </form>

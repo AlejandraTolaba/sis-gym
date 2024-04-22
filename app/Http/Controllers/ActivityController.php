@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Activity;
+use App\Plan;
+use App\PlanActivity;
 use Yajra\DataTables\DataTables;
 
 class ActivityController extends Controller
@@ -32,7 +34,8 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        return view('activities.create');
+        $plans = Plan::all();
+        return view('activities.create', compact('plans'));
     }
 
     /**
@@ -46,9 +49,19 @@ class ActivityController extends Controller
         request()->validate([
             'name' => "required|unique:activities,name",
         ]);
-
+        
         $activity = new Activity(request()->all());
-        $activity->save();
+        
+        for ($i=1; $i < 5 ; $i++) { 
+            if($request->has('checkbox-'.$i)){
+                $activity->save(); 
+                $plan_activity = new PlanActivity();
+                $plan_activity->activity_id = $activity->id;
+                $plan_activity->plan_id = $i;
+                $plan_activity->price = $request->get('price-'.$i);
+                $plan_activity->save();
+            }
+        }
         return redirect('activities')->with('info','Actividad agregada con éxito');
     }
 

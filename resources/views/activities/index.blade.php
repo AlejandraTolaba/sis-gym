@@ -2,7 +2,7 @@
 
 @section('content')
     @if (session()->has('info'))
-        <div class="alert alert-success alert-dismissible fade show col-md-8 col-md-offset-2" role="alert">
+        <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2" role="alert">
             <strong>{{session('info')}}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>

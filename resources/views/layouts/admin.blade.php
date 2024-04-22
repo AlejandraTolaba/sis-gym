@@ -82,31 +82,30 @@
                     <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                     
-                    <li class="nav-header">EXAMPLES</li>
+                    <li class="nav-header"></li>
                     <li class="nav-item">
-                        <a href="pages/calendar.html" class="nav-link">
-                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <a href="{{ route('activities.index') }}" class="nav-link">
+                        <i class="nav-icon far fa-folder"></i>
                         <p>
-                            Example 1
-                            <span class="badge badge-info right">2</span>
+                            Actividades
                         </p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="pages/gallery.html" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                        <!-- <i class="nav-icon far fa-image"></i> -->
                         <p>
-                            Example 2
+                            
                         </p>
                         </a>
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-envelope"></i>
+                        <!-- <i class="nav-icon far fa-envelope"></i>
                         <p>
-                            Example 3
+                            
                             <i class="fas fa-angle-left right"></i>
-                        </p>
+                        </p> -->
                         </a>
                     </li>
                     </ul>

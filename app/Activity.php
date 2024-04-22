@@ -14,4 +14,8 @@ class Activity extends Model
         'name',
         'state'
     ];
+
+    public function plans(){
+        return $this->belongsToMany('App\Plan');
+    }
 }

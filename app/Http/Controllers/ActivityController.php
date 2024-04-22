@@ -62,6 +62,9 @@ class ActivityController extends Controller
                 $plan_activity->save();
             }
         }
+        if ($activity->id == null) {
+            $activity->save(); 
+        }
         return redirect('activities')->with('info','Actividad agregada con éxito');
     }
 

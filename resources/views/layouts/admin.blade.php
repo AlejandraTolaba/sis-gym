@@ -92,10 +92,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">
-                        <!-- <i class="nav-icon far fa-image"></i> -->
+                        <a href="{{ route('students.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-users"></i>
                         <p>
-                            
+                            Alumnos
                         </p>
                         </a>
                     </li>

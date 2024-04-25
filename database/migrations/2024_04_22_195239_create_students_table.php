@@ -29,7 +29,7 @@ class CreateStudentsTable extends Migration
             $table->string('observations')->nullable();
             // $table->date('discharge_date');
             $table->string('state',10)->default('activo');
-            $table->decimal('balance',6,2)->default(0);
+            $table->float('balance')->default(0);
             $table->timestamps();
         });
     }

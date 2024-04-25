@@ -38,6 +38,7 @@
                                         <th>Teléfono</th>
                                         <th>Estado</th>
                                         <th>Saldo</th>
+                                        <!-- <th width="100px">Opciones</th> -->
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">

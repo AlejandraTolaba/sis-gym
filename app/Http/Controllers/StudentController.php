@@ -21,8 +21,11 @@ class StudentController extends Controller
             ->addColumn('fullname', function($student){
                 return $student->name.' '.$student->lastname;
             })
-            // ->addColumn('action', 'activity.actions')
-            // ->rawColumns(['action'])
+            ->addColumn('balance', function($student){
+                return '$'.number_format($student->balance, 2, ',', '.');
+            })
+            ->addColumn('action', 'students.actions')
+            ->rawColumns(['action'])
             ->make(true);
         }
         return view('students.index');

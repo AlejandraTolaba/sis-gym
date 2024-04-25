@@ -14,4 +14,8 @@ class Plan extends Model
     public function activities(){
         return $this->belongsToMany('App\Activity');
     }
+
+    public function inscriptions(){
+        return $this->hasMany('App\Inscription');
+    }
 }

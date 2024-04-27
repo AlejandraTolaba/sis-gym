@@ -38,7 +38,7 @@
                                         <th>Teléfono</th>
                                         <th>Estado</th>
                                         <th>Saldo</th>
-                                        <!-- <th width="100px">Opciones</th> -->
+                                        <th width="150px">Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
@@ -65,7 +65,7 @@
                     { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
                     { data: 'state', name:'state', orderable:false},
                     { data: 'balance', name:'balance'},
-                    // { data: 'action', name:'action', orderable:false, searchable:false},
+                    { data: 'action', name:'action', orderable:false, searchable:false},
                 ],
                 language: {
                     "decimal": ",",

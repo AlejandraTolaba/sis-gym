@@ -12,7 +12,7 @@ class MethodOfPaymentSeeder extends Seeder
     public function run()
     {
         // DB::table('methods_of_payment')->delete();
-        $data = ['Contado','Tarjeta de crédito','Tarjeta de débito'];
+        $data = ['Contado','Tarjeta de crédito','Tarjeta de débito', 'Débito automático'];
 
         for ($i=0; $i <sizeof($data) ; $i++) {
             DB::table('methods_of_payment')

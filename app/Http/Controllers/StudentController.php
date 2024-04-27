@@ -24,6 +24,9 @@ class StudentController extends Controller
             ->addColumn('balance', function($student){
                 return '$'.number_format($student->balance, 2, ',', '.');
             })
+            ->setRowClass(function ($student) {
+                return $student->balance > 0 ? "danger text-danger" : "";
+            })
             ->addColumn('action', 'students.actions')
             ->rawColumns(['action'])
             ->make(true);

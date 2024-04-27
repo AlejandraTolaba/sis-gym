@@ -1,11 +1,13 @@
 <?php
 
 namespace Tests\Unit;
-
+use PlanSeeder;
 use Tests\TestCase;
-
+use Illuminate\Foundation\Testing\RefreshDatabase;
 class ActivityTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic unit test example.
      *
@@ -13,6 +15,7 @@ class ActivityTest extends TestCase
      */
     public function testCreateActivity()
     {
+        $this->seed(PlanSeeder::class);
         $this->visit('activities/create')
             ->see('Nueva Actividad')
             ->type('Boxeo','name')

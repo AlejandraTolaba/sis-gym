@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Student;
 use Yajra\DataTables\DataTables;
+use Image;
+use Illuminate\Support\Str;
+
 
 class StudentController extends Controller
 {
@@ -64,8 +67,22 @@ class StudentController extends Controller
         ]);
 
         $student = new Student(request()->all());
-        // dd($student);
-        
+        $img = $request->get('photo_camera');
+        // Para guardar la foto del alumno en la carpeta public/imagenes/alumnos
+        if ($img!=""){
+            $img = str_replace('data:image/png;base64,', '', $img);
+            $img = str_replace(' ', '+', $img);
+            $image = base64_decode($img);
+            $temp_name = Str::random(5);
+            $extension="png";
+            $photo_name=  $temp_name.'-'.date('Y-m-d').'.'.$extension; 
+            Image::make($image)->resize(144,144)->save(public_path('img/students/'.$photo_name));
+            $student->photo=$photo_name;
+        }
+        else{
+            $student->photo= 'avatar.png';
+        }
+        // dd($student->photo);
         $student->save();
        
         return redirect('students')->with('info','Alumno agregado con éxito');

@@ -8,7 +8,10 @@ $('input').on('input', function(index, element){
     if (inputs_plans. length >= 2) {
         $('#btns_create_plan').removeClass('d-none');
     }
-    console.log(inputs_plans.length);
+    else{
+        $('#btns_create_plan').addClass('d-none');
+    }
+    // console.log(inputs_plans.length);
 });
 
 $("#btnSavePlan").click(function (e){

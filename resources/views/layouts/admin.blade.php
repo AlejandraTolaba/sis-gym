@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
         <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
         <!-- Select2 -->
-        <link rel="stylesheet" href="/plugins//select2/css/select2.min.css">
+        <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="/dist/css/adminlte.min.css">
         <link rel="stylesheet" href="/css/app.css">

@@ -52,7 +52,7 @@
                                     <div class="form-group d-none" id="plans_table">
                                         <!-- <label for="plan_id">Ingrese precio</label> -->
                                         <div class="row">
-                                            <div class="col-lg-8 col-md-12 offset-md-2">
+                                            <div class="col-md-8 offset-md-2">
                                                 <table class="table table-bordered data-table" id="table">
                                                     <thead class="text-center">
                                                     <tr>
@@ -69,8 +69,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-5">
-                                    <div class="col-md-12 text-center mt-3">
+                                <div class="row">
+                                    <div class="col-md-12 text-center mt-2">
                                         <!-- <a href="{{ URL::previous() }}" class="btn btn-secondary">Cancelar</a> -->
                                         <a href="{{ route('activities.index') }}" class="btn btn-secondary">Cancelar</a>
                                         <button type="submit" class="btn btn-primary">Guardar</button>

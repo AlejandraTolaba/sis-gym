@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Activity;
 use App\Inscription;
+use App\Movement;
 use DB;
 use Carbon\Carbon;
 
@@ -76,6 +77,14 @@ class InscriptionController extends Controller
             $inscription->balance=$balance_new;
         }
         $inscription->save();
+        if ($inscription->id) {
+            $movement= new Movement();
+            $movement->concept= "Inscripción N° ".$inscription->id;
+            $movement->type="INGRESO";
+            $movement->amount=$inscription->amount;
+            $movement->method_of_payment_id= $inscription->method_of_payment_id;
+            $movement->save();
+        }
         return redirect('students')->with('info','Inscripción agregada con éxito');
         
         // dd($inscription);

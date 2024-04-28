@@ -1,1 +1,1 @@
-<a href="{{route('inscriptions.create',$id)}}"><button name="craete" type="submit" class="btn btn-info"><i class="fa fa-plus"></i> Inscripción</button></a>
+<a href="{{route('inscriptions',$id)}}"><button name="index" type="submit" class="btn btn-info"><i class="fa fa-eye"></i> Inscripciones</button></a>

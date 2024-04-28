@@ -16,9 +16,14 @@ class InscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $inscriptions = $student->inscriptions;
+        // $activities = $inscriptions->activities;
+        // dd($inscriptions);
+            
+        return view('students.inscriptions.index',compact('student'));
     }
 
     /**

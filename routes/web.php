@@ -23,7 +23,7 @@ Route::resource('students','StudentController');
 // Route::resource('students/inscriptions','InscriptionController');
 Route::get('students/inscriptions/create/{id}','InscriptionController@create')->name('inscriptions.create');
 Route::post('students/inscriptions/{id}','InscriptionController@store')->name('inscriptions.store');
-
+Route::get('students/inscriptions/{id}','InscriptionController@index')->name('inscriptions');
 Route::get('dropdown',function(){
     $id=Request::get('option');
     $activity = App\Activity::find($id);

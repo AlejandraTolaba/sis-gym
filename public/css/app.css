@@ -1,0 +1,9 @@
+.btn-secondary {
+    color: #fff !important;
+}
+
+.add_plan {
+    color: #28a745 !important;
+    font-weight: 700;
+    cursor: pointer;
+}

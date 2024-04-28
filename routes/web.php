@@ -31,4 +31,6 @@ Route::get('dropdown',function(){
     return $plans;
 });
 
+Route::post('plans/create','PlanController@store');
+
 Route::get('/home', 'HomeController@index')->name('home');

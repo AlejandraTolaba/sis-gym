@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Activity;
 use App\Inscription;
+use App\Movement;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 
 class InscriptionController extends Controller
 {
@@ -16,9 +18,14 @@ class InscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $inscriptions = $student->inscriptions;
+        // $activities = $inscriptions->activities;
+        // dd($inscriptions);
+            
+        return view('students.inscriptions.index',compact('student'));
     }
 
     /**
@@ -71,7 +78,15 @@ class InscriptionController extends Controller
             $inscription->balance=$balance_new;
         }
         $inscription->save();
-        return redirect('students')->with('info','Inscripción agregada con éxito');
+        if ($inscription->id) {
+            $movement= new Movement();
+            $movement->concept= "Inscripción N° ".$inscription->id;
+            $movement->type="INGRESO";
+            $movement->amount=$inscription->amount;
+            $movement->method_of_payment_id= $inscription->method_of_payment_id;
+            $movement->save();
+        }
+        return redirect('students')->with('success','Inscripción agregada con éxito');
         
         // dd($inscription);
         
@@ -120,5 +135,39 @@ class InscriptionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    /***
+     * 
+     * Attendances
+     * 
+     */
+    public function register()
+    {
+        return view('students.attendances.register');
+    }
+
+    public function showStudent(Request $request)
+    {
+        $query=trim($request->get('searchText'));
+        $student = Student::where('dni','LIKE',$query)->where('state','activo')->first();
+        if ($student) {
+            $inscription = Inscription::where('student_id',$student->id)->where('state','activa')->first();
+            if($inscription){
+                if ($inscription->classes > 0){
+                    $inscription->classes--;
+                    $inscription->update();
+                }
+                // dd($inscription);
+                return view('students.attendances.show',compact('inscription'));
+            }
+            else{
+                return Redirect::back()->with('error',"El DNI ". $query . " no tiene inscripciones activas");   
+            }
+        }else{
+            return Redirect::back()->with('error',"El DNI ". $query . " no está registrado");   
+        }
+            
     }
 }

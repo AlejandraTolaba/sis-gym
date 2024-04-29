@@ -51,17 +51,22 @@ class ActivityController extends Controller
         ]);
         
         $activity = new Activity(request()->all());
-        
-        for ($i=1; $i < 5 ; $i++) { 
-            if($request->has('checkbox-'.$i)){
-                $activity->save(); 
-                $plan_activity = new PlanActivity();
-                $plan_activity->activity_id = $activity->id;
-                $plan_activity->plan_id = $i;
-                $plan_activity->price = $request->get('price-'.$i);
-                $plan_activity->save();
-            }
+        $plans=$request->get('plans_id');
+        $prices=$request->get('td_price');
+        // dd($prices);
+        $cont = 0;
+        while ( $cont < count($plans) ) {
+            $activity->save(); 
+            $data_plans = explode("_",$plans[$cont]);
+            $plan_activity = new PlanActivity();
+            $plan_activity->activity_id = $activity->id;
+            $plan_activity->plan_id =$data_plans[0];
+            $plan_activity->price = $prices[$cont];
+            $plan_activity->save();
+            $cont = $cont+1;
+            // dd($data_plans);
         }
+        
         if ($activity->id == null) {
             $activity->save(); 
         }

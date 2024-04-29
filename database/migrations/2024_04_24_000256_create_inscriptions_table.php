@@ -23,7 +23,7 @@ class CreateInscriptionsTable extends Migration
             $table->unsignedBigInteger('method_of_payment_id');
             $table->integer('classes');
             $table->float('amount');
-            $table->float('balance');
+            $table->float('balance')->default(0);
             $table->string('state')->default('activa');
             $table->foreign('student_id')->references('id')->on('students');
             $table->foreign('plan_id')->references('id')->on('plans');

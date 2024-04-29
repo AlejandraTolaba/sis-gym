@@ -24,7 +24,9 @@ class Student extends Model
         'certificate_date',
         'observations',
         'state',
-        'balance'
+        'balance',
+        'photo',
+        'routine'
         
     ];
 

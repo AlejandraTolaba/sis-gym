@@ -18,8 +18,7 @@
 		    $('#price').val(data[1]);
             // console.log(data[0]);
         });
-    });	
-        
+    });	       
 </script>
 @endpush
 @section('content')

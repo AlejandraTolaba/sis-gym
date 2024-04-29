@@ -28,7 +28,7 @@
                                     <div class="form-row w-100">
                                         <div class="col-md-6 mb-3">
                                             <label for="name">Nombre(*)</label>
-                                            <input class="form-control bg-ligth shadow-sm @if($errors->first('name')) is-invalid @endif"
+                                            <input class="form-control mb-3 bg-ligth shadow-sm @if($errors->first('name')) is-invalid @endif"
                                             id="name"
                                             type="text"
                                             name="name"
@@ -36,10 +36,8 @@
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('name', ':message') }} </strong>
                                                 </span>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
                                             <label for="lastname">Apellido(*)</label>
-                                            <input class="form-control bg-ligth shadow-sm @if($errors->first('lastname')) is-invalid @endif"
+                                            <input class="form-control mb-3 bg-ligth shadow-sm @if($errors->first('lastname')) is-invalid @endif"
                                             id="lastname"
                                             type="text"
                                             name="lastname"
@@ -48,6 +46,25 @@
                                                     <strong> {{ $errors->first('lastname', ':message') }} </strong>
                                                 </span>
                                         </div>
+                                        <div class="col-md-6" mb-3>
+											<label>Foto del alumno</label>
+											<div class="row">
+												<div class="col-lg-4">
+													<!-- Video via webcam -->
+													<!-- <div class="video-wrap"> -->
+														<video id="video" playsinline autoplay style="border:1px solid #b0b8b9; height:100px"></video>
+												<!-- 	</div> -->
+													<!-- Boton para tomar foto -->
+													<div class="controller" > 
+														<input type="button" name="snap" id="snap" value="Capturar foto" class="btn btn-outline-info btn-sm"> 
+													</div>
+												</div>
+												<div class="col-lg-2">
+														<canvas id="canvas" width="110" height="100" style="border:1px solid #b0b8b9;"></canvas>
+														<input style="display:none" id='photo_camera' name="photo_camera" type="text" class="form-control">
+												</div>
+											</div> <!-- end row -->		
+										</div> <!-- end col-lg-6-->
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
@@ -177,9 +194,12 @@
                                     </div>    
                                     <div class="form-group">
                                         <label for="observations">Observaciones</label>
-                                        <textarea class="form-control" id="observations" rows="3"></textarea>
+                                        <textarea class="form-control" id="observations" name="observations" rows="3"></textarea>
                                     </div>
-                                
+                                    <div class="form-group">
+                                        <label for="routine">Rutina</label>
+                                        <textarea class="form-control" id="routine" name="routine" rows="3"></textarea>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-12 text-center mt-3">
                                             <a href="{{ route('students.index') }}" class="btn btn-secondary">Cancelar</a>
@@ -197,3 +217,6 @@
     </section>
     <!-- /.content -->
 @endsection
+@push('scripts')
+    <script src="{{asset('js/add_photo_student.js')}}"></script>
+@endpush

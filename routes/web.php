@@ -23,6 +23,12 @@ Route::resource('students','StudentController');
 // Route::resource('students/inscriptions','InscriptionController');
 Route::get('students/inscriptions/create/{id}','InscriptionController@create')->name('inscriptions.create');
 Route::post('students/inscriptions/{id}','InscriptionController@store')->name('inscriptions.store');
+Route::get('students/inscriptions/{id}','InscriptionController@index')->name('inscriptions');
+/*              Attendances             */
+Route::get('attendances/register','InscriptionController@register')->name('attendances.register');
+Route::get('attendances/showStudent','InscriptionController@showStudent')->name('attendances.showStudent');
+Route::get('attendances/updateClasses/{id}','InscriptionController@updateClasses');
+
 
 Route::get('dropdown',function(){
     $id=Request::get('option');
@@ -30,5 +36,7 @@ Route::get('dropdown',function(){
     $plans = $activity->plans()->pluck('name',DB::raw('CONCAT(plan_id,"_",price) as plan'));
     return $plans;
 });
+
+Route::post('plans/create','PlanController@store');
 
 Route::get('/home', 'HomeController@index')->name('home');

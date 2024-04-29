@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
         <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+        <!-- Select2 -->
+        <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="/dist/css/adminlte.min.css">
         <link rel="stylesheet" href="/css/app.css">
@@ -99,13 +101,12 @@
                         </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                        <!-- <i class="nav-icon far fa-envelope"></i>
-                        <p>
-                            
-                            <i class="fas fa-angle-left right"></i>
-                        </p> -->
+                    <li class="nav-item">
+                        <a href="{{ route('attendances.register') }}" class="nav-link">
+                            <i class="nav-icon fa fa-check"></i>
+                            <p>
+                                Asistencias
+                            </p>
                         </a>
                     </li>
                     </ul>
@@ -114,7 +115,6 @@
                 </div>
                 <!-- /.sidebar -->
             </aside>
-
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -183,6 +183,11 @@
         <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
         <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
         <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <!-- Select2 -->
+        <script src="/plugins/select2/js/select2.full.min.js"></script>
+
+        <script src="/js/app.js"></script>
         @stack('scripts')
+        @yield('js')
     </body>
 </html>

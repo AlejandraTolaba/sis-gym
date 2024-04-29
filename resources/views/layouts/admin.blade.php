@@ -101,13 +101,12 @@
                         </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                        <!-- <i class="nav-icon far fa-envelope"></i>
-                        <p>
-                            
-                            <i class="fas fa-angle-left right"></i>
-                        </p> -->
+                    <li class="nav-item">
+                        <a href="{{ route('attendances.register') }}" class="nav-link">
+                            <i class="nav-icon fa fa-check"></i>
+                            <p>
+                                Asistencias
+                            </p>
                         </a>
                     </li>
                     </ul>
@@ -116,7 +115,6 @@
                 </div>
                 <!-- /.sidebar -->
             </aside>
-
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -187,6 +185,8 @@
         <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
         <!-- Select2 -->
         <script src="/plugins/select2/js/select2.full.min.js"></script>
+
+        <script src="/js/app.js"></script>
         @stack('scripts')
         @yield('js')
     </body>

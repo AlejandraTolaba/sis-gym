@@ -36,7 +36,7 @@
                                         <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Estado</th>
-                                        <!-- <th></th> -->
+                                        <th>Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
@@ -61,7 +61,7 @@
                     { data: 'id', name:'id'},
                     { data: 'name', name:'name'},
                     { data: 'state', name:'state'},
-                    // { data: 'action', name:'action', orderable:false, searchable:false},
+                    { data: 'action', name:'action', orderable:false, searchable:false},
                 ],
                 language: {
                     "decimal": ",",

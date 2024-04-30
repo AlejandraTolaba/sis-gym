@@ -16,7 +16,7 @@ class Activity extends Model
     ];
 
     public function plans(){
-        return $this->belongsToMany('App\Plan');
+        return $this->belongsToMany('App\Plan')->withPivot('price');;
     }
 
     public function inscriptions(){

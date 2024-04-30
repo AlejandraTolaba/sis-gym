@@ -20,6 +20,9 @@
                             <div class="row text-center">
                                 <div class="card-title col-md-12">
                                     <h4>{{ \Carbon\Carbon::parse(now())->formatLocalized('%d de %B de %Y') }}</h4>
+                                    @if (session('error'))
+                                            <audio src="/audios/error.mp3" autoplay></audio>
+                                    @endif
                                 </div>
                             </div>
                         </div>

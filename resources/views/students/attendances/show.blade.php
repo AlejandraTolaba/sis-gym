@@ -51,7 +51,7 @@
                             </div> <!-- /.row -->
                             <div class="row">
                                 <div class="col-md-12 text-center mt-2">
-                                    <a href="{{ URL::previous() }}" class="btn btn-secondary">Volver</a>
+                                    <a href="{{ URL::previous() }}" class="btn btn-secondary" autofocus>Volver</a>
                                 </div>
                             </div>
                         </div>

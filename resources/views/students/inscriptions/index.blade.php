@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <div class="row">
                                 @if ($student->inscriptions->isNotEmpty())
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 table-responsive-md">
                                         <table class="table table-bordered" width="100%">
                                             <thead class="text-center">
                                             <tr>

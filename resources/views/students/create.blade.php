@@ -4,7 +4,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-lg-8 col-md-12 offset-md-2" id="accordion">
+            <div class="col-md-8 offset-md-2" id="accordion">
                 <div class="card card-success card-outline">
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                     <div class="card-header">
@@ -28,7 +28,7 @@
                                     <div class="form-row w-100">
                                         <div class="col-md-6 mb-3">
                                             <label for="name">Nombre(*)</label>
-                                            <input class="form-control mb-3 bg-ligth shadow-sm @if($errors->first('name')) is-invalid @endif"
+                                            <input class="form-control bg-ligth shadow-sm @if($errors->first('name')) is-invalid @endif"
                                             id="name"
                                             type="text"
                                             name="name"
@@ -36,8 +36,8 @@
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('name', ':message') }} </strong>
                                                 </span>
-                                            <label for="lastname">Apellido(*)</label>
-                                            <input class="form-control mb-3 bg-ligth shadow-sm @if($errors->first('lastname')) is-invalid @endif"
+                                            <label for="lastname" class="mt-3">Apellido(*)</label>
+                                            <input class="form-control bg-ligth shadow-sm @if($errors->first('lastname')) is-invalid @endif"
                                             id="lastname"
                                             type="text"
                                             name="lastname"

@@ -27,6 +27,9 @@ class StudentController extends Controller
             ->addColumn('balance', function($student){
                 return '$'.number_format($student->balance, 2, ',', '.');
             })
+            ->addColumn('state', function($activity){
+                return ucfirst($activity->state);
+            })
             ->setRowClass(function ($student) {
                 return $student->balance > 0 ? "text-danger" : "";
             })

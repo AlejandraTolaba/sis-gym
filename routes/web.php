@@ -24,10 +24,14 @@ Route::resource('students','StudentController');
 Route::get('students/inscriptions/create/{id}','InscriptionController@create')->name('inscriptions.create');
 Route::post('students/inscriptions/{id}','InscriptionController@store')->name('inscriptions.store');
 Route::get('students/inscriptions/{id}','InscriptionController@index')->name('inscriptions');
+
+Route::get('students/inscriptions/{id}/show','InscriptionController@show')->name('inscriptions.show');
+Route::post('students/inscriptions/{id}/show','InscriptionController@updateBalance')->name('inscriptions.updateBalance');
 /*              Attendances             */
 Route::get('attendances/register','InscriptionController@register')->name('attendances.register');
 Route::get('attendances/showStudent','InscriptionController@showStudent')->name('attendances.showStudent');
 Route::get('attendances/updateClasses/{id}','InscriptionController@updateClasses');
+
 
 
 Route::get('dropdown',function(){

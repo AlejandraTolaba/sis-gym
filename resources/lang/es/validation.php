@@ -86,6 +86,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'method_of_payment_id' => [
+            'required' => 'Debe seleccionar una forma de pago.',
+        ]
     ],
     /*
     |--------------------------------------------------------------------------
@@ -117,8 +120,8 @@ return [
         'imc' => 'IMC',
         'imm' => 'IMM',
         'mb' => 'MB',
-        'idforma_de_pago'=>'Seleccione forma de pago',
         'type'=>'Seleccione tipo',
+        'amount'=>'Monto',
     ],
 ];
 

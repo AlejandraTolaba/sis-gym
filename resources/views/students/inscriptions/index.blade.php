@@ -2,17 +2,14 @@
 
 @section('content')
     @if (session()->has('info'))
-        <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2" role="alert">
+        <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
             <strong>{{session('info')}}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
         </div>         
     @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-lg-8 col-md-12 offset-md-2" id="accordion">
+            <div class="col-md-12" id="accordion">
                 <div class="card card-success card-outline">
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                         <div class="card-header">
@@ -40,6 +37,7 @@
                                                 <th>Cantidad de clases</th>
                                                 <th>Saldo</th>
                                                 <th>Estado</th>
+                                                <th>Opciones</th>
                                             </tr>
                                             </thead>
                                             <tbody class="text-center">
@@ -50,11 +48,12 @@
                                                         <td><?php $fv = new DateTime($insc->expiration_date); echo $fv->format('d-m-Y');?></td> 
                                                         <td>{{ $insc->classes }}</td>
                                                         @if($insc->balance > 0)
-                                                        <td class = "danger text-danger">{{'$'.$insc->balance}}</td>
+                                                            <td class = "danger text-danger">$<?=number_format($insc->balance,2,',','.') ?></td>
                                                         @else 
-                                                            <td>{{ '$'.$insc->balance }}</td>
+                                                            <td>$<?=number_format($insc->balance,2,',','.') ?></td>
                                                         @endif 
                                                         <td>{{ $insc->state }}</td>
+                                                        <td><a href="{{ route('inscriptions.updateBalance',$insc->id) }}"><button name="actualizar" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i>Actualizar saldo</button></a></td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

@@ -1,1 +1,2 @@
+<a href="{{ route('students.edit',$id) }}"><button name="edit" title="Editar alumno" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</button></a>
 <a href="{{route('inscriptions',$id)}}"><button name="index" type="submit" title="Ver inscripciones" class="btn btn-info"><i class="fa fa-eye"></i> Inscripciones</button></a>

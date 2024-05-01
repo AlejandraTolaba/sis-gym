@@ -2,14 +2,14 @@
 
 @section('content')
     @if (session()->has('info'))
-        <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2" role="alert">
+        <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
             <strong>{{session('info')}}</strong>
         </div>         
     @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-8 offset-md-2" id="accordion">
+            <div class="col-md-12" id="accordion">
                 <div class="card card-success card-outline">
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                         <div class="card-header">
@@ -35,7 +35,7 @@
                                         <th>Teléfono</th>
                                         <th>Estado</th>
                                         <th>Saldo</th>
-                                        <th width="150px">Opciones</th>
+                                        <th>Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">

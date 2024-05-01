@@ -34,7 +34,7 @@
                                 <input type="text" class="form-control mb-4" name="searchText" placeholder="Ingrese DNI..." autofocus>          
                                 <div class="row">
                                     <div class="col-md-12 text-center mt-2">
-                                        <button type="submit" class="btn btn-primary" id="btn">Registrar Asistencia</button>
+                                        <button type="submit" class="btn btn-primary" id="btn" title="Registrar asistencia">Registrar Asistencia</button>
                                     </div>
                                 </div>
                             </form>

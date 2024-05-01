@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@push('scripts')
+
+@endpush
 
 @section('content')
     <!-- Main content -->
@@ -19,8 +22,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="text-center p-2" style="background-color: gray;">
-                                        <h4 class="text-white">{{ $inscription->activity->name }}</h4> <!-- ;font-size:300% -->
+                                    <div class="text-center p-2 alert alert-secondary alert-important">
+                                        <h4>{{ $inscription->activity->name }}</h4> <!-- ;font-size:300% -->
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table" id="table">

@@ -69,7 +69,7 @@
                                             <div class="form-group">
                                                 <label for="activity_id">Actividad</label>
                                                 <select id="activity_id" name='activity_id' class="form-control activity select2 shadow-sm @if($errors->first('activity_id')) is-invalid @endif" >
-                                                    <option selected>Seleccione una actividad</option>
+                                                    <option selected value="">Seleccione una actividad</option>
                                                     @foreach ($activities as $activity)
                                                         <option value="{{$activity->id}}" {{old('activity_id') == $activity->id ? 'selected' : ''}}>{{$activity->name}}</option>
                                                     @endforeach
@@ -82,7 +82,7 @@
                                         <div class="col-md-4 mb-3">
                                             <div class="form-group">
                                                 <label for="plan_id">Plan</label>
-                                                <select id="plan_id" name='plan_id' class="form-control activity select2 shadow-sm @if($errors->first('plan_id')) is-invalid @endif" >
+                                                <select id="plan_id" name='plan_id' class="form-control plan select2 shadow-sm @if($errors->first('plan_id')) is-invalid @endif" >
                                                     
                                                 </select>
                                                 <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                                        
                                         <div class="col-md-3">
                                             <label for="price">Precio</label>
-                                            <div class="input-group mb-2">
+                                            <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">$</div>
                                                     </div>
@@ -106,8 +106,8 @@
                                         <div class="col-md-9 mb-3">
                                             <div class="form-group">
                                                 <label for="method_of_payment_id">Forma de pago</label>
-                                                <select id="method_of_payment_id" name='method_of_payment_id' class="form-control activity select2 shadow-sm @if($errors->first('method_of_payment_id')) is-invalid @endif" >
-                                                    <option selected>Seleccione forma de pago</option>
+                                                <select id="method_of_payment_id" name='method_of_payment_id' class="form-control select2 shadow-sm @if($errors->first('method_of_payment_id')) is-invalid @endif" >
+                                                    <option selected value="">Seleccione forma de pago</option>
                                                     @foreach ($methods_of_payment as $method_of_paymen)
                                                         <option value="{{$method_of_paymen->id}}" {{old('method_of_payment_id') == $method_of_paymen->id ? 'selected' : ''}}>{{$method_of_paymen->name}}</option>
                                                     @endforeach

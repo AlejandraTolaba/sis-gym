@@ -18,7 +18,7 @@
                                     <h4>Alumnos</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('students.create') }}"><button class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
+                                    <a href="{{ route('students.create') }}"><button title="Agregar alumno" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +84,7 @@
                         "previous": "Anterior"
                     }
                 },
+                responsive: true,
             });
         });
     </script>

@@ -48,7 +48,7 @@
                                                         <td><?php $fv = new DateTime($insc->expiration_date); echo $fv->format('d-m-Y');?></td> 
                                                         <td>{{ $insc->classes }}</td>
                                                         @if( $insc->balance > 0)
-                                                            <td class = "danger text-danger">$<?=number_format($insc->balance,2,',','.') ?></td>
+                                                            <td class = "text-danger">$<?=number_format($insc->balance,2,',','.') ?></td>
                                                         @else 
                                                             <td>$<?=number_format($insc->balance,2,',','.') ?></td>
                                                         @endif 

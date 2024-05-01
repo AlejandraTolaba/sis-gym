@@ -32,7 +32,7 @@
                 <div class="row d-none" id="btns_create_plan">
                     <div class="col-md-12 text-center mt-3">
                         <a data-dismiss="modal" class="btn btn-secondary">Cancelar</a>
-                        <button data-dismiss="modal" class="btn btn-primary" id="btnSavePlan" name="btnSavePlan" onclick="setTimeout('addPlan()',1000);">Guardar</button>
+                        <button data-dismiss="modal" class="btn btn-primary" id="btnSavePlan" autofocus name="btnSavePlan" onclick="setTimeout('addPlan()',1000);">Guardar</button>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,9 @@ class ActivityController extends Controller
             $activities = Activity::all();
             return DataTables::of($activities)
             ->addColumn('action', 'activities.actions')
+            ->addColumn('state', function($activity){
+                return ucfirst($activity->state);
+            })
             ->rawColumns(['action'])
             ->make(true);
         }
@@ -53,18 +56,12 @@ class ActivityController extends Controller
         $activity = new Activity(request()->all());
         $plans=$request->get('plans_id');
         $prices=$request->get('td_price');
-        // dd($prices);
         $cont = 0;
         while ( $cont < count($plans) ) {
             $activity->save(); 
             $data_plans = explode("_",$plans[$cont]);
-            $plan_activity = new ActivityPlan();
-            $plan_activity->activity_id = $activity->id;
-            $plan_activity->plan_id =$data_plans[0];
-            $plan_activity->price = $prices[$cont];
-            $plan_activity->save();
+            $activity->plans()->attach($data_plans[0],['price' => $prices[$cont]]);
             $cont = $cont+1;
-            // dd($data_plans);
         }
         
         if ($activity->id == null) {
@@ -93,7 +90,6 @@ class ActivityController extends Controller
     public function edit($id)
     {
         $activity = Activity::findOrFail($id);
-        // dd($activity->plans);
         $plans = Plan::all();
         return view('activities.edit', compact('activity','plans'));
     }
@@ -108,22 +104,19 @@ class ActivityController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request);
-        $activity_plan = ActivityPlan::where('activity_id',$id)->pluck('price','plan_id')->sortKeys()->all();
-        // dd($activity_plan);
+        $activity = Activity::where('id',$id)->where('state','activa')->first();
         $plans=$request->get('plans_id');
         // dd($plans);
         $prices=$request->get('td_price');
         // dd($prices);
         $cont = 0;
-        $data_plans = [];
+        $plans_id = [];
         while ( $cont < count($plans) ) {
             $data_plan = explode("_",$plans[$cont]);
             $plan_id = $data_plan[0];
-            $data_plans[$plan_id] = $prices[$cont];
-            // dd($data_plans);
-            if (array_key_exists($plan_id, $activity_plan)) {
-                // dd($activity_plan[$plan_id]);
-                $price = $activity_plan[$plan_id]; //precio guardado
+            array_push($plans_id, $plan_id);
+            if ($activity->plans->contains('id', $plan_id)) {
+                $price = $activity->plans[$cont]->pivot->price; //precio guardado
                 if ($price !== $prices[$cont]) {
                     $ap = ActivityPlan::where('activity_id',$id)->where('plan_id',$plan_id)->first();
                     $ap->price = $prices[$cont];
@@ -135,23 +128,13 @@ class ActivityController extends Controller
                 }
             }
             else{
-                $activity_plan_new = new ActivityPlan();
-                $activity_plan_new->activity_id = $id;
-                $activity_plan_new->plan_id = $plan_id;
-                $activity_plan_new->price = $prices[$cont];
-                $activity_plan_new->save();
+                $activity->plans()->attach($plan_id,['price' => $prices[$cont]]);
                 $cont++;
-                }
+            }
         }
+
+        $activity->plans()->sync($plans_id);
         
-        $diff = array_diff_key($activity_plan, $data_plans);
-        // dd(array_keys($diff));
-        for ($i=0; $i < count($diff); $i++) { 
-            $p_id = array_keys($diff)[$i];
-            // dd($p_id);
-            $p = ActivityPlan::where('activity_id',$id)->where('plan_id',$p_id)->first();
-            $p->delete();
-        }
         return redirect('activities')->with('info','Actividad editada con éxito');
         
     }

@@ -36,7 +36,7 @@
                                     @include('activities.plans.create')
                                     <div class="form-group" id="plans_table">
                                         <div class="row">
-                                            <div class="col-md-8 offset-md-2">
+                                            <div class="col-md-12">
                                                 <table class="table table-bordered data-table" id="table">
                                                     <thead class="text-center">
                                                     <tr>
@@ -50,7 +50,6 @@
                                                     <tbody class="text-center" id="resultsTableBody">
                                                         @if ( !$activity->plans->isEmpty() )
                                                              @foreach ($activity->plans->sortBy('id') as $plan)
-                                                             <!-- <input type="hidden" value=""> -->
                                                                 <tr id="row{{$plan->id}}"> 
                                                                     <td class="plan_id d-none">{{ $plan->id }}_{{ $plan->name }}_{{ $plan->classes }}</td>
                                                                     <td class="idColumn">{{ $plan->id }}</td>

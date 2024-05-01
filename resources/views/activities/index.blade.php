@@ -4,15 +4,12 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2" role="alert">
             <strong>{{session('info')}}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
         </div>         
     @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-lg-8 col-md-12 offset-md-2" id="accordion">
+            <div class="col-md-8 offset-md-2" id="accordion">
                 <div class="card card-success card-outline">
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                         <div class="card-header">

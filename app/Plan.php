@@ -12,7 +12,7 @@ class Plan extends Model
     protected $fillable= ['name','classes'];
 
     public function activities(){
-        return $this->belongsToMany('App\Activity');
+        return $this->belongsToMany('App\Activity','activity_plan')->withPivot('price')->withTimestamps();
     }
 
     public function inscriptions(){

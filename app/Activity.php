@@ -16,7 +16,7 @@ class Activity extends Model
     ];
 
     public function plans(){
-        return $this->belongsToMany('App\Plan')->withPivot('price');;
+        return $this->belongsToMany('App\Plan','activity_plan')->withPivot('price')->withTimestamps();
     }
 
     public function inscriptions(){

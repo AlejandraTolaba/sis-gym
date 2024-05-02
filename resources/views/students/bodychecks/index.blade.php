@@ -15,7 +15,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="card-title col-md-6 text-left">
-                                    <h4>Ficha de control corporal de {{$student->name}} {{$student->lastname}}</h4>
+                                    <h4>Fichas de control corporal</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <a href="{{ route('bodychecks.create', $student->id) }}"><button class="btn btn-success" title="Agregar ficha de control corporal"><i class="fa fa-plus"></i> Agregar</button></a>
@@ -25,7 +25,15 @@
                     <!-- </a> -->
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row mb-3">
+                                <div class="col-md-12 card-title text-center">
+                                    <h4>{{ $student->name }} {{ $student->lastname}}</h4>
+                                    <div class="text-center">
+                                        <img src="/img/students/{{ $student->photo }}" width="80px" height="80px" class="rounded-circle" alt="photo-student">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row"> -->
                                 @if ($student->bodychecks->isNotEmpty())
                                     <div class="col-md-12 table-responsive-md">
                                         <table class="table table-sm table-bordered">
@@ -44,7 +52,7 @@
                                             <tbody class="text-center">
                                                 @foreach ($student->bodychecks as $bc)
                                                     <tr>
-                                                        <td>{{$bc->created_at ? $bc->created_at->format('d-m-Y') : '-'}}</td>
+                                                        <td>{{$bc->created_at ? $bc->created_at->format('m-Y') : '-'}}</td>
                                                         <td>{{$bc->weight}} kg</td>
                                                         <td>{{$bc->body_age}}</td> 
                                                         <td>{{$bc->imc}}</td>
@@ -58,11 +66,11 @@
                                         </table>
                                     </div>
                                 @else
-                                    <div class="text-center col-md-12 text-lg">
-                                        <p>Sin inscripciones</p>
+                                    <div class="text-center text-lg alert alert-secondary alert-important">
+                                        Sin fichas de control corporal
                                     </div>
                                 @endif
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@
                             <form  action="{{ route('bodychecks.store', $student->id) }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="card-body">
-                                    <label for="">Alumno/a: {{ $student->name }} {{ $student->lastname}}</label>
+                                    <!-- <label for="">Alumno/a: {{ $student->name }} {{ $student->lastname}}</label> -->
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="weight">Peso</label>

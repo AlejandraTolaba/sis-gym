@@ -32,7 +32,10 @@ Route::get('attendances/register','InscriptionController@register')->name('atten
 Route::get('attendances/showStudent','InscriptionController@showStudent')->name('attendances.showStudent');
 Route::get('attendances/updateClasses/{id}','InscriptionController@updateClasses');
 
-
+/*              BodyChecks             */
+Route::get('students/bodychecks/create/{id}','BodyCheckController@create')->name('bodychecks.create');
+Route::post('students/bodychecks/{id}','BodyCheckController@store')->name('bodychecks.store');
+Route::get('students/bodychecks/{id}','BodyCheckController@index')->name('bodychecks');
 
 Route::get('dropdown',function(){
     $id=Request::get('option');

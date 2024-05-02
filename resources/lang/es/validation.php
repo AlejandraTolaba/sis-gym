@@ -131,6 +131,11 @@ return [
         'mb' => 'MB',
         'type'=>'Seleccione tipo',
         'amount'=>'Monto',
+        'weight' => 'Peso',
+        'body_age' => 'Edad corporal',
+        'body_fat' => 'Grasa corporal',
+        'visceral_fat' => 'Grasa visceral',
+
     ],
 ];
 

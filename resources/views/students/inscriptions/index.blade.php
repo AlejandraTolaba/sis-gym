@@ -25,7 +25,7 @@
                     <!-- </a> -->
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <div class="row">
+                            <!-- <div class="row"> -->
                                 @if ($student->inscriptions->isNotEmpty())
                                     <div class="col-md-12 table-responsive-md">
                                         <table class="table table-bordered table-sm">
@@ -60,11 +60,11 @@
                                         </table>
                                     </div>
                                 @else
-                                    <div class="text-center col-md-12 text-lg">
-                                        <p>Sin inscripciones</p>
+                                    <div class="text-center text-lg alert alert-secondary alert-important">
+                                        Sin inscripciones
                                     </div>
                                 @endif
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>

@@ -94,6 +94,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('teachers.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-users"></i>
+                        <p>
+                            Profesores
+                        </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('students.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
                         <p>

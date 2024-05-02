@@ -46,4 +46,7 @@ Route::get('dropdown',function(){
 
 Route::post('plans/create','PlanController@store');
 
+/*              Teachers             */
+Route::resource('teachers','TeacherController');
+
 Route::get('/home', 'HomeController@index')->name('home');

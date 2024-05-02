@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    @if (session()->has('info'))
+    @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
-            <strong>{{session('info')}}</strong>
+            <strong>{{session('success')}}</strong>
         </div>         
     @endif
     <!-- Main content -->
@@ -45,7 +45,7 @@
                                                     <tr>
                                                         <td>{{ $insc->activity->name }}</td>
                                                         <td>{{ $insc->plan->name }}</td>
-                                                        <td><?php $fv = new DateTime($insc->expiration_date); echo $fv->format('d-m-Y');?></td> 
+                                                        <td>{{ \Carbon\Carbon::parse($insc->expiration_date)->format('d-m-Y') }}</td> 
                                                         <td>{{ $insc->classes }}</td>
                                                         @if( $insc->balance > 0)
                                                             <td class = "text-danger">$<?=number_format($insc->balance,2,',','.') ?></td>

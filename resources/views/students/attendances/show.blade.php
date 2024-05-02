@@ -34,7 +34,7 @@
                         
                                             <tr>
                                                 <th >Fecha de Vencimiento</th> <!-- style="font-size:200%" --> 
-                                                <td > <?php $fv = new DateTime($inscription->expiration_date); echo $fv->format('d-m-Y');?></td>
+                                                <td >{{ \Carbon\Carbon::parse($inscription->expiration_date)->format('d-m-Y') }}</td>
                                             </tr>
 
                                             <tr>

@@ -93,7 +93,7 @@ class InscriptionController extends Controller
             $movement->method_of_payment_id= $method_of_payment_id;
             $movement->save();
         }
-        return redirect('students')->with('success','Inscripción agregada con éxito');
+        return redirect('students/inscriptions/'.$inscription->student->id)->with('success','Inscripción agregada con éxito');
         
         // dd($inscription);
         

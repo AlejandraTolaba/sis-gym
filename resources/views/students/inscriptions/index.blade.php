@@ -28,7 +28,7 @@
                             <div class="row">
                                 @if ($student->inscriptions->isNotEmpty())
                                     <div class="col-md-12 table-responsive-md">
-                                        <table class="table table-bordered" width="100%">
+                                        <table class="table table-bordered table-sm">
                                             <thead class="text-center">
                                             <tr>
                                                 <th>Actividad</th>

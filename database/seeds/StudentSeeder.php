@@ -21,7 +21,7 @@ class StudentSeeder extends Seeder
         $phone_number = ['3874314848','38756894890'];
         $certificate = [true, true];
         $certificate_date = ['2019-03-11','2020-12-01'];
-        $discharge_date = ['2019-03-01','2020-11-20'];
+        $photos = ['avatar.png','avatar.png'];
 
 
         for ($i=0; $i <sizeof($names) ; $i++) {
@@ -36,7 +36,7 @@ class StudentSeeder extends Seeder
                 'phone_number' => $phone_number[$i],
                 'certificate' => $certificate[$i],
                 'certificate_date' => $certificate_date[$i],
-                // 'discharge_date' => $discharge_date[$i],
+                'photo' => $photos[$i],
             ]);
         }
     }

@@ -10,6 +10,9 @@
 |
 */
 
+use App\Student;
+use App\Teacher;
+
 App::setLocale("es");
 
 Route::get('/', function () {
@@ -48,5 +51,12 @@ Route::post('plans/create','PlanController@store');
 
 /*              Teachers             */
 Route::resource('teachers','TeacherController');
+/*             Birthadays             */
+Route::get('/birthdays',function(){
+    $students = Student::where(DB::raw('date_format(birthdate,"%m-%d")'),DB::raw('date_format(now(),"%m-%d")'))->get();
+    $teachers = Teacher::where(DB::raw('date_format(birthdate,"%m-%d")'),DB::raw('date_format(now(),"%m-%d")'))->get();
+    // dd($students->isNotEmpty());
+    return view("birthdays",compact('students','teachers'));
+});
 
 Route::get('/home', 'HomeController@index')->name('home');

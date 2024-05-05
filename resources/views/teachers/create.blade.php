@@ -10,14 +10,14 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-12 card-title text-center">
-                                <h4>Nuevo Alumno</h4>
+                                <h4>Nuevo Profesor</h4>
                             </div>
                         </div>
                     </div>
                     <!-- </a> -->
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <form  action="{{ route('students.store') }}" method="POST">
+                            <form  action="{{ route('teachers.store') }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="card-body">
                                     <div class="">
@@ -47,7 +47,7 @@
                                                 </span>
                                         </div>
                                         <div class="col-md-6" mb-3>
-											<label>Foto del alumno</label>
+											<label>Foto</label>
 											<div class="row">
 												<div class="col-lg-4">
 													<!-- Video via webcam -->
@@ -154,52 +154,6 @@
                                         value="{{old('email')}}">
                                     </div>
                                     
-                                    <div class="form-row">
-                                        <h3 class="card-title mb-3"><b>Otros datos</b></h3>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">¿Presentó certificado?</label>
-                                                <div class="form-check">
-                                                    <div class="container">
-                                                        <input class="form-check-input" type="radio" name="certificate" id="SI" value=1 {{(old('certificate') == 1) ? 'checked' : ''}}>
-                                                        <label class="form-check-label" for="SI"> Si </label>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="form-check">
-                                                    <div class="container">
-                                                        <input class="form-check-input" type="radio" name="certificate" id="NO" value=0 {{(old('certificate') == 0) ? 'checked' : ''}} checked>
-                                                        <label class="form-check-label" for="NO"> No </label>
-                                                    </div>
-                                                </div>
-                                                <span class="" role="alert">
-                                                    <strong style="font-size: 82%; color: #d9534f"> {{ $errors->first('certificate', ':message') }} </strong>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="certificate_date">Fecha de presentación</label>                   
-                                                <input class="form-control bg-ligth shadow-sm @if($errors->first('certificate_date')) is-invalid @endif"
-                                                id='input_certificate_date'
-                                                type ="date" 
-                                                name="certificate_date" 
-                                                value="{{ old('certificate_date') }}">
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong> {{ $errors->first('certificate_date', ':message') }} </strong>
-                                                </span>
-                                        </div>
-                                    </div>    
-                                    <div class="form-group">
-                                        <label for="observations">Observaciones</label>
-                                        <textarea class="form-control" id="observations" name="observations" rows="3"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="routine">Rutina</label>
-                                        <textarea class="form-control" id="routine" name="routine" rows="3"></textarea>
-                                    </div>
                                     <div class="row">
                                         <div class="col-md-12 text-center mt-3">
                                             <a href="{{ route('students.index') }}" class="btn btn-secondary">Cancelar</a>

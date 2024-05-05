@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Activity;
 use App\Plan;
-use App\PlanActivity;
+use App\ActivityPlan;
+use App\Inscription;
 use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 
 class ActivityController extends Controller
 {
@@ -20,8 +22,11 @@ class ActivityController extends Controller
         if ($request->ajax()){
             $activities = Activity::all();
             return DataTables::of($activities)
-            // ->addColumn('action', 'activity.actions')
-            // ->rawColumns(['action'])
+            ->addColumn('action', 'activities.actions')
+            ->addColumn('state', function($activity){
+                return ucfirst($activity->state);
+            })
+            ->rawColumns(['action'])
             ->make(true);
         }
         return view('activities.index');
@@ -53,18 +58,12 @@ class ActivityController extends Controller
         $activity = new Activity(request()->all());
         $plans=$request->get('plans_id');
         $prices=$request->get('td_price');
-        // dd($prices);
         $cont = 0;
         while ( $cont < count($plans) ) {
             $activity->save(); 
             $data_plans = explode("_",$plans[$cont]);
-            $plan_activity = new PlanActivity();
-            $plan_activity->activity_id = $activity->id;
-            $plan_activity->plan_id =$data_plans[0];
-            $plan_activity->price = $prices[$cont];
-            $plan_activity->save();
+            $activity->plans()->attach($data_plans[0],['price' => $prices[$cont]]);
             $cont = $cont+1;
-            // dd($data_plans);
         }
         
         if ($activity->id == null) {
@@ -92,7 +91,9 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+        $plans = Plan::all();
+        return view('activities.edit', compact('activity','plans'));
     }
 
     /**
@@ -104,7 +105,40 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $activity = Activity::where('id',$id)->where('state','activa')->first();
+        $plans=$request->get('plans_id');
+        // dd($plans);
+        $prices=$request->get('td_price');
+        // dd($prices);
+        $cont = 0;
+        $plans_id = [];
+        while ( $cont < count($plans) ) {
+            $data_plan = explode("_",$plans[$cont]);
+            $plan_id = $data_plan[0];
+            array_push($plans_id, $plan_id);
+            if ($activity->plans->contains('id', $plan_id)) {
+                $price = $activity->plans[$cont]->pivot->price; //precio guardado
+                if ($price !== $prices[$cont]) {
+                    $ap = ActivityPlan::where('activity_id',$id)->where('plan_id',$plan_id)->first();
+                    $ap->price = $prices[$cont];
+                    $ap->update();
+                    $cont++;
+                }
+                else{
+                    $cont++;
+                }
+            }
+            else{
+                $activity->plans()->attach($plan_id,['price' => $prices[$cont]]);
+                $cont++;
+            }
+        }
+
+        $activity->plans()->sync($plans_id);
+        
+        return redirect('activities')->with('info','Actividad editada con éxito');
+        
     }
 
     /**
@@ -116,5 +150,24 @@ class ActivityController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showInscriptions(Request $request, $id)
+    {
+        $activity = Activity::findOrFail($id);
+        $inscriptions = $activity->inscriptions->sortKeysDesc()->all();
+        return view('activities.showInscriptions',compact('inscriptions','activity'));
+    }
+
+    public function showInscriptionsFromTo(Request $request, $id)
+    {
+        $from=Carbon::createFromFormat('Y-m-d',$request->get('from'))->toDateString();
+        $to=Carbon::createFromFormat('Y-m-d',$request->get('to'))->toDateString();
+        $activity = Activity::findOrFail($id);
+        // dd($activity->inscriptions->whereBetween('registration_date',[$from,$to])->all());
+        // $inscriptions = Inscription::where('activity_id',$id)->with(['activity:id,name'])->whereBetween('registration_date',[$from,$to])->get();
+        $inscriptions = $activity->inscriptions->whereBetween('registration_date',[$from,$to])->all();
+        // dd($inscriptions);
+        return view('activities.showInscriptions',compact('from','to','inscriptions','activity'));
     }
 }

@@ -1,0 +1,84 @@
+@extends('layouts.admin')
+
+@section('content')
+    @if (session()->has('info'))
+        <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
+            <strong>{{session('info')}}</strong>
+        </div>         
+    @endif
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12" id="accordion">
+                <div class="card card-success card-outline">
+                    <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="card-title col-md-6 text-left">
+                                    <h4>Fichas de control corporal</h4>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a href="{{ route('bodychecks.create', $student->id) }}"><button class="btn btn-success" title="Agregar ficha de control corporal"><i class="fa fa-plus"></i> Agregar</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </a> -->
+                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-12 card-title text-center">
+                                    <h4>{{ $student->name }} {{ $student->lastname}}</h4>
+                                    <div class="text-center">
+                                        <img src="/img/students/{{ $student->photo }}" width="80px" height="80px" class="rounded-circle" alt="photo-student">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row"> -->
+                                @if ($student->bodychecks->isNotEmpty())
+                                    <div class="col-md-12 table-responsive-md">
+                                        <table class="table table-sm table-bordered data-table data-table-bodycheck">
+                                            <thead class="text-center">
+                                            <tr>
+                                                <th widht="80px">Fecha</th>
+                                                <th>Peso</th>
+                                                <th width="100px">Edad corporal</th>
+                                                <th>IMC</th>
+                                                <th width="100px">Grasa corporal</th>
+                                                <th>IMM</th>
+                                                <th>MB</th>
+                                                <th width="100px">Grasa visceral</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="text-center">
+                                                @foreach ($student->bodychecks as $bc)
+                                                    <tr>
+                                                        <td>{{$bc->created_at ? $bc->created_at->format('m-Y') : '-'}}</td>
+                                                        <td>{{$bc->weight}} kg</td>
+                                                        <td>{{$bc->body_age}}</td> 
+                                                        <td>{{$bc->imc}}</td>
+                                                        <td>{{$bc->body_fat}}</td>
+                                                        <td>{{$bc->imm}}</td>
+                                                        <td>{{$bc->mb}}</td> 
+                                                        <td>{{$bc->visceral_fat}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @else
+                                    <div class="text-center text-lg alert alert-secondary alert-important">
+                                        Sin fichas de control corporal
+                                    </div>
+                                @endif
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+@endsection
+@push('scripts')
+    <script src="{{asset('js/data_table.js')}}"></script>
+@endpush  

@@ -10,15 +10,19 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-12 card-title text-center">
-                                <h4>Nuevo Alumno</h4>
+                                <h4>Editar datos de {{ $student->name }} {{ $student->lastname}}</h4>
+                                <div class="text-center">
+                                    <img src="/img/students/{{ $student->photo }}" width="90px" height="90px" class="rounded-circle" alt="photo-student">
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- </a> -->
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <form  action="{{ route('students.store') }}" method="POST">
+                            <form  action="{{ route('students.update',$student->id) }}" method="POST">
                                 {{ csrf_field() }}
+                                @method('PUT')
                                 <div class="card-body">
                                     <div class="">
                                         <h3 class="card-title mb-3"><b>Datos personales</b></h3>
@@ -32,7 +36,7 @@
                                             id="name"
                                             type="text"
                                             name="name"
-                                            value="{{old('name')}}">
+                                            value="{{old('name',$student->name)}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('name', ':message') }} </strong>
                                                 </span>
@@ -41,7 +45,7 @@
                                             id="lastname"
                                             type="text"
                                             name="lastname"
-                                            value="{{old('lastname')}}">
+                                            value="{{old('lastname',$student->lastname)}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('lastname', ':message') }} </strong>
                                                 </span>
@@ -73,7 +77,7 @@
                                             id='input_dni'
                                             type="number"
                                             name="dni"
-                                            value="{{old('dni')}}"
+                                            value="{{old('dni', $student->dni)}}"
                                             >
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('dni', ':message') }} </strong>
@@ -85,7 +89,7 @@
                                                 id='input_birthdate'
                                                 type ="date" 
                                                 name="birthdate" 
-                                                value="{{old('birthdate')}}">
+                                                value="{{old('birthdate', $student->birthdate)}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('birthdate', ':message') }} </strong>
                                                 </span>
@@ -95,14 +99,14 @@
                                             <label for="exampleInputEmail1">Sexo (*)</label>
                                             <div class="form-check">
                                                 <div class="container">
-                                                    <input class="form-check-input" type="radio" name="gender" id="F" value="F" {{(old('gender') == 'F') ? 'checked' : ''}}>
+                                                    <input class="form-check-input" type="radio" name="gender" id="F" value="F" {{(old('gender',$student->gender) == 'F') ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="F"> Femenino </label>
                                                 </div>
                                                 
                                             </div>
                                             <div class="form-check">
                                                 <div class="container">
-                                                    <input class="form-check-input" type="radio" name="gender" id="M" value="M" {{(old('gender') == 'M') ? 'checked' : ''}}>
+                                                    <input class="form-check-input" type="radio" name="gender" id="M" value="M" {{(old('gender',$student->gender) == 'M') ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="M"> Masculino </label>
                                                 </div>
                                             </div>
@@ -117,7 +121,7 @@
                                         id="address"
                                         type="text"
                                         name="address"
-                                        value="{{old('address')}}">
+                                        value="{{old('address',$student->address)}}">
                                             <span class="invalid-feedback" role="alert">
                                                 <strong> {{ $errors->first('address', ':message') }} </strong>
                                             </span>
@@ -130,7 +134,7 @@
                                             id="phone_number"
                                             type="text"
                                             name="phone_number"
-                                            value="{{old('phone_number')}}">
+                                            value="{{old('phone_number',$student->phone_number)}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('phone_number', ':message') }} </strong>
                                                 </span>
@@ -141,7 +145,7 @@
                                             id="contact_number"
                                             type="text"
                                             name="contact_number"
-                                            value="{{old('contact_number')}}">
+                                            value="{{old('contact_number',$student->contact_number)}}">
                                         </div>
                                     </div>                     
                                     <div class="form-group">
@@ -151,7 +155,7 @@
                                         id="email" 
                                         name="email"
                                         placeholder="nombre@ejemplo.com"
-                                        value="{{old('email')}}">
+                                        value="{{old('email',$student->email)}}">
                                     </div>
                                     
                                     <div class="form-row">
@@ -164,14 +168,14 @@
                                                 <label for="exampleInputEmail1">¿Presentó certificado?</label>
                                                 <div class="form-check">
                                                     <div class="container">
-                                                        <input class="form-check-input" type="radio" name="certificate" id="SI" value=1 {{(old('certificate') == 1) ? 'checked' : ''}}>
+                                                        <input class="form-check-input" type="radio" name="certificate" id="SI" value=1 {{(old('certificate',$student->certificate) == 1) ? 'checked' : ''}}>
                                                         <label class="form-check-label" for="SI"> Si </label>
                                                     </div>
                                                     
                                                 </div>
                                                 <div class="form-check">
                                                     <div class="container">
-                                                        <input class="form-check-input" type="radio" name="certificate" id="NO" value=0 {{(old('certificate') == 0) ? 'checked' : ''}} checked>
+                                                        <input class="form-check-input" type="radio" name="certificate" id="NO" value=0 {{(old('certificate',$student->certificate) == 0) ? 'checked' : ''}}>
                                                         <label class="form-check-label" for="NO"> No </label>
                                                     </div>
                                                 </div>
@@ -186,7 +190,7 @@
                                                 id='input_certificate_date'
                                                 type ="date" 
                                                 name="certificate_date" 
-                                                value="{{ old('certificate_date') }}">
+                                                value="{{ old('certificate_date',$student->certificate_date) }}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('certificate_date', ':message') }} </strong>
                                                 </span>
@@ -194,11 +198,11 @@
                                     </div>    
                                     <div class="form-group">
                                         <label for="observations">Observaciones</label>
-                                        <textarea class="form-control" id="observations" name="observations" rows="3"></textarea>
+                                        <textarea class="form-control" id="observations" name="observations" rows="3">{{ $student->observations ? $student->observations : ''}}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="routine">Rutina</label>
-                                        <textarea class="form-control" id="routine" name="routine" rows="3"></textarea>
+                                        <textarea class="form-control" id="routine" name="routine" rows="3">{{ $student->routine ? $student->routine : ''}}</textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 text-center mt-3">

@@ -34,4 +34,8 @@ class Student extends Model
         return $this->hasMany('App\Inscription');
     }
 
+    public function bodychecks(){
+        return $this->hasMany('App\BodyCheck');
+    }
+
 }

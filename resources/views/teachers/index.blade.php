@@ -2,23 +2,23 @@
 
 @section('content')
     @if (session()->has('info'))
-        <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2" role="alert">
+        <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
             <strong>{{session('info')}}</strong>
         </div>         
     @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-8 offset-md-2" id="accordion">
+            <div class="col-md-12" id="accordion">
                 <div class="card card-success card-outline">
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-6 text-left">
-                                    <h4>Actividades</h4>
+                                <div class="card-title col-md-6 text-left">
+                                    <h4>Profesores</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('activities.create') }}"><button title="Agregar actividad" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
+                                    <a href="{{ route('teachers.create') }}"><button title="Agregar profesor" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -27,13 +27,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered data-table" width="100%">
+                                    <table class="table table-bordered data-table-teachers" width="100%">
                                     <thead class="text-center">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
+                                        <th>Nombre y Apellido</th>
+                                        <th>Foto</th>
+                                        <th>DNI</th>
+                                        <th>Teléfono</th>
                                         <th>Estado</th>
-                                        <th>Opciones</th>
+                                        <!-- <th>Opciones</th> -->
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
@@ -52,13 +54,15 @@
     @push('scripts')
     <script>
         $(function(){
-            var table = $('.data-table').DataTable({
-                ajax: "{{ route('activities.index')}}",
+            var table = $('.data-table-teachers').DataTable({
+                ajax: "{{ route('teachers.index')}}",
                 columns: [
-                    { data: 'id', name:'id'},
-                    { data: 'name', name:'name'},
-                    { data: 'state', name:'state'},
-                    { data: 'action', name:'action', orderable:false, searchable:false},
+                    { data: 'fullname', name:'fullname'},
+                    { data: 'photo', name:'photo', orderable:false, searchable:false},
+                    { data: 'dni', name:'dni', orderable:false},
+                    { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
+                    { data: 'state', name:'state', orderable:false},
+                    // { data: 'action', name:'action', orderable:false, searchable:false},
                 ],
                 language: {
                     "decimal": ",",

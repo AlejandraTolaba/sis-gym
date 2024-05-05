@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class StudentSeeder extends Seeder
+class TeacherSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,21 +11,19 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('students')->delete();
-        $names = ['Belén','Luis'];
+        DB::table('teachers')->delete();
+        $names = ['Marcela','Federico'];
         $lastnames = ['Lopez','Martinez'];
-        $dni = ['40234321','38098890'];
-        $birthdate = ['1997-03-01','1994-08-10'];
+        $dni = ['21234321','19098890'];
+        $birthdate = ['1971-03-01','1969-08-10'];
         $gender = ['F', 'M'];
-        $address =['Vicente Lopez 146', 'España 234'];
-        $phone_number = ['3874314848','38756894890'];
-        $certificate = [true, true];
-        $certificate_date = ['2019-03-11','2020-12-01'];
+        $address =['Vicente Lopez 500', 'España 789'];
+        $phone_number = ['3874314787','38756894789'];
         $photos = ['avatar.png','avatar.png'];
 
 
         for ($i=0; $i <sizeof($names) ; $i++) {
-            DB::table('students')
+            DB::table('teachers')
             ->insert([
                 'name' => $names[$i],
                 'lastname' => $lastnames[$i],
@@ -34,8 +32,6 @@ class StudentSeeder extends Seeder
                 'gender' => $gender[$i],
                 'address' => $address[$i],
                 'phone_number' => $phone_number[$i],
-                'certificate' => $certificate[$i],
-                'certificate_date' => $certificate_date[$i],
                 'photo' => $photos[$i],
             ]);
         }

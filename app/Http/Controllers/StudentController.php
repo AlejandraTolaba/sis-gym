@@ -27,8 +27,11 @@ class StudentController extends Controller
             ->addColumn('balance', function($student){
                 return '$'.number_format($student->balance, 2, ',', '.');
             })
+            ->addColumn('state', function($activity){
+                return ucfirst($activity->state);
+            })
             ->setRowClass(function ($student) {
-                return $student->balance > 0 ? "danger text-danger" : "";
+                return $student->balance > 0 ? "text-danger" : "";
             })
             ->addColumn('action', 'students.actions')
             ->rawColumns(['action'])
@@ -96,7 +99,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::findOrFail($id);
+		return view("students.show",compact('student'));
     }
 
     /**
@@ -107,7 +111,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::findOrFail($id);
+        return view('students.edit',compact('student'));
     }
 
     /**
@@ -119,7 +124,38 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+            'lastname' => 'required',
+            'dni' => 'required',
+            'birthdate' => 'required',
+            'gender' => 'required',
+            'address' =>'required',
+            'phone_number' => 'required',
+        ]);
+        $student = Student::findOrFail($id);
+        $student->fill($request->all());
+        // dd($student);
+        $img = $request->get('photo_camera');
+        // Para guardar la foto del alumno en la carpeta public/imagenes/alumnos
+        if ($img!=""){
+            $img = str_replace('data:image/png;base64,', '', $img);
+            $img = str_replace(' ', '+', $img);
+            $image = base64_decode($img);
+            $temp_name = Str::random(5);
+            $extension="png";
+            $photo_name=  $temp_name.'-'.date('Y-m-d').'.'.$extension; 
+            Image::make($image)->resize(144,144)->save(public_path('img/students/'.$photo_name));
+            $student->photo=$photo_name;
+        }
+        else{
+            $student->photo= 'avatar.png';
+        }
+        $student->update();
+
+        if ( $student->update() ){
+            return redirect('students')->with('info','Los cambios se guardaron exitosamente');
+        } 
     }
 
     /**

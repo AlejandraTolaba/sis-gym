@@ -9,31 +9,19 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <h4>Nueva Actividad</h4>
+                                <h4>Editar planes de {{$activity->name}}</h4>
                             </div>
                         </div>
                     </div>
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <form  action="{{ route('activities.store') }}" method="POST">
-                                {{ csrf_field() }}
+                            <form  action="{{ route('activities.update', $activity->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="name">Nombre</label>
-                                        <input class="form-control bg-ligth shadow-sm @if($errors->first('name')) is-invalid @endif"
-                                        id="title"
-                                        type="text"
-                                        name="name"
-                                        placeholder="Ingrese nombre de la actividad"
-                                        value="{{old('name')}}">
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong> {{ $errors->first('name', ':message') }} </strong>
-                                            </span>
-                                    </div>
-                                    
-                                    <div class="form-group">
                                         <label for="plan_id">Planes</label>
-                                        <select id="plans_id" name='plans_id[]' multiple="multiple" class="form-control plan select2_multiple shadow-sm @if($errors->first('plan_id')) is-invalid @endif" >
+                                        <select id="plans_id" name='plans_id[]' multiple="multiple" class="form-control plan select2_multiple shadow-sm @if($errors->first('plans_id[]')) is-invalid @endif" required>
                                             <!-- <option selected>{{''}}</option> -->
                                             @if ( !$plans->isEmpty() )
                                                 @foreach ($plans as $plan)
@@ -42,17 +30,17 @@
                                             @endif
                                         </select>
                                         <span class="invalid-feedback" role="alert">
-                                            <strong> {{ $errors->first('plan_id', ':message') }} </strong>
+                                            <strong> {{ $errors->first('plans_id[]', ':message') }} </strong>
                                         </span>
                                     </div>
                                     @include('activities.plans.create')
-                                      
-                                    <div class="form-group d-none" id="plans_table">
+                                    <div class="form-group" id="plans_table">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <table class="table table-bordered data-table" id="table">
                                                     <thead class="text-center">
                                                     <tr>
+                                                        <th class="d-none">ID_Nombre_Clases</th>
                                                         <th>ID</th>
                                                         <th>Nombre del plan</th>
                                                         <th>Cantidad de clases</th>
@@ -60,7 +48,17 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody class="text-center" id="resultsTableBody">
-                                                        
+                                                        @if ( !$activity->plans->isEmpty() )
+                                                             @foreach ($activity->plans->sortBy('id') as $plan)
+                                                                <tr id="row{{$plan->id}}"> 
+                                                                    <td class="plan_id d-none">{{ $plan->id }}_{{ $plan->name }}_{{ $plan->classes }}</td>
+                                                                    <td class="idColumn">{{ $plan->id }}</td>
+                                                                    <td>{{ $plan->name }}</td>
+                                                                    <td>{{ $plan->classes}}</td>
+                                                                    <td><input type="number" id="prices" name="td_price[]" class="form-control text-center" value="{{$plan->pivot->price}}" required></td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -68,10 +66,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12 text-center mt-2">
+                                    <div class="col-md-12 text-center">
                                         <!-- <a href="{{ URL::previous() }}" class="btn btn-secondary">Cancelar</a> -->
                                         <a href="{{ route('activities.index') }}" class="btn btn-secondary">Cancelar</a>
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="submit" class="btn btn-primary" id="btnSaveActivity">Guardar</button>
                                     </div>
                                 </div>
                                 </div>

@@ -15,9 +15,7 @@ class Inscription extends Model
         'student_id',
         'activity_id',
         'plan_id',
-        'method_of_payment_id',
         'classes',
-        'amount',
         'balance',
         'state'];
         
@@ -32,6 +30,10 @@ class Inscription extends Model
 
     public function student(){
         return $this->belongsTo('App\Student');
+    }
+
+    public function methods_of_payment(){
+        return $this->belongsToMany('App\MethodOfPayment','inscription_method_of_payment')->withPivot('amount')->withTimestamps();
     }
     
 }

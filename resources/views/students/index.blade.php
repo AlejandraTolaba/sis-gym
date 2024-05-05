@@ -2,17 +2,14 @@
 
 @section('content')
     @if (session()->has('info'))
-        <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2" role="alert">
+        <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
             <strong>{{session('info')}}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
         </div>         
     @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-lg-8 col-md-12 offset-md-2" id="accordion">
+            <div class="col-md-12" id="accordion">
                 <div class="card card-success card-outline">
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                         <div class="card-header">
@@ -21,7 +18,7 @@
                                     <h4>Alumnos</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('students.create') }}"><button class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
+                                    <a href="{{ route('students.create') }}"><button title="Agregar alumno" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +35,7 @@
                                         <th>Teléfono</th>
                                         <th>Estado</th>
                                         <th>Saldo</th>
-                                        <th width="150px">Opciones</th>
+                                        <th>Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
@@ -87,6 +84,7 @@
                         "previous": "Anterior"
                     }
                 },
+                responsive: true,
             });
         });
     </script>

@@ -10,6 +10,9 @@
 |
 */
 
+use App\Student;
+use App\Teacher;
+
 App::setLocale("es");
 
 Route::get('/', function () {
@@ -24,11 +27,18 @@ Route::resource('students','StudentController');
 Route::get('students/inscriptions/create/{id}','InscriptionController@create')->name('inscriptions.create');
 Route::post('students/inscriptions/{id}','InscriptionController@store')->name('inscriptions.store');
 Route::get('students/inscriptions/{id}','InscriptionController@index')->name('inscriptions');
+
+Route::get('students/inscriptions/{id}/show','InscriptionController@show')->name('inscriptions.show');
+Route::post('students/inscriptions/{id}/show','InscriptionController@updateBalance')->name('inscriptions.updateBalance');
 /*              Attendances             */
 Route::get('attendances/register','InscriptionController@register')->name('attendances.register');
 Route::get('attendances/showStudent','InscriptionController@showStudent')->name('attendances.showStudent');
 Route::get('attendances/updateClasses/{id}','InscriptionController@updateClasses');
 
+/*              BodyChecks             */
+Route::get('students/bodychecks/create/{id}','BodyCheckController@create')->name('bodychecks.create');
+Route::post('students/bodychecks/{id}','BodyCheckController@store')->name('bodychecks.store');
+Route::get('students/bodychecks/{id}','BodyCheckController@index')->name('bodychecks');
 
 Route::get('dropdown',function(){
     $id=Request::get('option');
@@ -38,5 +48,20 @@ Route::get('dropdown',function(){
 });
 
 Route::post('plans/create','PlanController@store');
+
+/*              Teachers             */
+Route::resource('teachers','TeacherController');
+/*             Birthadays             */
+Route::get('/birthdays',function(){
+    $students = Student::where(DB::raw('date_format(birthdate,"%m-%d")'),DB::raw('date_format(now(),"%m-%d")'))->get();
+    $teachers = Teacher::where(DB::raw('date_format(birthdate,"%m-%d")'),DB::raw('date_format(now(),"%m-%d")'))->get();
+    // dd($students->isNotEmpty());
+    return view("birthdays",compact('students','teachers'));
+});
+
+// 
+
+Route::get('activity/{id}/showInscriptions','ActivityController@showInscriptions')->name('showInscriptions');
+Route::post('activity/{id}/showInscriptions','ActivityController@showInscriptionsFromTo')->name('showInscriptionsFromTo');
 
 Route::get('/home', 'HomeController@index')->name('home');

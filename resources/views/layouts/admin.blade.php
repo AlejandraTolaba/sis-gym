@@ -70,7 +70,7 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
-                <a href="index3.html" class="brand-link">
+                <a href="/" class="brand-link">
                 <img src="/img/logo1.jpg" alt="Logo PF" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">PUNTO FIT</span>
@@ -84,31 +84,47 @@
                     <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                     
-                    <li class="nav-header"></li>
-                    <li class="nav-item">
-                        <a href="{{ route('activities.index') }}" class="nav-link">
-                        <i class="nav-icon far fa-folder"></i>
-                        <p>
-                            Actividades
-                        </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('students.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-users"></i>
-                        <p>
-                            Alumnos
-                        </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('attendances.register') }}" class="nav-link">
-                            <i class="nav-icon fa fa-check"></i>
+                        <li class="nav-header"></li>
+                        <li class="nav-item">
+                            <a href="{{ route('activities.index') }}" class="nav-link">
+                            <i class="nav-icon far fa-folder"></i>
                             <p>
-                                Asistencias
+                                Actividades
                             </p>
-                        </a>
-                    </li>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('teachers.index') }}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Profesores
+                            </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('students.index') }}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Alumnos
+                            </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('attendances.register') }}" class="nav-link">
+                                <i class="nav-icon fa fa-check"></i>
+                                <p>
+                                    Asistencias
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('birthdays')}}" class="nav-link">
+                                <i class="nav-icon fa fa-birthday-cake"></i>
+                                <p>
+                                    Cumpleaños
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

@@ -86,6 +86,18 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'method_of_payment_id' => [
+            'required' => 'Debe seleccionar una forma de pago.',
+        ],
+        'activity_id' => [
+            'required' => 'Debe seleccionar una actividad.',
+        ],
+        'plan_id' => [
+            'required' => 'Debe seleccionar un plan.',
+        ],
+        'registration_date' => [
+            'required' => 'Debe seleccionar una fecha.',
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -117,8 +129,13 @@ return [
         'imc' => 'IMC',
         'imm' => 'IMM',
         'mb' => 'MB',
-        'idforma_de_pago'=>'Seleccione forma de pago',
         'type'=>'Seleccione tipo',
+        'amount'=>'Monto',
+        'weight' => 'Peso',
+        'body_age' => 'Edad corporal',
+        'body_fat' => 'Grasa corporal',
+        'visceral_fat' => 'Grasa visceral',
+
     ],
 ];
 

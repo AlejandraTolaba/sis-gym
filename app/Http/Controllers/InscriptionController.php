@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Activity;
 use App\Inscription;
+use App\MethodOfPayment;
 use App\Movement;
 use DB;
 use Carbon\Carbon;
@@ -36,7 +37,7 @@ class InscriptionController extends Controller
     public function create($id)
     {
         $activities = Activity::where('state','activa')->get();
-        $methods_of_payment = DB::table('methods_of_payment')->get();
+        $methods_of_payment = MethodOfPayment::all();
         $student= Student::where('id','=',$id)->first();
         // dd($student->id);
 		return view('students.inscriptions.create',compact('activities', 'methods_of_payment', 'student'));
@@ -59,8 +60,13 @@ class InscriptionController extends Controller
         ]);
         
         $inscription = new Inscription(request()->all());
+        $method_of_payment_id = $request->get('method_of_payment_id');
+        $amount = $request->get('amount');
         $inscription->student_id = $id;
-        $expitarion = Carbon::now()->addMonth()->subDay();
+        // dd($inscription->registration_date);
+        $date = Carbon::createFromFormat('Y-m-d', $inscription->registration_date);
+        // dd($date);
+        $expitarion = $date->addMonth()->subDay();
         $inscription->expiration_date = $expitarion->toDateString();
         $plan = $inscription->plan_id; //obtengo una cadena de la forma "1_50.00"
         $pos=strpos($plan,'_'); //busco la posición del guion bajo
@@ -69,24 +75,25 @@ class InscriptionController extends Controller
         $inscription->classes = $inscription->plan->classes;
         $plan_price=(double)substr($plan,$pos+1); //obtengo el precio del plan elegido
         // dd($plan_price);
-        if($plan_price!=$inscription->amount){
+        if($plan_price!=$amount){
             $student = Student::findOrFail($id);
             $balance_prev=(double)$student->balance;
-            $balance_new=(double)$plan_price - (double)$inscription->amount;
+            $balance_new=(double)$plan_price - (double)$amount;
             $student->balance=$balance_prev+$balance_new;
             $student->update();
             $inscription->balance=$balance_new;
         }
         $inscription->save();
+        $inscription->methods_of_payment()->attach($method_of_payment_id, ['amount' => $amount]);
         if ($inscription->id) {
             $movement= new Movement();
             $movement->concept= "Inscripción N° ".$inscription->id;
             $movement->type="INGRESO";
-            $movement->amount=$inscription->amount;
-            $movement->method_of_payment_id= $inscription->method_of_payment_id;
+            $movement->amount=$amount;
+            $movement->method_of_payment_id= $method_of_payment_id;
             $movement->save();
         }
-        return redirect('students')->with('success','Inscripción agregada con éxito');
+        return redirect('students/inscriptions/'.$inscription->student->id)->with('success','Inscripción agregada con éxito');
         
         // dd($inscription);
         
@@ -100,7 +107,10 @@ class InscriptionController extends Controller
      */
     public function show($id)
     {
-        //
+        $inscription = Inscription::findOrFail($id); 
+        $methods_of_payment = MethodOfPayment::all();
+        // dd($inscription->methods_of_payment);
+        return view('students.inscriptions.show',compact('inscription','methods_of_payment'));
     }
 
     /**
@@ -163,11 +173,45 @@ class InscriptionController extends Controller
                 return view('students.attendances.show',compact('inscription'));
             }
             else{
-                return Redirect::back()->with('error',"El DNI ". $query . " no tiene inscripciones activas");   
+                return Redirect::back()->with('error',"El DNI ". $query . " no tiene inscriptiones activas");   
             }
         }else{
             return Redirect::back()->with('error',"El DNI ". $query . " no está registrado");   
         }
             
+    }
+
+    public function updateBalance(Request $request, $id)
+    {
+        request()->validate([
+            'method_of_payment_id' => "required",
+            'amount' => "required",
+        ]);
+
+        $inscription = Inscription::findOrFail($id); 
+        $prev_balance = (double)$inscription->balance;
+        $amount=$request->get("amount");
+        $method_of_payment_id = $request->get('method_of_payment_id');
+
+        if($amount > $prev_balance){
+            return Redirect::back()->with('error',"Error: El monto a pagar no puede ser superior al saldo"); 
+        } else{
+            $student = Student::findOrFail($inscription->student_id);
+            $student->balance = (double)$student->balance - $amount;
+            $student->update();
+            // $inscription->balance = (double)$inscription->amount + $amount;
+            $inscription->balance = (double)$prev_balance - $amount;
+            $inscription->update();
+            $inscription->methods_of_payment()->attach($method_of_payment_id,['amount' => $amount]);
+            $movement = new Movement();
+            $movement->concept = "Act. Inscripción N° ".$inscription->id;
+            $movement->type = "INGRESO";
+            $movement->method_of_payment_id = $method_of_payment_id;
+            $movement->amount = $amount;
+            $movement->save();
+
+            return redirect('students/inscriptions/'.$inscription->student->id)->with('info',"Los cambios se realizaron con éxito");
+        } 
+
     }
 }

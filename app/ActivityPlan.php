@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PlanActivity extends Model
+class ActivityPlan extends Model
 {
     protected $table="activity_plan";
 

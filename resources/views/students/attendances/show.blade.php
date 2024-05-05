@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@push('scripts')
+
+@endpush
 
 @section('content')
     <!-- Main content -->
@@ -19,8 +22,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="text-center p-2" style="background-color: gray;">
-                                        <h4 class="text-white">{{ $inscription->activity->name }}</h4> <!-- ;font-size:300% -->
+                                    <div class="text-center p-2 alert alert-secondary alert-important">
+                                        <h4>{{ $inscription->activity->name }}</h4> <!-- ;font-size:300% -->
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table" id="table">
@@ -31,7 +34,7 @@
                         
                                             <tr>
                                                 <th >Fecha de Vencimiento</th> <!-- style="font-size:200%" --> 
-                                                <td > <?php $fv = new DateTime($inscription->expiration_date); echo $fv->format('d-m-Y');?></td>
+                                                <td >{{ \Carbon\Carbon::parse($inscription->expiration_date)->format('d-m-Y') }}</td>
                                             </tr>
 
                                             <tr>
@@ -51,7 +54,7 @@
                             </div> <!-- /.row -->
                             <div class="row">
                                 <div class="col-md-12 text-center mt-2">
-                                    <a href="{{ URL::previous() }}" class="btn btn-secondary">Volver</a>
+                                    <a href="{{ URL::previous() }}" class="btn btn-secondary" autofocus>Volver</a>
                                 </div>
                             </div>
                         </div>

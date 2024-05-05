@@ -16,7 +16,7 @@ use App\Teacher;
 App::setLocale("es");
 
 Route::get('/', function () {
-    return view('layouts.admin');
+    return view('home');
 });
 
 Auth::routes();

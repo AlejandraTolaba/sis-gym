@@ -1,1 +1,2 @@
-<a href="{{ route('activities.edit',$id) }}"><button name="Editar" title="Editar planes" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></a>
+<a href="{{ route('activities.edit',$id) }}"><button name="Editar" title="Editar planes" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+<a href="{{route('showInscriptions',$id)}}"><button name="show" type="submit" title="Ver inscripciones" class="btn btn-info"><i class="fa fa-eye"></i> Inscripciones</button></a>

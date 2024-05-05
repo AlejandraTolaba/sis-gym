@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Activity;
 use App\Plan;
 use App\ActivityPlan;
+use App\Inscription;
 use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 
 class ActivityController extends Controller
 {
@@ -148,5 +150,24 @@ class ActivityController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showInscriptions(Request $request, $id)
+    {
+        $activity = Activity::findOrFail($id);
+        $inscriptions = $activity->inscriptions->sortKeysDesc()->all();
+        return view('activities.showInscriptions',compact('inscriptions','activity'));
+    }
+
+    public function showInscriptionsFromTo(Request $request, $id)
+    {
+        $from=Carbon::createFromFormat('Y-m-d',$request->get('from'))->toDateString();
+        $to=Carbon::createFromFormat('Y-m-d',$request->get('to'))->toDateString();
+        $activity = Activity::findOrFail($id);
+        // dd($activity->inscriptions->whereBetween('registration_date',[$from,$to])->all());
+        // $inscriptions = Inscription::where('activity_id',$id)->with(['activity:id,name'])->whereBetween('registration_date',[$from,$to])->get();
+        $inscriptions = $activity->inscriptions->whereBetween('registration_date',[$from,$to])->all();
+        // dd($inscriptions);
+        return view('activities.showInscriptions',compact('from','to','inscriptions','activity'));
     }
 }

@@ -59,4 +59,9 @@ Route::get('/birthdays',function(){
     return view("birthdays",compact('students','teachers'));
 });
 
+// 
+
+Route::get('activity/{id}/showInscriptions','ActivityController@showInscriptions')->name('showInscriptions');
+Route::post('activity/{id}/showInscriptions','ActivityController@showInscriptionsFromTo')->name('showInscriptionsFromTo');
+
 Route::get('/home', 'HomeController@index')->name('home');

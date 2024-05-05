@@ -36,17 +36,17 @@
                             <!-- <div class="row"> -->
                                 @if ($student->bodychecks->isNotEmpty())
                                     <div class="col-md-12 table-responsive-md">
-                                        <table class="table table-sm table-bordered">
+                                        <table class="table table-sm table-bordered data-table data-table-bodycheck">
                                             <thead class="text-center">
                                             <tr>
-                                                <th>Fecha</th>
+                                                <th widht="80px">Fecha</th>
                                                 <th>Peso</th>
-                                                <th>Edad corporal</th>
+                                                <th width="100px">Edad corporal</th>
                                                 <th>IMC</th>
-                                                <th>Grasa corporal</th>
+                                                <th width="100px">Grasa corporal</th>
                                                 <th>IMM</th>
                                                 <th>MB</th>
-                                                <th>Grasa visceral</th>
+                                                <th width="100px">Grasa visceral</th>
                                             </tr>
                                             </thead>
                                             <tbody class="text-center">
@@ -79,3 +79,6 @@
     </section>
     <!-- /.content -->
 @endsection
+@push('scripts')
+    <script src="{{asset('js/data_table.js')}}"></script>
+@endpush  

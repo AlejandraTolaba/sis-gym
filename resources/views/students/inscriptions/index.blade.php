@@ -28,15 +28,15 @@
                             <!-- <div class="row"> -->
                                 @if ($student->inscriptions->isNotEmpty())
                                     <div class="col-md-12 table-responsive-md">
-                                        <table class="table table-bordered table-sm">
+                                        <table class="table table-bordered table-sm data-table">
                                             <thead class="text-center">
                                             <tr>
                                                 <th>Actividad</th>
                                                 <th>Plan</th>
-                                                <th>Fecha de vencimiento</th>
-                                                <th>Cantidad de clases</th>
+                                                <th width="100px">Fecha de vencimiento</th>
+                                                <th width="100px">Cantidad de clases</th>
                                                 <th>Saldo</th>
-                                                <th>Estado</th>
+                                                <th width="100px">Estado</th>
                                                 <th>Opciones</th>
                                             </tr>
                                             </thead>
@@ -73,3 +73,6 @@
     </section>
     <!-- /.content -->
 @endsection
+@push('scripts')
+    <script src="{{asset('js/data_table.js')}}"></script>
+@endpush  

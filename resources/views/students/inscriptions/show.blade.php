@@ -29,7 +29,7 @@
                                         <label class="col-sm-12 col-form-label">N° de Inscripción: {{$inscription->id}}</label>
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="col-sm-12 col-form-label">Fecha de alta: <?php $fecha = new DateTime($inscription->registration_date); echo $fecha->format('d-m-Y');?></label>
+                                        <label class="col-sm-12 col-form-label">Fecha de alta: {{ \Carbon\Carbon::parse($inscription->registration_date)->format('d-m-Y') }}</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -51,8 +51,8 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-7 mt-2">
-                                        <select id="method_of_payment_id" name='method_of_payment_id' class="form-control shadow-sm @if($errors->first('method_of_payment_id')) is-invalid @endif" >
-                                            <option value="" selected>Seleccione forma de pago</option>
+                                        <select id="method_of_payment_id" name='method_of_payment_id' data-placeholder="Seleccione una forma de pago" class="form-control select2 shadow-sm @if($errors->first('method_of_payment_id')) is-invalid @endif" >
+                                            <option></option>
                                             @foreach ($methods_of_payment as $method_of_paymen)
                                                 <option value="{{$method_of_paymen->id}}" {{old('method_of_payment_id') == $method_of_paymen->id ? 'selected' : ''}}>{{$method_of_paymen->name}}</option>
                                             @endforeach

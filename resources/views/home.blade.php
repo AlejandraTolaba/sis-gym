@@ -54,12 +54,12 @@
                     <div class="small-box bg-olive">
                         <div class="inner">
                             <h3>Asistencia</h3>
-                            <p>Listar Asistencia</p>
+                            <p>Listar Asistencias</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-list-ul"></i>
                         </div>
-                        <a href="" class="small-box-footer">Hacer clik aquí  <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('attendances.index') }}" class="small-box-footer">Hacer clik aquí  <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
             </div><!-- /.row -->

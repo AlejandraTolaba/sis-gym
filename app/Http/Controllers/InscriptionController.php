@@ -8,6 +8,7 @@ use App\Activity;
 use App\Inscription;
 use App\MethodOfPayment;
 use App\Movement;
+use App\Attendance;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
@@ -168,6 +169,10 @@ class InscriptionController extends Controller
                 if ($inscription->classes > 0){
                     $inscription->classes--;
                     $inscription->update();
+
+                    $attendance = new Attendance();
+                    $attendance->inscription_id = $inscription->id;
+                    $attendance->save();
                 }
                 // dd($inscription);
                 return view('students.attendances.show',compact('inscription'));

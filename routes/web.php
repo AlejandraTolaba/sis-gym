@@ -12,6 +12,8 @@
 
 use App\Student;
 use App\Teacher;
+use Carbon\Carbon;
+use App\Attendance;
 
 App::setLocale("es");
 
@@ -34,6 +36,19 @@ Route::post('students/inscriptions/{id}/show','InscriptionController@updateBalan
 Route::get('attendances/register','InscriptionController@register')->name('attendances.register');
 Route::get('attendances/showStudent','InscriptionController@showStudent')->name('attendances.showStudent');
 Route::get('attendances/updateClasses/{id}','InscriptionController@updateClasses');
+
+Route::get('attendances/showAttendances','AttendanceController@index')->name('attendances.index');
+Route::get('attendances/showAttendancesByDay','AttendanceController@showAttendanceByDay')->name('attendances.byDay');
+
+Route::get('dropdown2', function(){
+    $date = Carbon::now()->toDateString();
+	$activity = Request::get('option');
+    // dd($activity);
+	$attendances = Attendance::where(DB::raw('DATE(created_at)'),$date)->get()->where('activity',$activity)->pluck('fullname');
+    // $count = $attendances->count();
+	// dd($count);
+    return $attendances;
+});
 
 /*              BodyChecks             */
 Route::get('students/bodychecks/create/{id}','BodyCheckController@create')->name('bodychecks.create');
@@ -64,4 +79,4 @@ Route::get('/birthdays',function(){
 Route::get('activity/{id}/showInscriptions','ActivityController@showInscriptions')->name('showInscriptions');
 Route::post('activity/{id}/showInscriptions','ActivityController@showInscriptionsFromTo')->name('showInscriptionsFromTo');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

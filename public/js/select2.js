@@ -25,3 +25,7 @@ function closeSelect() {
     $('#btns_create_plan').addClass('d-none');
 }
 
+$('.select2').on("select2:select", function (e) {
+    $('.select2-activities').select2('close');
+});
+

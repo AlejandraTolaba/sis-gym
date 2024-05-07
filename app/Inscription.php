@@ -35,5 +35,9 @@ class Inscription extends Model
     public function methods_of_payment(){
         return $this->belongsToMany('App\MethodOfPayment','inscription_method_of_payment')->withPivot('amount')->withTimestamps();
     }
+
+    public function attendances(){
+        return $this->hasMany('App\Attendance');
+    }
     
 }

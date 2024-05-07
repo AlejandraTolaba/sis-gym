@@ -110,7 +110,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('attendances.register') }}" class="nav-link">
+                            <a href="{{ route('attendances.index') }}" class="nav-link">
                                 <i class="nav-icon fa fa-check"></i>
                                 <p>
                                     Asistencias

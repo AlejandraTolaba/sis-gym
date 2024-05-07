@@ -7,7 +7,7 @@
             { option: $(this).val() },
             function(data) {
                 $('#plan_id').empty();
-                $('#plan_id').append("<option value=0 selected> Seleccione un plan </option>");
+                $('#plan_id').append("<option></option>");
                 $.each(data, function(key, element) {
                     $('#plan_id').append("<option value='" + key+"'>" + element + "</option>");
                 });
@@ -68,8 +68,8 @@
                                             <input type="hidden" id="id_activity" class="form-control" >
                                             <div class="form-group">
                                                 <label for="activity_id">Actividad</label>
-                                                <select id="activity_id" name='activity_id' class="form-control activity select2 shadow-sm @if($errors->first('activity_id')) is-invalid @endif" >
-                                                    <option selected value="">Seleccione una actividad</option>
+                                                <select id="activity_id" name='activity_id' data-placeholder="Seleccione una actividad" class="form-control activity select2 shadow-sm @if($errors->first('activity_id')) is-invalid @endif" >
+                                                    <option></option>
                                                     @foreach ($activities as $activity)
                                                         <option value="{{$activity->id}}" {{old('activity_id') == $activity->id ? 'selected' : ''}}>{{$activity->name}}</option>
                                                     @endforeach
@@ -82,8 +82,8 @@
                                         <div class="col-md-4 mb-3">
                                             <div class="form-group">
                                                 <label for="plan_id">Plan</label>
-                                                <select id="plan_id" name='plan_id' class="form-control plan select2 shadow-sm @if($errors->first('plan_id')) is-invalid @endif" >
-                                                    
+                                                <select id="plan_id" name='plan_id' data-placeholder="Seleccione un plan" class="form-control plan select2 shadow-sm @if($errors->first('plan_id')) is-invalid @endif" >
+                                                    <option></option>
                                                 </select>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('plan_id', ':message') }} </strong>
@@ -106,8 +106,8 @@
                                         <div class="col-md-9 mb-3">
                                             <div class="form-group">
                                                 <label for="method_of_payment_id">Forma de pago</label>
-                                                <select id="method_of_payment_id" name='method_of_payment_id' class="form-control select2 shadow-sm @if($errors->first('method_of_payment_id')) is-invalid @endif" >
-                                                    <option selected value="">Seleccione forma de pago</option>
+                                                <select id="method_of_payment_id" name='method_of_payment_id' data-placeholder="Seleccione una forma de pago" class="form-control select2 shadow-sm @if($errors->first('method_of_payment_id')) is-invalid @endif" >
+                                                    <option></option>
                                                     @foreach ($methods_of_payment as $method_of_paymen)
                                                         <option value="{{$method_of_paymen->id}}" {{old('method_of_payment_id') == $method_of_paymen->id ? 'selected' : ''}}>{{$method_of_paymen->name}}</option>
                                                     @endforeach

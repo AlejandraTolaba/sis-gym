@@ -163,19 +163,27 @@ class InscriptionController extends Controller
     {
         $query=trim($request->get('searchText'));
         $student = Student::where('dni','LIKE',$query)->where('state','activo')->first();
+        $isBirthday = false;
+    
         if ($student) {
             $inscription = Inscription::where('student_id',$student->id)->where('state','activa')->first();
-            if($inscription){
-                if ($inscription->classes > 0){
+            if(isset($inscription)){
+                if ($inscription->classes >= 1){
                     $inscription->classes--;
+                    if ($inscription->classes == 0) {
+                        $inscription->state = 'inactiva';
+                    }
                     $inscription->update();
-
+                   
                     $attendance = new Attendance();
                     $attendance->inscription_id = $inscription->id;
                     $attendance->save();
                 }
-                // dd($inscription);
-                return view('students.attendances.show',compact('inscription'));
+                $currentDate = Carbon::now();
+                if($student->birthdate->day == $currentDate->day && $student->birthdate->month == $currentDate->month){
+                    $isBirthday = true;
+                }
+                return view('students.attendances.show',compact('inscription','isBirthday'));            
             }
             else{
                 return Redirect::back()->with('error',"El DNI ". $query . " no tiene inscriptiones activas");   

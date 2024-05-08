@@ -1,9 +1,11 @@
 @extends('layouts.admin')
-@push('scripts')
-
-@endpush
 
 @section('content')
+    @if ($isBirthday)
+        <div class="alert alert-info alert-important fade show col-md-6 offset-md-3 text-center" role="alert">
+            <i class="fa fa-gift"></i><strong>¡¡¡FELIZ CUMPLEAÑOS!!!</strong><i class="fa fa-gift"></i>
+        </div>         
+    @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">

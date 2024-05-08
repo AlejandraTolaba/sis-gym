@@ -3,7 +3,7 @@
 @section('content')
     @if ($isBirthday)
         <div class="alert alert-info alert-important fade show col-md-6 offset-md-3 text-center" role="alert">
-            <i class="fa fa-gift"></i><strong>¡¡¡FELIZ CUMPLEAÑOS!!!</strong><i class="fa fa-gift"></i>
+            <i class="fa fa-birthday-cake"></i><strong> ¡¡¡FELIZ CUMPLEAÑOS!!! </strong><i class="fa fa-birthday-cake"></i>
         </div>         
     @endif
     <!-- Main content -->

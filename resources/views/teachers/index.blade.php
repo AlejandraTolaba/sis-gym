@@ -18,7 +18,7 @@
                                     <h4>Profesores</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('teachers.create') }}"><button title="Agregar profesor" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
+                                    <a href="{{ route('teachers.create') }}"><button title="Agregar profesor" class="btn btn-success"><i class="fa fa-user-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>

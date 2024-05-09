@@ -30,7 +30,7 @@
                         <div class="icon">
                             <i class="fa fa-file-invoice-dollar"></i>
                         </div>
-                        <a href="" class="small-box-footer">Hacer clik aquí  <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('movements.create')}}" class="small-box-footer">Hacer clik aquí  <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
             </div><!-- /.row -->

@@ -79,4 +79,5 @@ Route::get('/birthdays',function(){
 Route::get('activity/{id}/showInscriptions','ActivityController@showInscriptions')->name('showInscriptions');
 Route::post('activity/{id}/showInscriptions','ActivityController@showInscriptionsFromTo')->name('showInscriptionsFromTo');
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('movements','MovementController');
+Route::get('movements/showMovements','MovementController@movementsFromTo')->name('movementsFromTo');

@@ -125,6 +125,14 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{url('movements')}}" class="nav-link">
+                                <i class="nav-icon fa fa-file-invoice-dollar"></i>
+                                <p>
+                                    Movimientos de caja
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

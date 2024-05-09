@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\MethodOfPayment;
+use App\Movement;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MovementController extends Controller
@@ -13,7 +16,18 @@ class MovementController extends Controller
      */
     public function index()
     {
-        //
+        $today = Carbon::today();
+        // dd($today);
+        $movements = Movement::whereDate('created_at',$today)->with(['method_of_payment:id,name'])->orderBy('id','desc')->get();
+        // dd($movements);
+        $total_incomes = Movement::whereDate('created_at',$today)->where('method_of_payment_id',1)->where('type','INGRESO')->get()->sum('amount');
+        $total_expenses = Movement::whereDate('created_at',$today)->where('method_of_payment_id',1)->where('type','EGRESO')->get()->sum('amount');
+        $total = $total_incomes - $total_expenses;
+        $total_incomes = number_format($total_incomes,2,',','.');
+        $total_expenses = number_format($total_expenses,2,',','.');
+        $total = number_format($total,2,',','.');
+        $today = $today->toDateString();
+        return view('movements.index', compact('today','movements','total_incomes','total_expenses','total'));
     }
 
     /**
@@ -23,7 +37,8 @@ class MovementController extends Controller
      */
     public function create()
     {
-        //
+        $methods_of_payment = MethodOfPayment::all();
+        return view('movements.create',compact('methods_of_payment'));
     }
 
     /**
@@ -34,7 +49,16 @@ class MovementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'concept' => "required",
+            'type' => "required",
+            'method_of_payment_id' => "required",
+            'amount' => "required",
+        ]);
+        $movement = new Movement(request()->all());
+        // dd($movement);
+        $movement->save();
+        return redirect('movements')->with('info','Movimiento agregado con éxito');
     }
 
     /**

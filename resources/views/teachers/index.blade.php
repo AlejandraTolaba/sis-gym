@@ -35,7 +35,7 @@
                                         <th>DNI</th>
                                         <th>Teléfono</th>
                                         <th>Estado</th>
-                                        <!-- <th>Opciones</th> -->
+                                        <th>Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
@@ -62,7 +62,7 @@
                     { data: 'dni', name:'dni', orderable:false},
                     { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
                     { data: 'state', name:'state', orderable:false},
-                    // { data: 'action', name:'action', orderable:false, searchable:false},
+                    { data: 'action', name:'action', orderable:false, searchable:false},
                 ],
                 language: {
                     "decimal": ",",

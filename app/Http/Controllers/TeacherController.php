@@ -95,7 +95,8 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+		return view("teachers.show",compact('teacher'));
     }
 
     /**

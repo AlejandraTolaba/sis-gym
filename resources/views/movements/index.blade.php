@@ -78,10 +78,10 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan="3" class="text-center">TOTALES</th>
-                                                <th class="text-center color-green"></th>
+                                                <th colspan="6" class="text-center"></th>
+                                                <!-- <th class="text-center color-green"></th>
                                                 <th class="text-center color-red"></th>
-                                                <th class="text-center"></th>
+                                                <th class="text-center"></th> -->
                                             </tr>
                                         </tfoot>
                                     </table>

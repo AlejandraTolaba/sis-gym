@@ -66,9 +66,16 @@ $(function(){
             var total = totalIncomes - totalOutcomes;
 
             // Set the value to the footer
-            $(api.column(3).footer()).html('<p>INGRESOS</p><p>$' + totalIncomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</p>');
-            $(api.column(4).footer()).html('<p>EGRESOS</p><p>$'  + totalOutcomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'</p>');
-            $(api.column(5).footer()).html('<p>TOTAL </p><p>$' + total.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</p>');
+            $(api
+                .column(1)
+                .footer())
+                .html('<div class="col-md-4 offset-md-8 mb-2 mt-2"><div class="input-group"><div class="input-group-prepend"><div class="input-group-text text-bold">INGRESOS</div></div><input type ="text" readonly value="$'+totalIncomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'" class="form-control bg-white text-bold text-center"/></div></div><div class="col-md-4 offset-md-8 mb-2 mt-2"><div class="input-group"><div class="input-group-prepend"><div class="input-group-text text-bold justify-content-center" style="width: 100px"> EGRESOS </div></div><input type ="text" readonly value="$'+totalOutcomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'" class="form-control bg-white text-bold text-center"/></div></div><div class="col-md-4 offset-md-8 mb-2 mt-2"><div class="input-group"><div class="input-group-prepend"><div class="input-group-text text-bold justify-content-center" style="width: 100px"> TOTAL </div></div><input type ="text" readonly value="$'+total.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'" class="form-control bg-white text-bold text-center"/></div></div>'
+            );
+            // $(api.column(3).footer()).html('<p>INGRESOS</p><p>$' + totalIncomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</p>');
+            // $(api.column(4).footer()).html('<p>EGRESOS</p><p>$'  + totalOutcomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'</p>');
+            // $(api.column(5).footer()).html('<p>TOTAL </p><p>$' + total.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</p>');
         },
     });
 });
+
+    

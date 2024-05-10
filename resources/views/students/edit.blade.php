@@ -12,7 +12,7 @@
                             <div class="col-md-12 card-title text-center">
                                 <h4>Editar datos de {{ $student->name }} {{ $student->lastname}}</h4>
                                 <div class="text-center">
-                                    <img src="/img/students/{{ $student->photo }}" width="90px" height="90px" class="rounded-circle" alt="photo-student">
+                                    <img src="{{asset('img/students/'.$student->photo)}}" width="90px" height="90px" class="rounded-circle" alt="photo-student">
                                 </div>
                             </div>
                         </div>

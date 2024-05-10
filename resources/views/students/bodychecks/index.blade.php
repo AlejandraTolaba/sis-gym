@@ -29,7 +29,7 @@
                                 <div class="col-md-12 card-title text-center">
                                     <h4>{{ $student->name }} {{ $student->lastname}}</h4>
                                     <div class="text-center">
-                                        <img src="/img/students/{{ $student->photo }}" width="80px" height="80px" class="rounded-circle" alt="photo-student">
+                                        <img src="{{asset('img/students/'.$student->photo)}}" width="80px" height="80px" class="rounded-circle" alt="photo-student">
                                     </div>
                                 </div>
                             </div>

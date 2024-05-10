@@ -26,7 +26,8 @@ class TeacherController extends Controller
                 if (empty($teacher->photo)) {
                     return 'avatar.png';
                 }
-                return '<img src="/img/teachers/'.$teacher->photo.'" width="50px" height="50px">';
+                $path = 'img/teachers/'.$teacher->photo;
+                return '<img src="'.$path.'" width="50px" height="50px">';
             })
             ->addColumn('state', function($teacher){
                 return ucfirst($teacher->state);

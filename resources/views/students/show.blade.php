@@ -9,7 +9,7 @@
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
                             <div class="text-center">
-                                <img src="/img/students/{{ $student->photo }}" width="80px" height="80px" class="rounded-circle" alt="photo-student">
+                                <img src="{{asset('img/students/'.$student->photo)}}" width="80px" height="80px" class="rounded-circle" alt="photo-student">
                             </div>
                             <div class="text-center mt-2">
                                 <h5>{{ $student->name }} {{ $student->lastname}}</h5>

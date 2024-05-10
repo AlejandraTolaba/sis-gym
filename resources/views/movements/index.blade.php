@@ -25,8 +25,7 @@
                     <!-- </a> -->
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <!-- <form action="{{ route('movementsFromTo') }}" method="GET" autocomplete="off">
-                                @csrf    
+                            <form action="{{ route('movements.index') }}" method="GET" autocomplete="off">   
                                 <div class="row mb-4">
                                     <div class="col-lg-4">
                                         <div class="input-group">
@@ -47,40 +46,14 @@
                                     </div>
                                     
                                     <div class="col-lg-1">
-                                        <button class="btn btn-primary" name="filtrar"><i class="fa fa-calendar"></i></button>
+                                        <button class="btn btn-primary"><i class="fa fa-calendar"></i></button>
                                     </div>
                                 </div>
-                            </form> -->
+                            </form>
 
-                            <div class="row mb-4">
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">TOTAL INGRESOS</div>
-                                        </div>	
-                                        <input readonly type ="text" name="total_incomes" value="${{$total_incomes}}" class="form-control bg-white">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="input-group">	
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">TOTAL EGRESOS</div>
-                                        </div>	
-                                        <input readonly type ="text" name="totalExpenses" value="${{$total_expenses}}" class="form-control bg-white">	
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="input-group">	
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">TOTAL</div>
-                                        </div>	
-                                        <input readonly type ="text" name="total" value="${{$total}}" class="form-control bg-white">	
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered table-sm data-table" width="100%">
+                                    <table class="table table-bordered table-sm data-table-movements" width="100%">
                                         <thead class="text-center">
                                         <tr>
                                             <th>Concepto</th>
@@ -99,10 +72,18 @@
                                                     <td>{{ $mov->created_at->format('H:i') }}</td>
                                                     <td>{{ $mov->type }}</td>
                                                     <td>{{ $mov->method_of_payment->name }}</td>
-                                                    <td>$<?=number_format($mov->amount,2,',','.') ?></td>
+                                                    <td>{{ $mov->amount }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="3" class="text-center">TOTALES</th>
+                                                <th class="text-center color-green"></th>
+                                                <th class="text-center color-red"></th>
+                                                <th class="text-center"></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -112,8 +93,8 @@
             </div>
         </div>
     </section>
-    <!-- /.content -->
-    @push('scripts')
-    
-    @endpush    
+    <!-- /.content -->  
 @endsection
+@push('scripts')
+    <script src="{{asset('js/data_table_movements.js')}}"></script>
+@endpush  

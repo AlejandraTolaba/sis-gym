@@ -80,4 +80,3 @@ Route::get('activity/{id}/showInscriptions','ActivityController@showInscriptions
 Route::post('activity/{id}/showInscriptions','ActivityController@showInscriptionsFromTo')->name('showInscriptionsFromTo');
 
 Route::resource('movements','MovementController');
-Route::get('movements/showMovements','MovementController@movementsFromTo')->name('movementsFromTo');

@@ -14,20 +14,20 @@ class MovementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $today = Carbon::today();
-        // dd($today);
-        $movements = Movement::whereDate('created_at',$today)->with(['method_of_payment:id,name'])->orderBy('id','desc')->get();
-        // dd($movements);
-        $total_incomes = Movement::whereDate('created_at',$today)->where('method_of_payment_id',1)->where('type','INGRESO')->get()->sum('amount');
-        $total_expenses = Movement::whereDate('created_at',$today)->where('method_of_payment_id',1)->where('type','EGRESO')->get()->sum('amount');
-        $total = $total_incomes - $total_expenses;
-        $total_incomes = number_format($total_incomes,2,',','.');
-        $total_expenses = number_format($total_expenses,2,',','.');
-        $total = number_format($total,2,',','.');
+        // dd($request);
+        $from = $request->get('from');
+        $to = $request->get('to');
+        if ($from != $to) {
+            $movements = Movement::whereDate('created_at','>=',$from)->whereDate('created_at','<=',$to)->with(['method_of_payment:id,name'])->orderBy('id','desc')->get();
+        }
+        else{
+            $movements = Movement::whereDate('created_at',$today)->with(['method_of_payment:id,name'])->orderBy('id','desc')->get();
+        }
         $today = $today->toDateString();
-        return view('movements.index', compact('today','movements','total_incomes','total_expenses','total'));
+        return view('movements.index', compact('today','movements','total_incomes','total_expenses','total','from','to'));
     }
 
     /**

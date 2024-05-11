@@ -31,4 +31,9 @@ $(document).ready(function() {
             { data: 'action', name:'action', orderable:false, searchable:false},
         ],
     });
+
+    $('.data-table-inscriptions').DataTable({
+        language: lang,
+        responsive: true,
+    });
 });

@@ -76,7 +76,6 @@ Route::get('/birthdays',function(){
 
 // 
 
-Route::get('activity/{id}/showInscriptions','ActivityController@showInscriptions')->name('showInscriptions');
-Route::post('activity/{id}/showInscriptions','ActivityController@showInscriptionsFromTo')->name('showInscriptionsFromTo');
+Route::get('activity/{id}/inscriptions/index','ActivityController@showInscriptions')->name('showInscriptions');
 
 Route::resource('movements','MovementController');

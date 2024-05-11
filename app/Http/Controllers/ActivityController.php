@@ -155,19 +155,17 @@ class ActivityController extends Controller
     public function showInscriptions(Request $request, $id)
     {
         $activity = Activity::findOrFail($id);
-        $inscriptions = $activity->inscriptions->sortKeysDesc()->all();
-        return view('activities.showInscriptions',compact('inscriptions','activity'));
-    }
-
-    public function showInscriptionsFromTo(Request $request, $id)
-    {
-        $from=Carbon::createFromFormat('Y-m-d',$request->get('from'))->toDateString();
-        $to=Carbon::createFromFormat('Y-m-d',$request->get('to'))->toDateString();
-        $activity = Activity::findOrFail($id);
-        // dd($activity->inscriptions->whereBetween('registration_date',[$from,$to])->all());
-        // $inscriptions = Inscription::where('activity_id',$id)->with(['activity:id,name'])->whereBetween('registration_date',[$from,$to])->get();
-        $inscriptions = $activity->inscriptions->whereBetween('registration_date',[$from,$to])->all();
-        // dd($inscriptions);
-        return view('activities.showInscriptions',compact('from','to','inscriptions','activity'));
+        $today = Carbon::today();
+        $from = $request->get('from');
+        $to = $request->get('to');
+        if ($from != $to) {
+            $inscriptions = $activity->inscriptions->sortKeysDesc()->all();
+        }
+        else{
+            $inscriptions = $activity->inscriptions->whereBetween('registration_date',[$from,$to])->all();
+        }
+        $today = $today->toDateString();
+        
+        return view('activities.showInscriptions',compact('inscriptions','activity','from','to','today'));
     }
 }

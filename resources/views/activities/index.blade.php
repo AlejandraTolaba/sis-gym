@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered data-table" width="100%">
+                                    <table class="table table-bordered data-table-activities table-sm" width="100%">
                                     <thead class="text-center">
                                     <tr>
                                         <th>ID</th>
@@ -48,41 +48,8 @@
             </div>
         </div>
     </section>
-    <!-- /.content -->
-    @push('scripts')
-    <script>
-        $(function(){
-            var table = $('.data-table').DataTable({
-                ajax: "{{ route('activities.index')}}",
-                columns: [
-                    { data: 'id', name:'id'},
-                    { data: 'name', name:'name'},
-                    { data: 'state', name:'state'},
-                    { data: 'action', name:'action', orderable:false, searchable:false},
-                ],
-                language: {
-                    "decimal": ",",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ".",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                },
-                responsive: true,
-            });
-        });
-    </script>
-    @endpush    
+    <!-- /.content --> 
 @endsection
+@push('scripts')
+    <script src="{{asset('js/data_table.js')}}"></script>
+@endpush   

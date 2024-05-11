@@ -81,3 +81,15 @@ td, th{
     background-color: #449d44 !important;
     border-color: #398439 !important;
 }
+
+.total-footer p {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 767px) {
+    div.dt-buttons {
+        width: auto !important;
+        margin-bottom: 0 !important;
+    }
+}

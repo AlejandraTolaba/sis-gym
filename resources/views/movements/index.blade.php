@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <form action="{{ route('movements.index') }}" method="GET" autocomplete="off">   
                                 <div class="row mb-4">
-                                    <div class="col-lg-4">
+                                    <div class="col-md-4 col-sm-6 mb-2">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">DESDE</div>
@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4">
+                                    <div class="col-md-4 col-sm-6 mb-2">
                                         <div class="input-group">	
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">HASTA</div>
@@ -45,15 +45,15 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-lg-1">
-                                        <button class="btn btn-primary"><i class="fa fa-calendar"></i></button>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                     </div>
                                 </div>
                             </form>
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered table-sm data-table-movements" width="100%">
+                                    <table id="example1" class="table table-bordered table-sm data-table-movements">
                                         <thead class="text-center">
                                         <tr>
                                             <th>Concepto</th>
@@ -77,11 +77,11 @@
                                             @endforeach
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th colspan="6" class="text-center"></th>
-                                                <!-- <th class="text-center color-green"></th>
+                                            <tr class="total-footer">
+                                                <th colspan="3" class="text-center"></th>
+                                                <th class="text-center color-green"></th>
                                                 <th class="text-center color-red"></th>
-                                                <th class="text-center"></th> -->
+                                                <th class="text-center"></th>
                                             </tr>
                                         </tfoot>
                                     </table>

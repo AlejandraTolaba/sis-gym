@@ -89,7 +89,7 @@
                                                 id='input_birthdate'
                                                 type ="date" 
                                                 name="birthdate" 
-                                                value="{{old('birthdate', $teacher->birthdate)}}">
+                                                value="{{old('birthdate', $teacher->birthdate->toDateString())}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('birthdate', ':message') }} </strong>
                                                 </span>

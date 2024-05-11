@@ -36,4 +36,18 @@ $(document).ready(function() {
         language: lang,
         responsive: true,
     });
+
+    $('.data-table-teachers').DataTable({
+        language: lang,
+        responsive: true,
+        ajax: "teachers",
+        columns: [
+            { data: 'fullname', name:'fullname'},
+            { data: 'photo', name:'photo', orderable:false, searchable:false},
+            { data: 'dni', name:'dni', orderable:false},
+            { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
+            { data: 'state', name:'state', orderable:false},
+            { data: 'action', name:'action', orderable:false, searchable:false},
+        ],
+    });
 });

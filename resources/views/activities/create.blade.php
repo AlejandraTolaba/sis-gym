@@ -50,7 +50,7 @@
                                     <div class="form-group d-none" id="plans_table">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <table class="table table-bordered data-table" id="table">
+                                                <table class="table table-bordered table-sm" id="table">
                                                     <thead class="text-center">
                                                     <tr>
                                                         <th>ID</th>

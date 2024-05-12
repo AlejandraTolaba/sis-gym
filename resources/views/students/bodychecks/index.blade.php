@@ -47,6 +47,7 @@
                                                 <th>IMM</th>
                                                 <th>MB</th>
                                                 <th>Grasa visceral</th>
+                                                <th>Opciones</th>
                                             </tr>
                                             </thead>
                                             <tbody class="text-center">
@@ -60,6 +61,9 @@
                                                         <td>{{$bc->imm}}</td>
                                                         <td>{{$bc->mb}}</td> 
                                                         <td>{{$bc->visceral_fat}}</td>
+                                                        <td>
+                                                        <a href="{{ route('bodychecks.edit',$bc->id) }}"><button title="Editar ficha" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

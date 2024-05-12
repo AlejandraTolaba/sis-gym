@@ -74,7 +74,8 @@ class BodyCheckController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bodycheck = BodyCheck::findOrFail($id); 
+        return view('students.bodychecks.edit',compact('bodycheck'));
     }
 
     /**
@@ -86,7 +87,19 @@ class BodyCheckController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'weight' => 'required',
+            'imc' => 'required',
+            'body_age' => 'required',
+            'body_fat' => 'required',
+            'imm' => 'required',
+            'mb' =>'required',
+            'visceral_fat' => 'required',
+        ]);
+        $bodycheck = BodyCheck::findOrFail($id); 
+        $bodycheck->fill($request->all());
+        $bodycheck->update();
+        return redirect('students/bodychecks/'.$bodycheck->student_id)->with('info','Ficha de control corporal editada con éxito');
     }
 
     /**

@@ -35,6 +35,8 @@ Route::post('students/inscriptions/{id}/show','InscriptionController@updateBalan
 
 Route::get('students/inscriptions/{id}/edit-expiration','InscriptionController@editExpiration')->name('inscriptions.editExpiration');
 Route::post('students/inscriptions/{id}/update-expiration','InscriptionController@updateExpiration')->name('inscriptions.updateExpiration');
+
+Route::delete('students/inscriptions/{id}','InscriptionController@destroy')->name('inscriptions.destroy');
 /*              Attendances             */
 Route::get('attendances/register','InscriptionController@register')->name('attendances.register');
 Route::get('attendances/showStudent','InscriptionController@showStudent')->name('attendances.showStudent');

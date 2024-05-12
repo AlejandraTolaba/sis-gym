@@ -172,7 +172,14 @@ class InscriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $inscription= Inscription::findOrFail($id);
+        $attendances = $inscription->attendances;
+        foreach ($attendances as $attendance) {
+            $attendance->delete();
+        }
+        $inscription->methods_of_payment()->detach();
+        $inscription->delete();
+		return redirect('students/inscriptions/'.$inscription->student->id)->with('error','Inscripción eliminada con éxito');
     }
 
 

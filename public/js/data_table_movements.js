@@ -13,8 +13,21 @@ $(function(){
     //     };
     //     img.src = url;
     // }
+    var from = $('#from').val();
+    from = $.format.date(from+'00:00:00', "dd/MM/yyyy");
+    var to = $('#to').val();
+    to = $.format.date(to+'00:00:00', "dd/MM/yyyy");
+    var text = '';
+    
+    if (from == to) {
+        text = 'Reporte de movimientos del '+from;
+    }
+    else{
+        text = 'Reporte de movimientos desde el '+from+' hasta el '+to;
+    }
     $('.data-table-movements').DataTable({
         responsive: true,
+        autoWidth: false,
         columnDefs:
             [
                 {
@@ -64,7 +77,7 @@ $(function(){
                 .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
-            console.log(totalIncomes);
+            // console.log(totalIncomes);
 
             totalOutcomes = api
                 .rows({filter:'applied'})
@@ -85,9 +98,9 @@ $(function(){
             //     .footer())
             //     .html('<div class="col-md-4 offset-md-8 mb-2 mt-2"><div class="input-group"><div class="input-group-prepend"><div class="input-group-text text-bold">INGRESOS</div></div><input type ="text" readonly value="$'+totalIncomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'" class="form-control bg-white text-bold text-center"/></div></div><div class="col-md-4 offset-md-8 mb-2 mt-2"><div class="input-group"><div class="input-group-prepend"><div class="input-group-text text-bold justify-content-center" style="width: 100px"> EGRESOS </div></div><input type ="text" readonly value="$'+totalOutcomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'" class="form-control bg-white text-bold text-center"/></div></div><div class="col-md-4 offset-md-8 mb-2 mt-2"><div class="input-group"><div class="input-group-prepend"><div class="input-group-text text-bold justify-content-center" style="width: 100px"> TOTAL </div></div><input type ="text" readonly value="$'+total.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'" class="form-control bg-white text-bold text-center"/></div></div>'
             // );
-            $(api.column(3).footer()).html('<p>INGRESOS</p><p>$' + totalIncomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</p>');
-            $(api.column(4).footer()).html('<p>EGRESOS</p><p>$'  + totalOutcomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'</p>');
-            $(api.column(5).footer()).html('<p>TOTAL </p><p>$' + total.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</p>');
+            $(api.column(1).footer()).html('<p><b>$' + totalIncomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</b></p>');
+            $(api.column(3).footer()).html('<p><b>$'  + totalOutcomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'</b></p>');
+            $(api.column(5).footer()).html('<p><b>$' + total.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</b></p>');
         },
         // "lengthChange": false, "autoWidth": false,
         // dom: 'Bfrtip',
@@ -104,7 +117,19 @@ $(function(){
             extension: '.pdf',
 
             customize: function (doc) {
-                console.log(doc);
+                // console.log(doc.content[1].table.body[doc.content[1].table.body.length-1]);
+                doc.content[1].table.body[doc.content[1].table.body.length-1][0].color = '#155724';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][0].fillColor ='#d4edda';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][1].color = '#155724';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][1].fillColor ='#d4edda';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][2].color = '#721c24';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][2].fillColor ='#f8d7da';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][3].color = '#721c24';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][3].fillColor ='#f8d7da';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][4].color = '#383d41';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][4].fillColor ='#e2e3e5';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][5].color = '#383d41';
+                doc.content[1].table.body[doc.content[1].table.body.length-1][5].fillColor ='#e2e3e5';
                 var colCount = new Array();
                 $('#example1').find('tbody tr:first-child td').each(function(){
                     if($(this).attr('colspan')){
@@ -119,13 +144,13 @@ $(function(){
                 //Create a date string that we use in the footer. Format is dd-mm-yyyy
                 var now = new Date();
                 var jsDate = now.getDate()+'/'+(now.getMonth()+1)+'/'+now.getFullYear();
-                var logo = 'data:image/jpeg;base64,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';
+                var logo = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMSEhIQExIVERUWFxYXFRUTFRUVFhcXFhUYFhUSFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0mIB03Ny8tLi0rLSstKysyKzctKy0tKy0rMSstLS0tKzIrKy0rKy0uNy0rKy0tLS0rLSsrLf/AABEIAOEA4AMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYCBAcDAf/EAD8QAAEDAgQEAggEAgkFAAAAAAEAAgMEEQUSITEGQVFxYbEHEyIygZGhwUJSYnIj4RQWJDRjgrLR8FNzkqLx/8QAGgEBAAMBAQEAAAAAAAAAAAAAAAECAwUEBv/EACsRAQACAgEDAwIFBQAAAAAAAAABAgMRMQQSIQUTQVFhIjJCcZEjUoHR8f/aAAwDAQACEQMRAD8Atkew7DyWSxj2HYeSyXx9uZYiIiqCIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIMY9h2HksljHsOw8lkrW5kERFUEREBERARfHOA1OndV/F+LYYbtafWO6N2HdaY8V8k6rBrawrwqK2OP33tb3IC5riXF1RLcA+rb0b/ALlQcszne84u7kldLH6XafzzpeKOo1HFlKz8ZP7RdaEnHUA2a4/Rc5CyynoV66+mYY52nsh0D+vkX/Td816x8cwHdrh8LrnXqz0KZT0KtPpuD6J7YdVpuKqV+0lv3C3mpWCqY/3Htd+0griZC9Yah7NWuLexIWF/Sqz+WUdjtiLmWG8ZTx2DrSDx3+iuOEcUwT2F8jvyu+y5+bocuLzMbhSazCcRAUXjQIiICIiAiIgxj2HYeSyWMew7DyWStbmQREVQRERAtDF8Xjp25nu15N5n4LS4k4hZTNsPakOw6eJXMq6tfM8ve4uJ+nZdHpOhnL+K3iF612lcc4nlqCQCWM/KDv36qDXtT0znnT5qWpqJrfE9Su9jx1xxqsNOEZBQvdysPFb0WGNG5ut5fVoPFlMwbNC9A0LJEHxfC0HkskQeD6Vh/CFrS4WD7pspBEEBPRubyuOoXgCrKtSpoGu1GhUDYwLiyWEhryZGdCdR2K6HhuJRztzxuv1HMdwuPTwFhsQvfDMSkgeHsNuo5HwK5/VdBXJ5r4lWa7dlRROAY4ypZcaOHvNUsuBelqW7bR5ZiIioCIiDGPYdh5LJYx7DsPJZK1uZBERVBQ3EuNtpo+r3e6PupHEKxsMbpHGwA+fQLkmL4i6okdI477DoOS9/Q9L7ttzxC1Y216updI4vebk7le1FRF+p0HmsaGlznXYKba0AWC+iiIiNQ0fI2BosBZZoisCIiAiIgIiICIiAiIg85Yg4WIULWUhYeo6qeWEjA4WKCEw+ufC8SMNiPr4FdWwLF21MYeN/xDoVyispix1uXJbnD+LOppQ8e6dHDqF4Ot6WMtdxzCLRt11F5084e1r2m4IuF6L5yY1OpZCIigYx7DsPJZLGPYdh5LJWtzIIi08XrRDC+Q8hp3StZtOoFK4+xfO/+jtPst97xPRVOGMuIASeUvc55NyTcqSwmCwznnsvq8GKMVIrDaI03YIg0BoXoiLYEREBERAREQEREBERAREQEREHjVQB7SPkoB7bEg8lZVFYtBs8fFQLR6P8X3pnHxZ9wruuLUFUYpGSD8JB+HMLsdHUCRjZBs4A/MLgepYOy/fHEs7w9kRFzFWMew7DyWSxj2HYeSyVrcyCpnpFrbNjhB39o/DS31VzXLONanPVP6NAA+Wq9vp2Puzbn4WryhImXIHVWGNtgB0URhUd336KZX0bRZKLguplibMzIWluYe0b26WtuvWk4EqpGB7cljfdxvobdF0XhMn+hwi2nqmm/wACqRDx/NCTEI2FrXOHO9sx8UEDi3DNTTi8kZy/mbqPmvHBsEkqcwjLRlFzmNvkuy4bWMraYPLfZe2xB621CqPo/wAPayoqWEXyE28NUFCxTDH07gyS1yL6L1wjBZam/qwDa256qx+lJtqlv7QpD0Usv674fZSKdX4HJDM2neW5zbY6C/UrcxPg+pgjMr2tLRa+Uk7/AAVk4gpmDFIGkANJF7nTurRSV8b2S0r3ZywFtwL5m297Tv8ARQOKAKxngqq9WZbNyhpdvyAv0UZjFD6mcsGrbgt7HULsIdegJ/wXf6SpHHcMwl85IYWg7WcbX7KXdwNVAXIYB+4/7LWwLHm01/4Qc7NcO5jwV9wPHJ6xhe1jcou0g/8A1BQ5uE52i5LD4B2vkoappnRuyHfw8leMR4oNPI6CSIOLTrbnfUBbfBuGtrJn10jBYGzG8rjc/DRQKnRcJ1UrDIIy1tr3dpcDXRJeEqoRtlEedpAd7Ouh11V/4x4wbTXp2NzPIsejbhafBnGjZPV0srcpsGtdyNtACg5i5pBsdCvGojzNIXTPSXw+wNFVGA039sDY32Pdc3UitOFtF0f0f12eAxndh+h1VAxFlnnx1Vg9H1TlqCzk5v10Xi6/H34Z+3lFuHSERF8yyYx7DsPJZLGPYdh5LJWtzI+OdYE9FxrFZM00p/W7zK7DVmzHn9J8lxipN3uPifNdb0qPNpXo3cIcBe5AJUoq0pjC5y4EHku0u73wxUNFDAekYB+A1VMpOBDPeX1haHOcdhtmOyuXDjL0UAIuDE3fbbVc3dxfVRF0TH5Wtc4DwGYoOpRRxUNNYmzIxudybeaq3o2qfWzVUn5jf66KhYljc8+ksrnjoTorZ6KaoCWWM6EtuPHXZB4elT+8t/aFIeiiQNE1za9vss/SPgskrhMwZg1vt8rAc781IcAYJJTxuMgF3nYEGwsDcoI3imHPilO3rl5X6clu8S0racRzuuAH5X5f4d2nT8PS60cWqQ/GIANcrmA97ahS/pPH9k/zDzCDX4p4bjmpmywC5aA4G93OB1sSVPR/3A/9l3+kqs+jPHc7TSSHUasvzHMfVT1SfUsqKc+6Y3ui7ZTdg7fdBxZ+5XSfRhUhsL221Lj2XNn7ldP9GFOHUzyd85seikVDj4/26b/L/pCvnBFRko4gxpfcnMG7i9rkrn/HEWWslbcu21O/uhWj0b1LZGGEvLXNNxY2JB6fJBSuIZS+pmc69y477+C1KVxD2kbgiyt3HfDb2SunjGZjt+oNun1WjwhwzJUyNkLbRNNyTztyCC6Y9A91JK+TW7RoHE225FclXX/SDibYKX1IPtPs0DwHNcPxWoIs0fFQPHFXAuBBuvXhibLVQn9Wqi1t4U600Z/UFnljdJgl2ZF8bsF9XyTFjHsOw8lksY9h2HkslNuZHjWD+G/9rvJcYqB7Tu5812uRtwR1FlxnEmZZZB0e7zK63pU/mhejWUrhERALuuy8cNp2uuTrZS4FtF2l3QsJ44gip4oHNkJY0A2AtceN9lQqh+Z7nDYuJ+ZuvNFILZw2ufBI2Vhs5p/4FrIg6BWceRTQPa9j2yOYW+zq3XuV71vpFjEWWGN2fKAS8AC9rX0K5wpaiwtuQTSuyt5DmVnkyVxxuUbZYDXOFXHUPDpCH5nZRcnXWyvHFeKsq4PVAOjJIP8AEsOfgSqLNjOUFsLRGOvNbuDUBd/aJjoNRfzXlzZsla90+Pp9ZRMy2sPwoUz2zmbKWm46KRxfi+ORuVxzb+6BfXQ6qqY5iXrnWHut28fFMOwkyxvkzWy307BZ1peKRfNefP0/4fu2Iqqk1BjcL8yf5qd4P4tgo43xva913EgtAOh+Ko5Czhhc8gNBJ8F7KY649zv+U60k+KcTbU1Mk7AQ11rB2h0AC0aCtfC8SMOVwU7U4DaEBrc0l9T9lF1WDPjZnfYeF1TH1eO/EkSs8nHvrITG+OzrEXADrkjc32XtQcdx09OyGKNxcBrm0F+Z0VBRelLdxbFJKmQySOuTt0A6AKu4vEbh3JSqxc0EWOqCtLawwXljH6gssRgawi3Ne3DkWaphb1cFnknVJkdebsOy+oEXyLFjHsOw8lksY9h2HkslNuZBco4vpvV1Ug5Gx+eq6uqL6RqLWOYD9J78vJe702/bm19VqcqvhMlnEdfsphVyCTK4HxViabi6+jaPqIiAiIgL2fUvc1sZN2t2C3qbBzbPK4Rt8dz8Fu0c8QcI4Y8xv7zvNeXJ1Ff0xvX8R/lG2tguDGR2Z4IYPqpzFaV0gEbXNYweOp8LL5j+IGKMNB9t3T6lU58hJuSSV48dMvUz7szqI4+VY3PlIYxhYgy2dmut/CsPIjzOm9W142HRa1Bg8k1nOJa3qfstHEoXRvMZdmDduy337ke137mOU/ZM3o4v8Q+H+ylMJqmSBzmxhjRsbAEqrYVhxmd0aPeKmsenEULI49A7mOi8vUYazaMUWmbT9+ETDWxfHn5y2M2aNL9VEVNbJIAHOJAWui6WLp8eOI1EePlaIERFukRFhK+wJ6IIbE33efDRTPAVNmqc3JoJ+KrsjrkldA9HdFljfKfxGw7DQrx9dk7MM/dFuFvREXzDJjHsOw8lksY9h2Hksla3Mgo3iKg9fA9nO129wpJEpaa2i0fA4g9tiQdwpfC58zcvMLc43wn1U3rGj2X69jzCgKWbI4H5r6zDkjJSLR8tonawosWPBFxsslqC+sdYg9CD8l8RRMb8Dar650rsztOgGwU9w3SiON07tLjTsq/h9N6yRrOp17Kf4lqRHG2BvTXsuf1XntwU+ef2Vn6ILEqsyyF5+HbksaCZrHZnNzW2HjyWui93t1ivZ8LaWvAah8pfK46NFg0bKNZQOnkdM/2GXuSenQL5gmLiFrmlua+oWvieLPm091vJo+659cOWMtu2NRPz9ldTtsV+JDSGH2WA6nmV6cStP8P8uXRQYKla/FBJCyO3tN3K3nD2XpNY/f8A2aRSIi9iwiIgKOxaewyjnut2aQNBJUBNIXEuKBTwl7msG7iAPiuxYVSCKJkY5AX781SOAcJzvM7h7LdG+JXQlwfU8/daMcfDO8iIi5SrGPYdh5LJYx7DsPJZK1uZBERVGhjeGtqInRnf8J6HkuSVlM6J7o3CxBt/NdqVZ4w4f9e31rB/EaP/ACHRdLoOq9u3ZbiVqzpQ8Oq8pynZS4Vbe0gkEWI3CkKCut7LvgV9BEtEqi+Ar6pEnw5M1kwLtLgj4lZ8SxkSl1wQdrHkolCVh7P9X3N/Gka87ERFukREQEREBERAXwlHOtqVEV9bm9lu3mgwxCqzmw2C+YXQOnkbG0ak6noOpXhBEXuDWi5OgC6hwrgQpmXdrI73j08AvH1fUxhp954RadJTDaJsMbY27Af8K2URfNWtNp3LIREVRjHsOw8lksY9h2Hksla3MgiIqgiIiFT4s4XEt5ohZ/Nv5v5rnskZaS0ggjcFduUDxDw1HUAuHsSfmHPuur0fX9n4MnDStvq5xSVxZodQpaGdrhcFReKYVLTuyyNt0PI9itNjyNQbLuVvFo3ErrKiiYMTI0cL+K3oq1judu6sNhF8BuvqAiIgIsXOA3WvLXMbzv2QbS8Z6lrBqfgo2fEnHRui0nOJ1OqgbFXWF/gOi8aenc9wY0FxOwC3sIwWWodZjdObjsF0fAeH46YaDM/m4/bovH1PW0wxrmUTbTT4W4aFOBI+zpD/AOvZWREXz2XLbJbusymdiIiyBERBjHsOw8lksY9h2Hksla3MgiIqgiIgIiIPGqpWSNLXtDgeqqGL8Dg3dA636Xbdgrqi3w9RkxT+GUxMw45XYRNCbPjI8QLj5haK7fJGHCxAI6HVRNbwzTSbxhv7fZ8l1Mfqsfrj+F4u5S2QjYlegrHj8RV5qOAoz7kpb3F/utGTgJ/KQHuLL116/BPynuhVv6dJ+ZYuq3n8RVn/AKiTfnavWPgJ/wCKUDsLq09dg/uO6FOdITuSvgXQabgOIe/I5/wt91NUXDlNF7sYPi72vNYX9TxRxuUd8OaYfgk8x9iM9zoPqrhhHBDG2dMc5/KNvire1oAsBYeC+rnZvUct/FfEKzaZYQQtYA1oDQOQWaIvBMzPmVRERQCIiAiIgxj2HYeSyWMew7DyWStbmQREVQREQEREBERAREQEREBERAREQEREBERAREQEREBERBjHsOw8lkiK1uZBERVBERAREQEREBERAREQEREBERAREQEREBERAREQEREH/9k=';
                 // A documentation reference can be found at
                 // https://github.com/bpampuch/pdfmake#getting-started
                 // Set page margins [left,top,right,bottom] or [horizontal,vertical]
                 // or one number for equal spread
                 // It's important to create enough space at the top for a header !!!
-                doc.pageMargins = [20,60,20,30];
+                doc.pageMargins = [30,90,30,30];
                 // Set the font size fot the entire document
                 doc.defaultStyle.fontSize = 10;
                 // Set the fontsize for the table header
@@ -140,18 +165,19 @@ $(function(){
                         columns: [
                             {
                                 image: logo,
-                                width: 30
+                                width: 35
                             },
                             {
-                                alignment: 'center',
+                                alignment: 'left',
                                 color: '#5D6975',
+                                bold: true,
                                 // italics: true,
-                                text: 'Reporte de Movimientos',
-                                fontSize: 18,
-                                margin: [10,0]
+                                text: text,
+                                fontSize: 14,
+                                margin: [10,6,10,5]
                             },
                         ],
-                        margin: 20
+                        margin: [30,50,30,40]
                     }
                 });
                 doc.styles.tableHeader = {
@@ -168,14 +194,14 @@ $(function(){
                 doc.styles.tableFooter = {
                     bold: true,
                     margin: 5,
-                    color: "white",
-                    fillColor: "#5D6975"
+                    // color: "white",
+                    // fillColor: "#5D6975"
                 },
                 // Create a footer object with 2 columns
                 // Left side: report creation date
                 // Right side: current page and total pages
                 doc['footer']=(function(page, pages) {
-                    console.log(page, pages);
+                    // console.log(page, pages);
                     return {
                         columns: [
                             {

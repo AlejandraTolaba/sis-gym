@@ -217,6 +217,7 @@
         <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
         <script src="{{asset('js/app.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
         @stack('scripts')
         @yield('js')
     </body>

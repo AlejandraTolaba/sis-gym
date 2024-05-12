@@ -1,1 +1,2 @@
-<a href="{{ route('inscriptions.updateBalance',$id) }}"><button name="updateBalance" title="Actualizar saldo" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Actualizar saldo</button></a>
+<a href="{{ route('inscriptions.updateBalance',$id) }}"><button title="Actualizar saldo" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Saldo</button></a>
+<a href="{{ route('inscriptions.editExpiration',$id) }}"><button title="Actualizar vencimiento" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Vencimiento</button></a>

@@ -98,6 +98,9 @@ return [
         'registration_date' => [
             'required' => 'Debe seleccionar una fecha.',
         ],
+        'expiration_date' => [
+            'required' => 'Debe seleccionar una fecha.',
+        ],
         'type' => [
             'required' => 'Debe seleccionar un tipo.',
         ],

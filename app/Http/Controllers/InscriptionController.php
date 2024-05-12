@@ -146,9 +146,10 @@ class InscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editExpiration($id)
     {
-        //
+        $inscription = Inscription::findOrFail($id); 
+        return view('students.inscriptions.edit',compact('inscription'));
     }
 
     /**
@@ -252,5 +253,16 @@ class InscriptionController extends Controller
             return redirect('students/inscriptions/'.$inscription->student->id)->with('info',"Los cambios se realizaron con éxito");
         } 
 
+    }
+
+    public function updateExpiration(Request $request, $id)
+    {
+        request()->validate([
+            'expiration_date' => "required"
+        ]);
+        $inscription = Inscription::findOrFail($id); 
+        $inscription->fill($request->all());
+        $inscription->update();
+        return redirect('students/inscriptions/'.$inscription->student->id)->with('info',"Los cambios se realizaron con éxito"); 
     }
 }

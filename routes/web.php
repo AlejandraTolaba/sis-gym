@@ -32,6 +32,9 @@ Route::get('students/inscriptions/{id}','InscriptionController@index')->name('in
 
 Route::get('students/inscriptions/{id}/show','InscriptionController@show')->name('inscriptions.show');
 Route::post('students/inscriptions/{id}/show','InscriptionController@updateBalance')->name('inscriptions.updateBalance');
+
+Route::get('students/inscriptions/{id}/edit-expiration','InscriptionController@editExpiration')->name('inscriptions.editExpiration');
+Route::post('students/inscriptions/{id}/update-expiration','InscriptionController@updateExpiration')->name('inscriptions.updateExpiration');
 /*              Attendances             */
 Route::get('attendances/register','InscriptionController@register')->name('attendances.register');
 Route::get('attendances/showStudent','InscriptionController@showStudent')->name('attendances.showStudent');

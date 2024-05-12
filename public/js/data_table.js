@@ -50,4 +50,48 @@ $(document).ready(function() {
             { data: 'action', name:'action', orderable:false, searchable:false},
         ],
     });
+
+    $('.data-table-students').DataTable({
+        language: lang,
+        responsive: true,
+        ajax: "students",
+        columns: [
+            { data: 'fullname', name:'fullname'},
+            { data: 'photo', name:'photo', orderable:false, searchable:false},
+            { data: 'dni', name:'dni', orderable:false},
+            { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
+            { data: 'state', name:'state', orderable:false},
+            { data: 'balance', name:'balance'},
+            { data: 'action', name:'action', orderable:false, searchable:false},
+        ],
+    });
+    var id = $('.data-table-act-inscriptions').attr("data-id");
+    // console.log(id);
+
+    $('.data-table-act-inscriptions').DataTable({
+        language: lang,
+        autoWidth: false,
+        responsive: true,
+        ajax: +id,
+        columns: [
+            { data: 'activity', name:'activity'},
+            { data: 'plan', name:'plan', orderable:false},
+            { data: 'expiration', name:'expiration'},
+            { data: 'classes', name:'classes', orderable:false, searchable:false},
+            { data: 'balance', name:'balance'},
+            { data: 'state', name:'state', orderable:false},
+            { data: 'action', name:'action', orderable:false, searchable:false},
+        ],
+    });
+    $('.data-table-bodycheck').DataTable({
+        language: lang,
+        autoWidth: false,
+        responsive: true,
+        searchable: false,
+        columnDefs:[{
+            targets: "_all",
+            searchable: false,
+            orderable: false
+        }],
+    });
 });

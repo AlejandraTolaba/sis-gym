@@ -36,17 +36,17 @@
                             <!-- <div class="row"> -->
                                 @if ($student->bodychecks->isNotEmpty())
                                     <div class="col-md-12 table-responsive-md">
-                                        <table class="table table-sm table-bordered data-table data-table-bodycheck">
+                                        <table class="table table-bordered table-sm data-table-bodycheck">
                                             <thead class="text-center">
                                             <tr>
-                                                <th widht="80px">Fecha</th>
+                                                <th>Fecha</th>
                                                 <th>Peso</th>
-                                                <th width="100px">Edad corporal</th>
+                                                <th>Edad corporal</th>
                                                 <th>IMC</th>
-                                                <th width="100px">Grasa corporal</th>
+                                                <th>Grasa corporal</th>
                                                 <th>IMM</th>
                                                 <th>MB</th>
-                                                <th width="100px">Grasa visceral</th>
+                                                <th>Grasa visceral</th>
                                             </tr>
                                             </thead>
                                             <tbody class="text-center">
@@ -66,7 +66,7 @@
                                         </table>
                                     </div>
                                 @else
-                                    <div class="text-center text-lg alert alert-secondary alert-important">
+                                    <div class="text-center alert alert-secondary alert-important">
                                         Sin fichas de control corporal
                                     </div>
                                 @endif

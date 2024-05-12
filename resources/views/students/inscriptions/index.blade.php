@@ -27,40 +27,26 @@
                         <div class="card-body">
                             <!-- <div class="row"> -->
                                 @if ($student->inscriptions->isNotEmpty())
-                                    <div class="col-md-12 table-responsive-md">
-                                        <table class="table table-bordered table-sm data-table">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered table-sm data-table-act-inscriptions" data-id="{{ $student->id }}">
                                             <thead class="text-center">
                                             <tr>
                                                 <th>Actividad</th>
                                                 <th>Plan</th>
-                                                <th width="100px">Fecha de vencimiento</th>
-                                                <th width="100px">Cantidad de clases</th>
+                                                <th>Fecha de vencimiento</th>
+                                                <th>Cantidad de clases</th>
                                                 <th>Saldo</th>
-                                                <th width="100px">Estado</th>
+                                                <th>Estado</th>
                                                 <th>Opciones</th>
                                             </tr>
                                             </thead>
                                             <tbody class="text-center">
-                                                @foreach ($student->inscriptions as $insc)
-                                                    <tr>
-                                                        <td>{{ $insc->activity->name }}</td>
-                                                        <td>{{ $insc->plan->name }}</td>
-                                                        <td>{{ \Carbon\Carbon::parse($insc->expiration_date)->format('d-m-Y') }}</td> 
-                                                        <td>{{ $insc->classes }}</td>
-                                                        @if( $insc->balance > 0)
-                                                            <td class = "text-danger">$<?=number_format($insc->balance,2,',','.') ?></td>
-                                                        @else 
-                                                            <td>$<?=number_format($insc->balance,2,',','.') ?></td>
-                                                        @endif 
-                                                        <td>{{ ucfirst($insc->state) }}</td>
-                                                        <td><a href="{{ route('inscriptions.updateBalance',$insc->id) }}"><button name="updateBalance" title="Actualizar saldo" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Actualizar saldo</button></a></td>
-                                                    </tr>
-                                                @endforeach
+                                               
                                             </tbody>
                                         </table>
                                     </div>
                                 @else
-                                    <div class="text-center text-lg alert alert-secondary alert-important">
+                                    <div class="text-center alert alert-secondary alert-important">
                                         Sin inscripciones
                                     </div>
                                 @endif

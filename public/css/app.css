@@ -86,7 +86,9 @@ td, th{
     font-size: 1rem;
     margin-bottom: 0;
 }
-
+table.dataTable.dataTable_width_auto {
+    width: auto;
+}
 @media screen and (max-width: 767px) {
     div.dt-buttons {
         width: auto !important;

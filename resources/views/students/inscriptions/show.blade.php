@@ -29,7 +29,7 @@
                                         <label class="col-sm-12 col-form-label">N° de Inscripción: {{$inscription->id}}</label>
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="col-sm-12 col-form-label">Fecha de alta: {{ \Carbon\Carbon::parse($inscription->registration_date)->format('d-m-Y') }}</label>
+                                        <label class="col-sm-12 col-form-label">Fecha de alta: {{ $inscription->registration_date->format('d-m-Y') }}</label>
                                     </div>
                                 </div>
                                 <div class="row">

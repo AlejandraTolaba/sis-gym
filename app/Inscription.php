@@ -17,8 +17,17 @@ class Inscription extends Model
         'plan_id',
         'classes',
         'balance',
-        'state'];
+        'state'
+    ];
         
+    protected $dates = [
+        'expiration_date','registration_date'
+    ];
+    
+    protected $casts = [
+        'expiration_date' => 'datetime:Y-m-d',
+        'registration_date' => 'datetime:Y-m-d'
+    ];
 
     public function activity(){
         return $this->belongsTo('App\Activity');

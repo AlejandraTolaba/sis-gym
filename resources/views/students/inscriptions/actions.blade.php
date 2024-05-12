@@ -1,0 +1,1 @@
+<a href="{{ route('inscriptions.updateBalance',$id) }}"><button name="updateBalance" title="Actualizar saldo" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Actualizar saldo</button></a>

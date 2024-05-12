@@ -23,4 +23,12 @@ class Teacher extends Model
         'email',
         'state'
     ];
+
+    protected $dates = [
+        'birthdate'
+    ];
+
+    protected $casts = [
+        'birthdate' => 'datetime:Y-m-d',
+    ];
 }

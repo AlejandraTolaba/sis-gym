@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
+    @if (session()->has('info'))
+        <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2" role="alert">
+            <strong>{{session('info')}}</strong>
+        </div>         
+    @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -9,17 +14,20 @@
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <h4>Inscripciones de {{ $activity->name }}</h4>
+                                <div class="col-md-6 text-left">
+                                    <h4>Movimientos</h4>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a href="{{ route('movements.create') }}"><button title="Agregar movimiento" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>
                     <!-- </a> -->
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <form action="{{ route('showInscriptions', $activity->id) }}" method="GET" autocomplete="off">   
+                            <form action="{{ route('movements.index') }}" method="GET" autocomplete="off">   
                                 <div class="row mb-4">
-                                    <div class="col-md-4 mb-2">
+                                    <div class="col-md-4 col-sm-6 mb-2">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">DESDE</div>
@@ -28,7 +36,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4 mb-2">
+                                    <div class="col-md-4 col-sm-6 mb-2">
                                         <div class="input-group">	
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">HASTA</div>
@@ -40,37 +48,43 @@
                                     <div class="col-md-3">
                                         <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                     </div>
-                                </div> <!-- end row-->
+                                </div>
                             </form>
+
                             <div class="row">
-                                <div class="col-md-12 table-responsive-md">
-                                    <table class="table table-bordered table-sm data-table-inscriptions">
+                                <div class="col-md-12">
+                                    <table id="example1" class="table table-bordered table-sm data-table-movements">
                                         <thead class="text-center">
                                         <tr>
-                                            <th>N°</th>
-                                            <th>Alumno</th>
-                                            <th>Plan</th>
-                                            <th>Fecha de inscripción</th>
-                                            <th>Estado</th>
+                                            <th>Concepto</th>
+                                            <th>Fecha</th>
+                                            <th>Hora</th>
+                                            <th>Tipo</th>
+                                            <th>Forma de pago</th>
+                                            <th>Monto</th>
                                         </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            @foreach ($inscriptions as $ins)
+                                            @foreach ($movements as $mov)
                                                 <tr>
-                                                    <td>{{ $ins->id }}</td>
-                                                    <td>{{ $ins->student->name }} {{ $ins->student->lastname }}</td>
-                                                    <td>{{ $ins->plan->name }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($ins->registration_date)->format('d-m-Y') }}</td>
-                                                    <td>{{ ucfirst($ins->state) }}</td>
-                                                </tr>   
+                                                    <td>{{ $mov->concept }}</td>
+                                                    <td>{{ $mov->created_at->format('d-m-Y') }}</td>
+                                                    <td>{{ $mov->created_at->format('H:i') }}</td>
+                                                    <td>{{ $mov->type }}</td>
+                                                    <td>{{ $mov->method_of_payment->name }}</td>
+                                                    <td>{{ $mov->amount }}</td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
+                                        <tfoot>
+                                            <tr class="total-footer">
+                                                <th colspan="3" class="text-center"></th>
+                                                <th class="text-center color-green"></th>
+                                                <th class="text-center color-red"></th>
+                                                <th class="text-center"></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-center mt-2">
-                                    <a href="{{ route('activities.index') }}" class="btn btn-secondary">Volver</a>
                                 </div>
                             </div>
                         </div>
@@ -79,8 +93,8 @@
             </div>
         </div>
     </section>
-    <!-- /.content --> 
+    <!-- /.content -->  
 @endsection
 @push('scripts')
-    <script src="{{asset('js/data_table.js')}}"></script>
-@endpush   
+    <script src="{{asset('js/data_table_movements.js')}}"></script>
+@endpush  

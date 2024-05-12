@@ -98,6 +98,9 @@ return [
         'registration_date' => [
             'required' => 'Debe seleccionar una fecha.',
         ],
+        'type' => [
+            'required' => 'Debe seleccionar un tipo.',
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -135,6 +138,7 @@ return [
         'body_age' => 'Edad corporal',
         'body_fat' => 'Grasa corporal',
         'visceral_fat' => 'Grasa visceral',
+        'concept' => 'Concepto',
 
     ],
 ];

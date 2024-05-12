@@ -37,7 +37,7 @@
                                     <div class="form-group" id="plans_table">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <table class="table table-bordered data-table" id="table">
+                                                <table class="table table-bordered data-table table-sm" id="table">
                                                     <thead class="text-center">
                                                     <tr>
                                                         <th class="d-none">ID_Nombre_Clases</th>

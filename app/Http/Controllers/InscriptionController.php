@@ -8,9 +8,11 @@ use App\Activity;
 use App\Inscription;
 use App\MethodOfPayment;
 use App\Movement;
+use App\Attendance;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
+use Yajra\DataTables\DataTables;
 
 class InscriptionController extends Controller
 {
@@ -19,10 +21,34 @@ class InscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Request $request, $id)
     {
         $student = Student::findOrFail($id);
-        $inscriptions = $student->inscriptions;
+        if ($request->ajax()){
+            $inscriptions = $student->inscriptions;
+            return DataTables::of($inscriptions)
+            ->addColumn('activity', function($inscription){
+                return $inscription->activity->name;
+            })
+            ->addColumn('plan', function($inscription){
+                return $inscription->plan->name;
+            })
+            ->addColumn('expiration', function($inscription){
+                return $inscription->expiration_date->format('d-m-Y');
+            })
+            ->addColumn('balance', function($inscription){
+                return '$'.number_format($inscription->balance, 2, ',', '.');
+            })
+            ->addColumn('state', function($inscription){
+                return ucfirst($inscription->state);
+            })
+            ->setRowClass(function ($inscription) {
+                return $inscription->balance > 0 ? "text-danger" : "";
+            })
+            ->addColumn('action', 'students.inscriptions.actions')
+            ->rawColumns(['photo','action'])
+            ->make(true);
+        }
         // $activities = $inscriptions->activities;
         // dd($inscriptions);
             
@@ -60,14 +86,15 @@ class InscriptionController extends Controller
         ]);
         
         $inscription = new Inscription(request()->all());
+        // dd($inscription);
         $method_of_payment_id = $request->get('method_of_payment_id');
         $amount = $request->get('amount');
         $inscription->student_id = $id;
         // dd($inscription->registration_date);
-        $date = Carbon::createFromFormat('Y-m-d', $inscription->registration_date);
+        $date = $inscription->registration_date;
         // dd($date);
-        $expitarion = $date->addMonth()->subDay();
-        $inscription->expiration_date = $expitarion->toDateString();
+        $expiration = $date->addMonth()->subDay();
+        $inscription->expiration_date = $expiration;
         $plan = $inscription->plan_id; //obtengo una cadena de la forma "1_50.00"
         $pos=strpos($plan,'_'); //busco la posición del guion bajo
         $plan_id=substr($plan,0, $pos); //obtengo el id del plan elegido
@@ -162,15 +189,27 @@ class InscriptionController extends Controller
     {
         $query=trim($request->get('searchText'));
         $student = Student::where('dni','LIKE',$query)->where('state','activo')->first();
+        $isBirthday = false;
+    
         if ($student) {
             $inscription = Inscription::where('student_id',$student->id)->where('state','activa')->first();
-            if($inscription){
-                if ($inscription->classes > 0){
+            if(isset($inscription)){
+                if ($inscription->classes >= 1){
                     $inscription->classes--;
+                    if ($inscription->classes == 0) {
+                        $inscription->state = 'inactiva';
+                    }
                     $inscription->update();
+                   
+                    $attendance = new Attendance();
+                    $attendance->inscription_id = $inscription->id;
+                    $attendance->save();
                 }
-                // dd($inscription);
-                return view('students.attendances.show',compact('inscription'));
+                $currentDate = Carbon::now();
+                if($student->birthdate->day == $currentDate->day && $student->birthdate->month == $currentDate->month){
+                    $isBirthday = true;
+                }
+                return view('students.attendances.show',compact('inscription','isBirthday'));            
             }
             else{
                 return Redirect::back()->with('error',"El DNI ". $query . " no tiene inscriptiones activas");   

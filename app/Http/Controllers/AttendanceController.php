@@ -2,32 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\MethodOfPayment;
-use App\Movement;
+use App\Activity;
+use App\Attendance;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 
-class MovementController extends Controller
+class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $today = Carbon::today();
-        // dd($request);
-        $from = $request->get('from');
-        $to = $request->get('to');
-        if ($from != $to) {
-            $movements = Movement::whereDate('created_at','>=',$from)->whereDate('created_at','<=',$to)->with(['method_of_payment:id,name'])->orderBy('id','desc')->get();
+        $date = Carbon::now()->toDateString();
+        $activities = Activity::where('state','activa')->get();
+        // dd($activities);
+        $attendances = Attendance::where(DB::raw('DATE(created_at)'),$date)->with('inscription')->get();
+        return view('students.attendances.index',compact('activities','attendances','date')); 
+    }
+
+    public function showAttendanceByDay(Request $request){
+        $date=Carbon::createFromFormat('Y-m-d',$request->get('date'))->toDateString();
+        $activities = Activity::where('state','activa')->get();
+        $activity  = $request->get('activity');
+        // dd($activity);
+    
+        if($activity == 0){
+            $attendances = Attendance::where(DB::raw('DATE(created_at)'),$date)->with('inscription')->get();
+            // dd($attendances);
         }
         else{
-            $movements = Movement::whereDate('created_at',$today)->with(['method_of_payment:id,name'])->orderBy('id','desc')->get();
+            $attendances = Attendance::where(DB::raw('DATE(created_at)'),$date)->get()->where('activity',$activity);
+            // dd($attendances);
         }
-        $today = $today->toDateString();
-        return view('movements.index', compact('today','movements','total_incomes','total_expenses','total','from','to'));
+        return view('students.attendances.index',compact('activities','attendances','date','activity')); 
     }
 
     /**
@@ -37,8 +48,7 @@ class MovementController extends Controller
      */
     public function create()
     {
-        $methods_of_payment = MethodOfPayment::all();
-        return view('movements.create',compact('methods_of_payment'));
+        //
     }
 
     /**
@@ -49,16 +59,7 @@ class MovementController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'concept' => "required",
-            'type' => "required",
-            'method_of_payment_id' => "required",
-            'amount' => "required",
-        ]);
-        $movement = new Movement(request()->all());
-        // dd($movement);
-        $movement->save();
-        return redirect('movements')->with('info','Movimiento agregado con éxito');
+        //
     }
 
     /**

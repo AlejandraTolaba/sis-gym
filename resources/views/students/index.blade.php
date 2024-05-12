@@ -18,7 +18,7 @@
                                     <h4>Alumnos</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('students.create') }}"><button title="Agregar alumno" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
+                                    <a href="{{ route('students.create') }}"><button title="Agregar alumno" class="btn btn-success"><i class="fa fa-user-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -27,10 +27,11 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered data-table-students" width="100%">
+                                    <table class="table table-bordered data-table-students table-sm" width="100%">
                                     <thead class="text-center">
                                     <tr>
                                         <th>Nombre y Apellido</th>
+                                        <th>Foto</th>
                                         <th>DNI</th>
                                         <th>Teléfono</th>
                                         <th>Estado</th>
@@ -51,42 +52,7 @@
         </div>
     </section>
     <!-- /.content -->
-    @push('scripts')
-    <script>
-        $(function(){
-            var table = $('.data-table-students').DataTable({
-                ajax: "{{ route('students.index')}}",
-                columns: [
-                    { data: 'fullname', name:'fullname'},
-                    { data: 'dni', name:'dni', orderable:false},
-                    { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
-                    { data: 'state', name:'state', orderable:false},
-                    { data: 'balance', name:'balance'},
-                    { data: 'action', name:'action', orderable:false, searchable:false},
-                ],
-                language: {
-                    "decimal": ",",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ".",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                },
-                responsive: true,
-            });
-        });
-    </script>
-    @endpush    
 @endsection
+@push('scripts')
+    <script src="{{asset('js/data_table.js')}}"></script>
+@endpush

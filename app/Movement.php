@@ -15,4 +15,8 @@ class Movement extends Model
         'type',
         'amount'
     ];
+
+    public function method_of_payment(){
+        return $this->belongsTo('App\MethodOfPayment');
+    }
 }

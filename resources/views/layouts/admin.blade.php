@@ -11,18 +11,18 @@
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- DataTables -->
-        <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-        <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+        <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+        <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+        <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
         <!-- Select2 -->
-        <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
         <!-- Theme style -->
-        <link rel="stylesheet" href="/dist/css/adminlte.min.css">
-        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
     
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -70,8 +70,8 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
-                <a href="/" class="brand-link">
-                <img src="/img/logo1.jpg" alt="Logo PF" class="brand-image img-circle elevation-3"
+                <a href="{{asset('/')}}" class="brand-link">
+                <img src="{{asset('img/logo1.jpg')}}" alt="Logo PF" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">PUNTO FIT</span>
                 </a>
@@ -110,7 +110,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('attendances.register') }}" class="nav-link">
+                            <a href="{{ route('attendances.index') }}" class="nav-link">
                                 <i class="nav-icon fa fa-check"></i>
                                 <p>
                                     Asistencias
@@ -122,6 +122,14 @@
                                 <i class="nav-icon fa fa-birthday-cake"></i>
                                 <p>
                                     Cumpleaños
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('movements')}}" class="nav-link">
+                                <i class="nav-icon fa fa-file-invoice-dollar"></i>
+                                <p>
+                                    Movimientos de caja
                                 </p>
                             </a>
                         </li>
@@ -177,32 +185,38 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
-        <script src="/plugins/jquery/jquery.min.js"></script>
+        <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
         <!-- jQuery UI 1.11.4 -->
-        <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
         $.widget.bridge('uibutton', $.ui.button)
         </script>
         <!-- Bootstrap 4 -->
-        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         <!-- AdminLTE App -->
-        <script src="/dist/js/adminlte.js"></script>
+        <script src="{{asset('dist/js/adminlte.js')}}"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="/dist/js/pages/dashboard.js"></script>
+        <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
         <!-- AdminLTE for demo purposes -->
-        <script src="/dist/js/demo.js"></script>
+        <script src="{{asset('dist/js/demo.js')}}"></script>
         <!-- DataTables -->
-        <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-        <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+        <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('plugins/jszip/jszip.min.js')}}"></script>
+        <script src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
+        <script src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+        <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+        <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+        <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script> 
         <!-- Select2 -->
-        <script src="/plugins/select2/js/select2.full.min.js"></script>
+        <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
-        <script src="/js/app.js"></script>
+        <script src="{{asset('js/app.js')}}"></script>
         @stack('scripts')
         @yield('js')
     </body>

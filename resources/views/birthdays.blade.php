@@ -30,7 +30,7 @@
                                     <div class="row row-cols-1 row-cols-md-3">
                                         <div class="col mb-4">
                                             <div class="card" style="width: 170px;">
-                                                <img src="/img/students/{{ $student->photo }}" class="card-img-top" alt="...">
+                                                <img src="{{asset('img/students/'.$student->photo)}}" class="card-img-top" alt="...">
                                                 <div class="card-body text-center">
                                                     <h5>{{ $student->name }} {{ $student->lastname }}</h5>
                                                     <p class="card-text">{{ \Carbon\Carbon::createFromDate($student->birthdate)->age }} años</p>
@@ -43,7 +43,7 @@
                                     <div class="row row-cols-1 row-cols-md-3">
                                         <div class="col mb-4">
                                             <div class="card" style="width: 170px;">
-                                                <img src="/img/teachers/{{ $teacher->photo }}" class="card-img-top" alt="...">
+                                                <img src="{{asset('img/teachers/'.$teacher->photo)}}" class="card-img-top" alt="...">
                                                 <div class="card-body text-center">
                                                     <h5>{{ $teacher->name }} {{ $teacher->lastname }}</h5>
                                                     <p class="card-text">{{ \Carbon\Carbon::createFromDate($teacher->birthdate)->age }} años</p>

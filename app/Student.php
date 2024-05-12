@@ -30,6 +30,14 @@ class Student extends Model
         
     ];
 
+    protected $dates = [
+        'birthdate'
+    ];
+
+    protected $casts = [
+        'birthdate' => 'datetime:Y-m-d',
+    ];
+
     public function inscriptions(){
         return $this->hasMany('App\Inscription');
     }

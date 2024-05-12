@@ -10,9 +10,9 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-12 card-title text-center">
-                                <h4>Editar datos de {{ $student->name }} {{ $student->lastname}}</h4>
+                                <h4>Editar datos de {{ $teacher->name }} {{ $teacher->lastname}}</h4>
                                 <div class="text-center">
-                                    <img src="{{asset('img/students/'.$student->photo)}}" width="90px" height="90px" class="rounded-circle" alt="photo-student">
+                                    <img src="{{asset('img/teachers/'.$teacher->photo)}}" width="90px" height="90px" class="rounded-circle" alt="photo-teacher">
                                 </div>
                             </div>
                         </div>
@@ -20,7 +20,7 @@
                     <!-- </a> -->
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <form  action="{{ route('students.update',$student->id) }}" method="POST">
+                            <form  action="{{ route('teachers.update',$teacher->id) }}" method="POST">
                                 {{ csrf_field() }}
                                 @method('PUT')
                                 <div class="card-body">
@@ -36,7 +36,7 @@
                                             id="name"
                                             type="text"
                                             name="name"
-                                            value="{{old('name',$student->name)}}">
+                                            value="{{old('name',$teacher->name)}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('name', ':message') }} </strong>
                                                 </span>
@@ -45,13 +45,13 @@
                                             id="lastname"
                                             type="text"
                                             name="lastname"
-                                            value="{{old('lastname',$student->lastname)}}">
+                                            value="{{old('lastname',$teacher->lastname)}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('lastname', ':message') }} </strong>
                                                 </span>
                                         </div>
                                         <div class="col-md-6" mb-3>
-											<label>Foto del alumno</label>
+											<label>Foto</label>
 											<div class="row">
 												<div class="col-lg-4">
 													<!-- Video via webcam -->
@@ -77,7 +77,7 @@
                                             id='input_dni'
                                             type="number"
                                             name="dni"
-                                            value="{{old('dni', $student->dni)}}"
+                                            value="{{old('dni', $teacher->dni)}}"
                                             >
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('dni', ':message') }} </strong>
@@ -89,7 +89,7 @@
                                                 id='input_birthdate'
                                                 type ="date" 
                                                 name="birthdate" 
-                                                value="{{old('birthdate', $student->birthdate->toDateString())}}">
+                                                value="{{old('birthdate', $teacher->birthdate->toDateString())}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('birthdate', ':message') }} </strong>
                                                 </span>
@@ -99,14 +99,14 @@
                                             <label for="exampleInputEmail1">Sexo (*)</label>
                                             <div class="form-check">
                                                 <div class="container">
-                                                    <input class="form-check-input" type="radio" name="gender" id="F" value="F" {{(old('gender',$student->gender) == 'F') ? 'checked' : ''}}>
+                                                    <input class="form-check-input" type="radio" name="gender" id="F" value="F" {{(old('gender',$teacher->gender) == 'F') ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="F"> Femenino </label>
                                                 </div>
                                                 
                                             </div>
                                             <div class="form-check">
                                                 <div class="container">
-                                                    <input class="form-check-input" type="radio" name="gender" id="M" value="M" {{(old('gender',$student->gender) == 'M') ? 'checked' : ''}}>
+                                                    <input class="form-check-input" type="radio" name="gender" id="M" value="M" {{(old('gender',$teacher->gender) == 'M') ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="M"> Masculino </label>
                                                 </div>
                                             </div>
@@ -121,7 +121,7 @@
                                         id="address"
                                         type="text"
                                         name="address"
-                                        value="{{old('address',$student->address)}}">
+                                        value="{{old('address',$teacher->address)}}">
                                             <span class="invalid-feedback" role="alert">
                                                 <strong> {{ $errors->first('address', ':message') }} </strong>
                                             </span>
@@ -134,7 +134,7 @@
                                             id="phone_number"
                                             type="text"
                                             name="phone_number"
-                                            value="{{old('phone_number',$student->phone_number)}}">
+                                            value="{{old('phone_number',$teacher->phone_number)}}">
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> {{ $errors->first('phone_number', ':message') }} </strong>
                                                 </span>
@@ -145,7 +145,7 @@
                                             id="contact_number"
                                             type="text"
                                             name="contact_number"
-                                            value="{{old('contact_number',$student->contact_number)}}">
+                                            value="{{old('contact_number',$teacher->contact_number)}}">
                                         </div>
                                     </div>                     
                                     <div class="form-group">
@@ -155,58 +155,12 @@
                                         id="email" 
                                         name="email"
                                         placeholder="nombre@ejemplo.com"
-                                        value="{{old('email',$student->email)}}">
+                                        value="{{old('email',$teacher->email)}}">
                                     </div>
                                     
-                                    <div class="form-row">
-                                        <h3 class="card-title mb-3"><b>Otros datos</b></h3>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">¿Presentó certificado?</label>
-                                                <div class="form-check">
-                                                    <div class="container">
-                                                        <input class="form-check-input" type="radio" name="certificate" id="SI" value=1 {{(old('certificate',$student->certificate) == 1) ? 'checked' : ''}}>
-                                                        <label class="form-check-label" for="SI"> Si </label>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="form-check">
-                                                    <div class="container">
-                                                        <input class="form-check-input" type="radio" name="certificate" id="NO" value=0 {{(old('certificate',$student->certificate) == 0) ? 'checked' : ''}}>
-                                                        <label class="form-check-label" for="NO"> No </label>
-                                                    </div>
-                                                </div>
-                                                <span class="" role="alert">
-                                                    <strong style="font-size: 82%; color: #d9534f"> {{ $errors->first('certificate', ':message') }} </strong>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="certificate_date">Fecha de presentación</label>                   
-                                                <input class="form-control bg-ligth shadow-sm @if($errors->first('certificate_date')) is-invalid @endif"
-                                                id='input_certificate_date'
-                                                type ="date" 
-                                                name="certificate_date" 
-                                                value="{{ old('certificate_date',$student->certificate_date) }}">
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong> {{ $errors->first('certificate_date', ':message') }} </strong>
-                                                </span>
-                                        </div>
-                                    </div>    
-                                    <div class="form-group">
-                                        <label for="observations">Observaciones</label>
-                                        <textarea class="form-control" id="observations" name="observations" rows="3">{{ $student->observations ? $student->observations : ''}}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="routine">Rutina</label>
-                                        <textarea class="form-control" id="routine" name="routine" rows="3">{{ $student->routine ? $student->routine : ''}}</textarea>
-                                    </div>
                                     <div class="row">
                                         <div class="col-md-12 text-center mt-3">
-                                            <a href="{{ route('students.index') }}" class="btn btn-secondary">Cancelar</a>
+                                            <a href="{{ route('teachers.index') }}" class="btn btn-secondary">Cancelar</a>
                                             <button type="submit" class="btn btn-primary">Guardar</button>
                                         </div>
                                     </div>
@@ -222,5 +176,5 @@
     <!-- /.content -->
 @endsection
 @push('scripts')
-    <script src="{{asset('js/add_photo_student.js')}}"></script>
+    <script src="{{asset('js/add_photo_teacher.js')}}"></script>
 @endpush

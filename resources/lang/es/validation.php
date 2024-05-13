@@ -142,6 +142,8 @@ return [
         'body_fat' => 'Grasa corporal',
         'visceral_fat' => 'Grasa visceral',
         'concept' => 'Concepto',
+        'code' => 'Código',
+        'stock' => 'Stock'
 
     ],
 ];

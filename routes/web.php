@@ -86,3 +86,5 @@ Route::get('/birthdays',function(){
 Route::get('activity/{id}/inscriptions/index','ActivityController@showInscriptions')->name('showInscriptions');
 
 Route::resource('movements','MovementController');
+
+Route::resource('products','ProductController');

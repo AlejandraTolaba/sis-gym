@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
 {
@@ -12,9 +13,19 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()){
+            $products = Product::all();
+            return DataTables::of($products)
+            ->setRowClass(function ($product) {
+                return ($product->stock < 10 && $product->stock != 0)  ? ("text-info") : ($product->stock == 0 ? ("text-danger") : "");
+            })
+            // ->addColumn('action', 'products.actions')
+            // ->rawColumns(['action'])
+            ->make(true);
+        }
+        return view('products.index');
     }
 
     /**

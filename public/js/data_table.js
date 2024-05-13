@@ -94,4 +94,15 @@ $(document).ready(function() {
             orderable: false
         }],
     });
+    $('.data-table-products').DataTable({
+        language: lang,
+        responsive: true,
+        ajax: "products",
+        columns: [
+            { data: 'code', name:'code'},
+            { data: 'name', name:'name'},
+            { data: 'stock', name:'stock'},
+            { data: 'price', name:'price'},
+        ],
+    });
 });

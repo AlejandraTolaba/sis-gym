@@ -29,3 +29,7 @@ $('.select2').on("select2:select", function (e) {
     $('.select2-activities').select2('close');
 });
 
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.product').select2();
+});

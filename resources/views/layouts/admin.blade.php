@@ -141,6 +141,14 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('sales.create')}}" class="nav-link">
+                                <i class="nav-icon fa fa-plus"></i>
+                                <p>
+                                    Nueva Venta
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

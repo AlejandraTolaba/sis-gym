@@ -6,6 +6,11 @@
             <strong>{{session('info')}}</strong>
         </div>         
     @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
+            <strong>{{session('error')}}</strong>
+        </div>         
+    @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -62,7 +67,9 @@
                                                         <td>{{$bc->mb}}</td> 
                                                         <td>{{$bc->visceral_fat}}</td>
                                                         <td>
-                                                        <a href="{{ route('bodychecks.edit',$bc->id) }}"><button title="Editar ficha" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+                                                            <a href="{{ route('bodychecks.edit',$bc->id) }}"><button title="Editar ficha" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+                                                            <a href="" id="Eliminar-{{$bc->id}}" data-target="#modal-delete-{{$bc->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$bc->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
+                                                            @include('students.bodychecks.destroy')
                                                         </td>
                                                     </tr>
                                                 @endforeach

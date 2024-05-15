@@ -110,6 +110,8 @@ class BodyCheckController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bodycheck = BodyCheck::findOrFail($id); 
+        $bodycheck->delete();
+		return redirect('students/bodychecks/'.$bodycheck->student->id)->with('error','Ficha de control eliminada con éxito');
     }
 }

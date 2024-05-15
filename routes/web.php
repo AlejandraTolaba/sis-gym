@@ -60,7 +60,8 @@ Route::get('students/bodychecks/create/{id}','BodyCheckController@create')->name
 Route::post('students/bodychecks/{id}','BodyCheckController@store')->name('bodychecks.store');
 Route::get('students/bodychecks/{id}','BodyCheckController@index')->name('bodychecks');
 Route::get('students/bodychecks/{id}/edit','BodyCheckController@edit')->name('bodychecks.edit');
-Route::post('students/bodychecks/{id}','BodyCheckController@update')->name('bodychecks.update');
+Route::put('students/bodychecks/{id}','BodyCheckController@update')->name('bodychecks.update');
+Route::delete('students/bodychecks/{id}','BodyCheckController@destroy')->name('bodychecks.destroy');
 
 Route::get('dropdown',function(){
     $id=Request::get('option');

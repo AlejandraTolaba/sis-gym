@@ -6,6 +6,11 @@
             <strong>{{session('info')}}</strong>
         </div>         
     @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show col-md-8 offset-md-2" role="alert">
+            <strong>{{session('error')}}</strong>
+        </div>         
+    @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -18,7 +23,7 @@
                                     <h4>Productos</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('products.create') }}"><button title="Agregar producto" class="btn btn-success"><i class="fa fa-user-plus"></i> Agregar</button></a>
+                                    <a href="{{ route('products.create') }}"><button title="Agregar producto" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>

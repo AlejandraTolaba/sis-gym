@@ -21,8 +21,8 @@ class ProductController extends Controller
             ->setRowClass(function ($product) {
                 return ($product->stock < 10 && $product->stock != 0)  ? ("text-info") : ($product->stock == 0 ? ("text-danger") : "");
             })
-            // ->addColumn('action', 'products.actions')
-            // ->rawColumns(['action'])
+            ->addColumn('action', 'products.actions')
+            ->rawColumns(['action'])
             ->make(true);
         }
         return view('products.index');
@@ -77,7 +77,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -89,7 +90,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'stock' => "required",
+            'price' => "required",
+        ]);
+        
+        $product = Product::findOrFail($id);
+        $product->fill($request->all());
+        $product->update();
+        return redirect('products')->with('info','Producto modificado con éxito');
     }
 
     /**

@@ -34,7 +34,7 @@
                                         <th>Nombre</th>
                                         <th>Stock</th>
                                         <th>Precio</th>
-                                        <!-- <th>Opciones</th> -->
+                                        <th>Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">

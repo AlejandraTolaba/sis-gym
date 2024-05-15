@@ -103,6 +103,7 @@ $(document).ready(function() {
             { data: 'name', name:'name'},
             { data: 'stock', name:'stock'},
             { data: 'price', name:'price'},
+            { data: 'action', name:'action', orderable:false, searchable:false},
         ],
     });
 });

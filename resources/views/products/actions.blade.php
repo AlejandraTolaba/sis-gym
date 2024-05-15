@@ -1,0 +1,1 @@
+<a href="{{ route('products.edit',$id) }}"><button name="Editar" title="Editar producto" type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</button></a>

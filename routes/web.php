@@ -89,4 +89,7 @@ Route::get('activity/{id}/inscriptions/index','ActivityController@showInscriptio
 Route::resource('movements','MovementController');
 
 Route::resource('products','ProductController');
+
 Route::resource('sales','SaleController');
+
+Route::resource('users','UserController');

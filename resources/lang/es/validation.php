@@ -117,7 +117,7 @@ return [
     */
     'attributes' => [
         'name' => 'Nombre',
-        'password' => 'Contraseña',
+        'password' => 'contraseña',
         'password-confirm'=> 'Confirmar Contraseña',
         'newpassword'=>'Nueva contraseña',
         'newpassword_confirmation'=>'Confirmar contraseña',
@@ -143,7 +143,8 @@ return [
         'visceral_fat' => 'Grasa visceral',
         'concept' => 'Concepto',
         'code' => 'Código',
-        'stock' => 'Stock'
+        'stock' => 'Stock',
+        'password_confirmation' => 'contraseña'
 
     ],
 ];

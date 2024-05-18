@@ -19,6 +19,9 @@ class TeacherController extends Controller
             $teachers = Teacher::all();
             // dd($teachers);
             return DataTables::of($teachers)
+            ->setRowClass(function ($teacher) {
+                return $teacher->state == 'inactivo'  ?  'danger text-danger ': '';
+            })
             ->addColumn('fullname', function($teacher){
                 return $teacher->name.' '.$teacher->lastname;
             })
@@ -163,6 +166,19 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+        if ($teacher->state == "activo") {
+            $teacher->state = "inactivo";
+        }
+        else{
+            $teacher->state = "activo";
+        }
+        $teacher->update();
+        if ($teacher->state == "activo") {
+            return redirect('teachers')->with('info','Profesor activado con éxito');
+        }
+        else{
+            return redirect('teachers')->with('error','Profesor desactivado con éxito');
+        }
     }
 }

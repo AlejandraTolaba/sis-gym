@@ -94,6 +94,10 @@ td, th{
 table.dataTable.dataTable_width_auto {
     width: auto;
 }
+
+.modal-content {
+    color: black;
+}
 @media screen and (max-width: 767px) {
     div.dt-buttons {
         width: auto !important;

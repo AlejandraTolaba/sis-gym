@@ -6,6 +6,11 @@
             <strong>{{session('info')}}</strong>
         </div>         
     @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
+            <strong>{{session('error')}}</strong>
+        </div>         
+    @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">

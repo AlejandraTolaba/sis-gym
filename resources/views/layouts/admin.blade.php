@@ -23,6 +23,9 @@
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
+
+        <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
+        <link rel="icon" type="image/jpg" href="{{asset('img/logo1.jpg')}}">
     
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -39,6 +42,25 @@
 
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
+                @if (Auth::user())
+                    <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            {{ __('Salir') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                    </li>
+                @endif
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">

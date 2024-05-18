@@ -171,14 +171,16 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('users.create')}}" class="nav-link">
-                                <i class="nav-icon fa fa-users"></i>
-                                <p>
-                                    Usuarios
-                                </p>
-                            </a>
-                        </li>
+                        @if(Auth::user()->type =='A')
+                            <li class="nav-item">
+                                <a href="{{route('users.create')}}" class="nav-link">
+                                    <i class="nav-icon fa fa-users"></i>
+                                    <p>
+                                        Usuarios
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

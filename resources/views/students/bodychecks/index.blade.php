@@ -68,8 +68,10 @@
                                                         <td>{{$bc->visceral_fat}}</td>
                                                         <td>
                                                             <a href="{{ route('bodychecks.edit',$bc->id) }}"><button title="Editar ficha" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
-                                                            <a href="" id="Eliminar-{{$bc->id}}" data-target="#modal-delete-{{$bc->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$bc->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
-                                                            @include('students.bodychecks.destroy')
+                                                            @if(Auth::user()->type =='A')
+                                                                <a href="" id="Eliminar-{{$bc->id}}" data-target="#modal-delete-{{$bc->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$bc->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
+                                                                @include('students.bodychecks.destroy')
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

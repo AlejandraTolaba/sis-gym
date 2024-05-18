@@ -144,7 +144,8 @@ return [
         'concept' => 'Concepto',
         'code' => 'Código',
         'stock' => 'Stock',
-        'password_confirmation' => 'contraseña'
+        'password_confirmation' => 'confirmar contraseña',
+        'new_password' => 'nueva contraseña'
 
     ],
 ];

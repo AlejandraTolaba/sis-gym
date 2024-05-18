@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -76,7 +79,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        // dd(Auth::user()->password);
+		return view('users.edit',compact('user'));
     }
 
     /**
@@ -88,7 +93,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+			'password'=>'required',
+            'new_password'=> 'required|confirmed',
+		]);
+
+        if(Hash::check($request->password,Auth::user()->password)){
+			$user=\Auth::user();
+			$user->password = bcrypt($request->new_password);
+		    $user->update();
+		    return Redirect::back()->with('info','Su contraseña se ha cambiado correctamente');
+		}
+        else{
+			return Redirect::back()->with('error','La contraseña ingresada no coincide con la contraseña actual. Intente de nuevo');
+		}
     }
 
     /**

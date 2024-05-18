@@ -21,6 +21,9 @@ class UserController extends Controller
         if ($request->ajax()){
             $users = User::all();
             return DataTables::of($users)
+            ->addColumn('type', function($user){
+                return $user->type == 'A' ? 'Administrador' : 'Empleado';
+            })
             ->addColumn('action', 'users.actions')
             ->rawColumns(['action'])
             ->make(true);

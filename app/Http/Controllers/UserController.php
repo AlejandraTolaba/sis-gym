@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
@@ -12,9 +13,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()){
+            $users = User::all();
+            return DataTables::of($users)
+            ->addColumn('action', 'users.actions')
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+        return view('users.index');
     }
 
     /**
@@ -46,7 +54,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->get('password'));
         // dd($user);
         $user->save();
-        return redirect('/')->with('info','Usuario agregado con éxito');
+        return redirect('users')->with('info','Usuario agregado con éxito');
     }
 
     /**
@@ -91,6 +99,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect('users')->with('error','Usuario eliminado con éxito');
     }
 }

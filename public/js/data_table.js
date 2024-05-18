@@ -106,4 +106,15 @@ $(document).ready(function() {
             { data: 'action', name:'action', orderable:false, searchable:false},
         ],
     });
+    $('.data-table-users').DataTable({
+        language: lang,
+        responsive: true,
+        ajax: "users",
+        columns: [
+            { data: 'name', name:'name'},
+            { data: 'email', name:'email', orderable:false, searchable:false},
+            { data: 'type', name:'type', orderable:false},
+            { data: 'action', name:'action', orderable:false, searchable:false},
+        ],
+    });
 });

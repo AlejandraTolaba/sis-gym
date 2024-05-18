@@ -1,0 +1,2 @@
+<a href="" id="Eliminar-{{$id}}" data-target="#modal-delete-{{$id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$id}}" title="Eliminar usuario"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
+@include('users.destroy')

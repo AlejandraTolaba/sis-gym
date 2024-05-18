@@ -94,7 +94,7 @@
                                 <div class="row">
                                     <div class="col-md-12 text-center mt-2">
                                         <!-- <a href="{{ URL::previous() }}" class="btn btn-secondary">Cancelar</a> -->
-                                        <a href="{{asset('/')}}" class="btn btn-secondary">Cancelar</a>
+                                        <a href="{{route('users.index')}}" class="btn btn-secondary">Cancelar</a>
                                         <button type="submit" class="btn btn-primary">Guardar</button>
                                     </div>
                                 </div>

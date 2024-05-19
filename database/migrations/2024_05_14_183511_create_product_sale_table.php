@@ -17,6 +17,8 @@ class CreateProductSaleTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('sale_id');
+            $table->integer('quantity');
+            $table->float('price');
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('sale_id')->references('id')->on('sales');

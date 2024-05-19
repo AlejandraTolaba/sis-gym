@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
+    @if (session()->has('info'))
+        <div class="alert alert-success alert-dismissible fade show col-md-6 offset-md-3" role="alert">
+            <strong>{{session('info')}}</strong>
+        </div>         
+    @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -20,7 +25,7 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="product_id">Productos</label>
-                                        <select id="products_id" name='products_id[]' data-placeholder="Seleccione producto o productos" multiple="multiple" class="form-control select2 shadow-sm @if($errors->first('product_id')) is-invalid @endif" >
+                                        <select id="products_id" name='products_id[]' data-placeholder="Seleccione producto o productos" multiple="multiple" class="form-control select2 select2_multiple shadow-sm @if($errors->first('product_id')) is-invalid @endif" required>
                                             <!-- <option selected>{{''}}</option> -->
                                             @if ( !$products->isEmpty() )
                                                 @foreach ($products as $product)
@@ -36,7 +41,7 @@
                                     <div class="form-group d-none" id="products_table">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <table class="table table-bordered table-sm" id="table">
+                                                <table class="table table-bordered w-100 table-sm" id="table">
                                                     <thead class="text-center">
                                                     <tr>
                                                         <th>ID</th>
@@ -44,19 +49,25 @@
                                                         <th>Stock</th>
                                                         <th width="100px">Cantidad</th>
                                                         <th>Precio</th>
-                                                        <!-- <th>Subtotal</th> -->
+                                                        <th>Subtotal</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody class="text-center" id="resultsTableBody">
                                                         
                                                     </tbody>
+                                                    <tfoot>
+                                                        <tr class="total-footer">
+                                                            <th colspan="5" class="text-right pr-2">TOTAL </th>
+                                                            <th width="130px" id="total" class="text-center text-bold"><input id="input_total" name="total" type="number" step="any" readonly class="form-control text-center text-bold" value="0.00"></th>
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="method_of_payment_id">Forma de pago</label>
-                                        <select id="method_of_payment_id" name='method_of_payments_id' data-placeholder="Seleccione forma de pago" class="form-control select2 shadow-sm @if($errors->first('method_of_payment_id')) is-invalid @endif" >
+                                        <select id="method_of_payment_id" name='method_of_payment_id' data-placeholder="Seleccione forma de pago" class="form-control select2 shadow-sm @if($errors->first('method_of_payment_id')) is-invalid @endif" >
                                             <!-- <option selected>{{''}}</option> -->
                                             @if ( !$methods_of_payment->isEmpty() )
                                                 @foreach ($methods_of_payment as $method_of_payment)
@@ -89,5 +100,5 @@
 @endsection
 @push('scripts')
     <script src="{{asset('js/app.js')}}"></script>
-    <!-- <script src="{{asset('js/add_product.js')}}"></script> -->
+    <script src="{{asset('js/add_product.js')}}"></script>
 @endpush

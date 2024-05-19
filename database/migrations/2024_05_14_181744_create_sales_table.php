@@ -15,8 +15,9 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('quantity');
-            $table->float('price');
+            $table->float('total');
+            $table->unsignedBigInteger('method_of_payment_id');
+            $table->foreign('method_of_payment_id')->references('id')->on('methods_of_payment');
             $table->timestamps();
         });
     }

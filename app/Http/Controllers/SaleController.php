@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\MethodOfPayment;
+use App\Movement;
+use App\Sale;
 
 class SaleController extends Controller
 {
@@ -39,7 +41,28 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sale = new Sale(request()->all());
+        // dd(request()->all());
+        $products = $request->get('products_id');
+        $quantity = $request->get('td_quantity');
+        $cont = 0;
+        while ( $cont < count($products) ) {
+            $sale->save(); 
+            $data_products = explode("_",$products[$cont]);
+            $p = Product::findOrFail($data_products[0]);
+            $p->stock=(int)$p->stock - (int)$quantity[$cont];
+            $p->update();
+            // dd($data_products);
+            $sale->products()->attach($data_products[0],['quantity' => $quantity[$cont], 'price' => $data_products[4]]);
+            $cont = $cont+1;
+        }
+        $movement= new Movement();
+        $movement->concept= " VENTA DE PRODUCTOS N° ".$sale->id;
+        $movement->type="INGRESO";
+        $movement->method_of_payment_id = $sale->method_of_payment_id;
+        $movement->amount = $request->get("total");
+        $movement->save();
+        return redirect('movements')->with('info','Venta registrada con éxito');
     }
 
     /**

@@ -10,11 +10,11 @@ class Sale extends Model
     protected $primaryKey='id';
 
     protected $fillable= [
-        'quantity',
-        'price'
+        'total',
+        'method_of_payment_id'
     ];
 
     public function products(){
-        return $this->belongsToMany('App\Product','product_sale')->withTimestamps();
+        return $this->belongsToMany('App\Product','product_sale')->withPivot('quantity','price')->withTimestamps();
     }
 }

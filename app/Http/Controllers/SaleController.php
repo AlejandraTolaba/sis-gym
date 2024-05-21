@@ -57,7 +57,13 @@ class SaleController extends Controller
             $cont = $cont+1;
         }
         $movement= new Movement();
-        $movement->concept= " VENTA DE PRODUCTOS N° ".$sale->id;
+        // dd(count($sale->products));
+        $concept = '';
+        for ($i=0; $i < count($sale->products); $i++) { 
+            $concept = $concept.PHP_EOL.'* '.$sale->products[$i]->name.' ('.$sale->products[$i]->pivot->quantity.')';
+        }
+        // dd($concept);
+        $movement->concept= " VENTA DE PRODUCTOS N° ".$sale->id.PHP_EOL.'-'.$concept.'-';
         $movement->type="INGRESO";
         $movement->method_of_payment_id = $sale->method_of_payment_id;
         $movement->amount = $request->get("total");

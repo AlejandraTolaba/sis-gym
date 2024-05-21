@@ -30,9 +30,12 @@
                 <div class="card card-success card-outline">
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                         <div class="card-header">
-                            <div class="row text-center">
-                                <div class="card-title col-md-12">
+                            <div class="row">
+                                <div class="card-title col-md-6 text-left">
                                     <h4>Asistencias</h4>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a href="{{ route('attendances.register')}}"><button title="Registrar Asistencia" class="btn btn-success"><i class="fa fa-user-check"></i> Registrar Asistencia</button></a>
                                 </div>
                             </div>
                         </div>

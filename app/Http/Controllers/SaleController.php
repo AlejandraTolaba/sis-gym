@@ -50,8 +50,10 @@ class SaleController extends Controller
             $sale->save(); 
             $data_products = explode("_",$products[$cont]);
             $p = Product::findOrFail($data_products[0]);
-            $p->stock=(int)$p->stock - (int)$quantity[$cont];
-            $p->update();
+            if ($p->stock > 0) {
+                $p->stock=(int)$p->stock - (int)$quantity[$cont];
+                $p->update();
+            }
             // dd($data_products);
             $sale->products()->attach($data_products[0],['quantity' => $quantity[$cont], 'price' => $data_products[4]]);
             $cont = $cont+1;
@@ -60,10 +62,10 @@ class SaleController extends Controller
         // dd(count($sale->products));
         $concept = '';
         for ($i=0; $i < count($sale->products); $i++) { 
-            $concept = $concept.PHP_EOL.'* '.$sale->products[$i]->name.' ('.$sale->products[$i]->pivot->quantity.')';
+            $concept = $concept.nl2br(' '.$sale->products[$i]->name.' ('.$sale->products[$i]->pivot->quantity.').');
         }
         // dd($concept);
-        $movement->concept= " VENTA DE PRODUCTOS N° ".$sale->id.PHP_EOL.'-'.$concept.'-';
+        $movement->concept= " VENTA DE PRODUCTOS N° ".$sale->id.' - '.nl2br($concept);
         $movement->type="INGRESO";
         $movement->method_of_payment_id = $sale->method_of_payment_id;
         $movement->amount = $request->get("total");

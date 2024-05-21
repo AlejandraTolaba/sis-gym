@@ -67,7 +67,7 @@
                                         <tbody class="text-center">
                                             @foreach ($movements as $mov)
                                                 <tr>
-                                                    <td>{{ $mov->concept }}</td>
+                                                    <td>{!! $mov->concept !!}</td>
                                                     <td>{{ $mov->created_at->format('d-m-Y') }}</td>
                                                     <td>{{ $mov->created_at->format('H:i') }}</td>
                                                     <td>{{ $mov->type }}</td>

@@ -1,8 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
+@if (session()->has('info'))
+    <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2" role="alert">
+        <strong>{{session('info')}}</strong>
+    </div>         
+@endif
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-5">
         <div class="col-md-8">
             <!-- Small boxes (Stat box) -->
             <div class="row">

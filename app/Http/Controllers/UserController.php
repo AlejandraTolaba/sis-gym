@@ -105,7 +105,12 @@ class UserController extends Controller
 			$user=\Auth::user();
 			$user->password = bcrypt($request->new_password);
 		    $user->update();
-		    return Redirect::back()->with('info','Su contraseña se ha cambiado correctamente');
+            if (Auth::user()->type == 'A') {
+                return Redirect::back()->with('info','Su contraseña se ha cambiado correctamente');
+            }
+		    else{
+                return redirect('home')->with('info','Su contraseña se ha cambiado correctamente');
+            }
 		}
         else{
 			return Redirect::back()->with('error','La contraseña ingresada no coincide con la contraseña actual. Intente de nuevo');

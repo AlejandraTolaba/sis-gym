@@ -66,24 +66,131 @@ $(function(){
                     i :
                     0;
             };
-
-            totalIncomes = api
+            /******************************************************************************
+                                                CONTADO
+            *******************************************************************************/
+            totalIncomesC = api
                 .rows({filter:'applied'})
                 .data()
                 .filter( function ( value, index ) {
-                    return value[3] == 'INGRESO' ? true : false;
+                    return (value[3] == 'INGRESO' && value[4] == 'Contado') ? true : false;
                 } )
                 .pluck(5)
                 .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
-            // console.log(totalIncomes);
+            
+            totalOutcomesC = api
+                .rows({filter:'applied'})
+                .data()
+                .filter( function ( value, index ) {
+                    return (value[3] == 'EGRESO' && value[4] == 'Contado') ? true : false;
+            } )
+                .pluck(5)
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            // Total amount calculation
+            var totalC = totalIncomesC - totalOutcomesC;
 
+            /******************************************************************************
+                                                DEBITO AUTOMATICO
+            *******************************************************************************/
+            totalIncomesDA = api
+            .rows({filter:'applied'})
+            .data()
+            .filter( function ( value, index ) {
+                return (value[3] == 'INGRESO' && value[4] == 'Débito automático') ? true : false;
+            } )
+            .pluck(5)
+            .reduce(function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+        
+            totalOutcomesDA = api
+                .rows({filter:'applied'})
+                .data()
+                .filter( function ( value, index ) {
+                    return (value[3] == 'EGRESO' && value[4] == 'Débito automático') ? true : false;
+            } )
+                .pluck(5)
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            // Total amount calculation
+            var totalDA = totalIncomesDA - totalOutcomesDA;
+
+            
+            /******************************************************************************
+                                                TARJETA DE DÉBITO
+            *******************************************************************************/
+            totalIncomesTD = api
+            .rows({filter:'applied'})
+            .data()
+            .filter( function ( value, index ) {
+                return (value[3] == 'INGRESO' && value[4] == 'Tarjeta de débito') ? true : false;
+            } )
+            .pluck(5)
+            .reduce(function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+        
+            totalOutcomesTD = api
+                .rows({filter:'applied'})
+                .data()
+                .filter( function ( value, index ) {
+                    return (value[3] == 'EGRESO' && value[4] == 'Tarjeta de débito') ? true : false;
+            } )
+                .pluck(5)
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            // Total amount calculation
+            var totalTD = totalIncomesTD - totalOutcomesTD;
+
+            /******************************************************************************
+                                                TARJETA DE CRÉDITO
+            *******************************************************************************/
+            totalIncomesTC = api
+            .rows({filter:'applied'})
+            .data()
+            .filter( function ( value, index ) {
+                return (value[3] == 'INGRESO' && value[4] == 'Tarjeta de crédito') ? true : false;
+            } )
+            .pluck(5)
+            .reduce(function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+        
+            totalOutcomesTC = api
+                .rows({filter:'applied'})
+                .data()
+                .filter( function ( value, index ) {
+                    return (value[3] == 'EGRESO' && value[4] == 'Tarjeta de crédito') ? true : false;
+            } )
+                .pluck(5)
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            // Total amount calculation
+            var totalTC = totalIncomesTC - totalOutcomesTC;
+            /*********************************************************************************************************/
+            totalIncomes = api
+            .rows({filter:'applied'})
+            .data()
+            .filter( function ( value, index ) {
+                return (value[3] == 'INGRESO') ? true : false;
+            } )
+            .pluck(5)
+            .reduce(function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+        
             totalOutcomes = api
                 .rows({filter:'applied'})
                 .data()
                 .filter( function ( value, index ) {
-                    return value[3] == 'EGRESO' ? true : false;
+                    return (value[3] == 'EGRESO') ? true : false;
             } )
                 .pluck(5)
                 .reduce(function (a, b) {
@@ -91,7 +198,6 @@ $(function(){
                 }, 0);
             // Total amount calculation
             var total = totalIncomes - totalOutcomes;
-
             // Set the value to the footer
             // $(api
             //     .column(1)
@@ -100,7 +206,7 @@ $(function(){
             // );
             $(api.column(1).footer()).html('<p><b>$' + totalIncomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</b></p>');
             $(api.column(3).footer()).html('<p><b>$'  + totalOutcomes.toLocaleString("es-ES",{ minimumFractionDigits: 2}) +'</b></p>');
-            $(api.column(5).footer()).html('<p><b>$' + total.toLocaleString("es-ES",{ minimumFractionDigits: 2}) + '</b></p>');
+            $(api.column(5).footer()).html('<p><b>$'+total.toLocaleString("es-ES",{ minimumFractionDigits: 2})+'</b></p>');
         },
         // "lengthChange": false, "autoWidth": false,
         // dom: 'Bfrtip',
@@ -113,11 +219,12 @@ $(function(){
             text: '<i class="fa fa-file-pdf"></i> Generar PDF',
             className: 'btn btn-danger',
             pageSize: 'A4',
+            orientation: 'landscape',
             filename: 'Reporte de Movimientos',
             extension: '.pdf',
 
             customize: function (doc) {
-                // console.log(doc.content[1].table.body[doc.content[1].table.body.length-1]);
+                // console.log(doc.content[1].table.body[doc.content[1].table.body.length-1][5]);
                 doc.content[1].table.body[doc.content[1].table.body.length-1][0].color = '#155724';
                 doc.content[1].table.body[doc.content[1].table.body.length-1][0].fillColor ='#d4edda';
                 doc.content[1].table.body[doc.content[1].table.body.length-1][1].color = '#155724';

@@ -67,11 +67,11 @@
                                         <tbody class="text-center">
                                             @foreach ($movements as $mov)
                                                 <tr>
-                                                    <td>{!! $mov->concept !!}</td>
+                                                    <td width="35%">{{ $mov->concept }}</td>
                                                     <td>{{ $mov->created_at->format('d-m-Y') }}</td>
-                                                    <td>{{ $mov->created_at->format('H:i') }}</td>
+                                                    <td width="12%">{{ $mov->created_at->format('H:i') }}</td>
                                                     <td>{{ $mov->type }}</td>
-                                                    <td>{{ $mov->method_of_payment->name }}</td>
+                                                    <td width="18%">{{ $mov->method_of_payment->name }}</td>
                                                     <td>{{ $mov->amount }}</td>
                                                 </tr>
                                             @endforeach

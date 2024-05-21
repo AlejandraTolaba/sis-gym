@@ -98,6 +98,9 @@ return [
         'registration_date' => [
             'required' => 'Debe seleccionar una fecha.',
         ],
+        'expiration_date' => [
+            'required' => 'Debe seleccionar una fecha.',
+        ],
         'type' => [
             'required' => 'Debe seleccionar un tipo.',
         ],
@@ -114,7 +117,7 @@ return [
     */
     'attributes' => [
         'name' => 'Nombre',
-        'password' => 'Contraseña',
+        'password' => 'contraseña',
         'password-confirm'=> 'Confirmar Contraseña',
         'newpassword'=>'Nueva contraseña',
         'newpassword_confirmation'=>'Confirmar contraseña',
@@ -139,6 +142,10 @@ return [
         'body_fat' => 'Grasa corporal',
         'visceral_fat' => 'Grasa visceral',
         'concept' => 'Concepto',
+        'code' => 'Código',
+        'stock' => 'Stock',
+        'password_confirmation' => 'confirmar contraseña',
+        'new_password' => 'nueva contraseña'
 
     ],
 ];

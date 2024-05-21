@@ -56,6 +56,11 @@ td, th{
     background-color: #d1ecf1 !important;
     border-color: #bee5eb !important;
 }
+
+.text-info{
+    color: #0c5460;
+}
+
 .alert-secondary {
     color: #383d41 !important;
     background-color: #e2e3e5 !important;
@@ -88,6 +93,10 @@ td, th{
 }
 table.dataTable.dataTable_width_auto {
     width: auto;
+}
+
+.modal-content {
+    color: black;
 }
 @media screen and (max-width: 767px) {
     div.dt-buttons {

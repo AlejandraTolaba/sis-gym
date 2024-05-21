@@ -22,6 +22,9 @@ class ActivityController extends Controller
         if ($request->ajax()){
             $activities = Activity::all();
             return DataTables::of($activities)
+            ->setRowClass(function ($activity) {
+                return $activity->state == 'inactiva'  ?  'danger text-danger ': '';
+            })
             ->addColumn('action', 'activities.actions')
             ->addColumn('state', function($activity){
                 return ucfirst($activity->state);
@@ -58,6 +61,7 @@ class ActivityController extends Controller
         $activity = new Activity(request()->all());
         $plans=$request->get('plans_id');
         $prices=$request->get('td_price');
+        dd($prices);
         $cont = 0;
         while ( $cont < count($plans) ) {
             $activity->save(); 
@@ -149,7 +153,20 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+        if ($activity->state == "activa") {
+            $activity->state = "inactiva";
+        }
+        else{
+            $activity->state = "activa";
+        }
+        $activity->update();
+        if ($activity->state == "activa") {
+            return redirect('activities')->with('info','Actividad activada con éxito');
+        }
+        else{
+            return redirect('activities')->with('error','Actividad desactivada con éxito');
+        }
     }
 
     public function showInscriptions(Request $request, $id)

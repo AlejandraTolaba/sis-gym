@@ -23,6 +23,9 @@
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
+
+        <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
+        <link rel="icon" type="image/jpg" href="{{asset('img/logo1.jpg')}}">
     
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -39,6 +42,30 @@
 
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
+                @if (Auth::user())
+                    <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="{{URL::action('UserController@edit',Auth::user()->id)}}">Modificar Contraseña</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Salir') }}
+                            </a>
+                        </li>
+                        
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </ul>
+                    </li>
+                @endif
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -133,6 +160,32 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('products.index')}}" class="nav-link">
+                                <i class="nav-icon fa fa-shopping-cart"></i>
+                                <p>
+                                    Productos
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('sales.create')}}" class="nav-link">
+                                <i class="nav-icon fa fa-plus"></i>
+                                <p>
+                                    Nueva Venta
+                                </p>
+                            </a>
+                        </li>
+                        @if(Auth::user()->type =='A')
+                            <li class="nav-item">
+                                <a href="{{route('users.index')}}" class="nav-link">
+                                    <i class="nav-icon fa fa-users"></i>
+                                    <p>
+                                        Usuarios
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -169,11 +222,7 @@
             </div>
             <!-- /.content-wrapper -->
             <footer class="main-footer">
-                <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-                All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.0.1
-                </div>
+                <strong>Copyright &copy; 2019. Todos los derechos reservados</strong>
             </footer>
 
             <!-- Control Sidebar -->
@@ -217,6 +266,7 @@
         <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
         <script src="{{asset('js/app.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
         @stack('scripts')
         @yield('js')
     </body>

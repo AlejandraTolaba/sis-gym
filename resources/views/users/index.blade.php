@@ -20,10 +20,10 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6 text-left">
-                                    <h4>Actividades</h4>
+                                    <h4>Usuarios</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('activities.create') }}"><button title="Agregar actividad" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
+                                    <a href="{{ route('users.create') }}"><button title="Agregar usuario" class="btn btn-success"><i class="fa fa-user-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -32,12 +32,12 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered data-table-activities table-sm" width="100%">
+                                    <table class="table table-bordered data-table-users table-sm" width="100%">
                                     <thead class="text-center">
                                     <tr>
-                                        <th>ID</th>
                                         <th>Nombre</th>
-                                        <th>Estado</th>
+                                        <th>E-mail</th>
+                                        <th>Tipo</th>
                                         <th>Opciones</th>
                                     </tr>
                                     </thead>

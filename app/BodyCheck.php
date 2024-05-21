@@ -18,4 +18,7 @@ class BodyCheck extends Model
         'mb',
         'visceral_fat'
     ];
+    public function student(){
+        return $this->belongsTo('App\Student');
+    }
 }

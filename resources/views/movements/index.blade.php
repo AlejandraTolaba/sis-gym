@@ -32,7 +32,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">DESDE</div>
                                             </div>
-                                            <input type ="date" name="from" value="{{isset($from) ? $from : $today}}" class="form-control">
+                                            <input id="from" type ="date" name="from" value="{{isset($from) ? $from : $today}}" class="form-control">
                                         </div>
                                     </div>
 
@@ -41,7 +41,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">HASTA</div>
                                             </div>
-                                            <input type ="date" name="to" value="{{isset($to) ? $to : $today}}" class="form-control">	
+                                            <input id="to" type ="date" name="to" value="{{isset($to) ? $to : $today}}" class="form-control">	
                                         </div>
                                     </div>
                                     
@@ -67,7 +67,7 @@
                                         <tbody class="text-center">
                                             @foreach ($movements as $mov)
                                                 <tr>
-                                                    <td>{{ $mov->concept }}</td>
+                                                    <td>{!! $mov->concept !!}</td>
                                                     <td>{{ $mov->created_at->format('d-m-Y') }}</td>
                                                     <td>{{ $mov->created_at->format('H:i') }}</td>
                                                     <td>{{ $mov->type }}</td>
@@ -78,10 +78,13 @@
                                         </tbody>
                                         <tfoot>
                                             <tr class="total-footer">
-                                                <th colspan="3" class="text-center"></th>
-                                                <th class="text-center color-green"></th>
-                                                <th class="text-center color-red"></th>
-                                                <th class="text-center"></th>
+                                                <!-- <th colspan="3" class="text-center"></th> -->
+                                                <th class="text-center alert-success"><b>INGRESOS</b></th>
+                                                <th class="text-center alert-success"></th>
+                                                <th class="text-center alert-danger"><b>EGRESOS</b></th>
+                                                <th class="text-center alert-danger"></th>
+                                                <th class="text-center alert-secondary">TOTAL</th>
+                                                <th class="text-center alert-secondary"></th>
                                             </tr>
                                         </tfoot>
                                     </table>

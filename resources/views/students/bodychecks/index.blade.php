@@ -6,6 +6,11 @@
             <strong>{{session('info')}}</strong>
         </div>         
     @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
+            <strong>{{session('error')}}</strong>
+        </div>         
+    @endif
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -47,6 +52,7 @@
                                                 <th>IMM</th>
                                                 <th>MB</th>
                                                 <th>Grasa visceral</th>
+                                                <th>Opciones</th>
                                             </tr>
                                             </thead>
                                             <tbody class="text-center">
@@ -60,6 +66,13 @@
                                                         <td>{{$bc->imm}}</td>
                                                         <td>{{$bc->mb}}</td> 
                                                         <td>{{$bc->visceral_fat}}</td>
+                                                        <td>
+                                                            <a href="{{ route('bodychecks.edit',$bc->id) }}"><button title="Editar ficha" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+                                                            @if(Auth::user()->type =='A')
+                                                                <a href="" id="Eliminar-{{$bc->id}}" data-target="#modal-delete-{{$bc->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$bc->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
+                                                                @include('students.bodychecks.destroy')
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

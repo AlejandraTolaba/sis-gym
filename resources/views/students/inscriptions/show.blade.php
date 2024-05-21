@@ -22,7 +22,7 @@
                     <!-- </a> -->
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
-                            <form  action="{{ route('inscriptions.show', $inscription->id) }}" method="POST">
+                            <form  action="{{ route('inscriptions.updateBalance', $inscription->id) }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-7">

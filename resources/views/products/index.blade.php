@@ -19,11 +19,11 @@
                     <!-- <a class="d-block w-100" data-toggle="collapse" href="#collapseOne"> -->
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-6 text-left">
-                                    <h4>Actividades</h4>
+                                <div class="card-title col-md-6 text-left">
+                                    <h4>Productos</h4>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('activities.create') }}"><button title="Agregar actividad" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
+                                    <a href="{{ route('products.create') }}"><button title="Agregar producto" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -32,12 +32,13 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered data-table-activities table-sm" width="100%">
+                                    <table class="table table-bordered data-table-products table-sm" width="100%">
                                     <thead class="text-center">
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Código</th>
                                         <th>Nombre</th>
-                                        <th>Estado</th>
+                                        <th>Stock</th>
+                                        <th>Precio</th>
                                         <th>Opciones</th>
                                     </tr>
                                     </thead>
@@ -53,8 +54,8 @@
             </div>
         </div>
     </section>
-    <!-- /.content --> 
+    <!-- /.content -->
 @endsection
 @push('scripts')
     <script src="{{asset('js/data_table.js')}}"></script>
-@endpush   
+@endpush

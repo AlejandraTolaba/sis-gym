@@ -23,8 +23,8 @@ class ProductSeeder extends Seeder
             ->insert([
                 'code' => $codes[$i],
                 'name' => $names[$i],
-                'stocks' => $stocks[$i],
-                'prices' => $prices[$i]
+                'stock' => $stocks[$i],
+                'price' => $prices[$i]
             ]);
         }
     }

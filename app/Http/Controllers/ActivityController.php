@@ -61,7 +61,7 @@ class ActivityController extends Controller
         $activity = new Activity(request()->all());
         $plans=$request->get('plans_id');
         $prices=$request->get('td_price');
-        dd($prices);
+        // dd($prices);
         $cont = 0;
         while ( $cont < count($plans) ) {
             $activity->save(); 

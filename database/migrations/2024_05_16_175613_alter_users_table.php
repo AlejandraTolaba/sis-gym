@@ -14,7 +14,7 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('type')->nullable()->after('email');
+            $table->string('type')->default('A')->after('email');
         });
     }
 

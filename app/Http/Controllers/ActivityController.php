@@ -63,11 +63,13 @@ class ActivityController extends Controller
         $prices=$request->get('td_price');
         // dd($prices);
         $cont = 0;
-        while ( $cont < count($plans) ) {
-            $activity->save(); 
-            $data_plans = explode("_",$plans[$cont]);
-            $activity->plans()->attach($data_plans[0],['price' => $prices[$cont]]);
-            $cont = $cont+1;
+        if ($plans) {
+            while ( $cont < count($plans) ) {
+                $activity->save(); 
+                $data_plans = explode("_",$plans[$cont]);
+                $activity->plans()->attach($data_plans[0],['price' => $prices[$cont]]);
+                $cont = $cont+1;
+            }
         }
         
         if ($activity->id == null) {

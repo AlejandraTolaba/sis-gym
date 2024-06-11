@@ -44,7 +44,23 @@
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                        
+                                        @foreach ($teachers as $teacher)
+                                            <tr class="@if ($teacher->state == 'inactivo') danger text-danger @endif"> 
+                                                <td>{{ $teacher->name }} {{ $teacher->lastname }}</td>
+                                                <td><img src="{{asset('img/teachers/'.$teacher->photo)}}" width="50px" height="50px"></td>
+                                                <td>{{ $teacher->dni }}</td>
+                                                <td>{{ $teacher->phone_number }}</td>
+                                                <td>{{ ucfirst($teacher->state) }}</td>
+                                                <td>
+                                                    <a href="{{ route('teachers.show',$teacher->id) }}"><button {{ $teacher->state !='activo' ? 'disabled' : '' }} name="show-dates" title="Ver datos de profesor" type="submit" class="btn btn-success btn-sm"><i class="fa fa-user"></i> Visualizar</button></a>
+                                                    <a href="{{ route('teachers.edit',$teacher->id) }}"><button {{ $teacher->state !='activo' ? 'disabled' : '' }} name="edit" title="Editar profesor" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+                                                    @if(Auth::user()->type =='A')
+                                                        <a href="" id="Eliminar-{{$teacher->id}}" data-target="#modal-delete-{{$teacher->id}}" data-toggle="modal"><button class="{{ $teacher->state !='activo' ? "btn btn-success btn-sm" : "btn btn-danger btn-sm" }}" title="{{ $teacher->state !='activo' ? 'Activar profesor' : 'Desactivar profesor' }}"><i class="{{ $teacher->state !='activo' ? 'fa fa-check' : 'fa fa-times' }}"></i> {{ $teacher->state !='activo' ? 'Activar' : 'Desactivar' }}</button></a>
+                                                        @include('teachers.destroy')
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                     </table>
                                 </div>

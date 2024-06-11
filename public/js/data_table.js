@@ -30,26 +30,42 @@ $(document).ready(function() {
         //     { data: 'state', name:'state'},
         //     { data: 'action', name:'action', orderable:false, searchable:false},
         // ],
+        columnDefs:[{
+            targets: [3],
+            searchable: false,
+            orderable: false
+        }],
     });
 
     $('.data-table-inscriptions').DataTable({
         language: lang,
         responsive: true,
         autoWidth: false,
+        columnDefs:[{
+            targets: [6],
+            searchable: false,
+            orderable: false
+        }],
     });
 
     $('.data-table-teachers').DataTable({
         language: lang,
         responsive: true,
-        ajax: "teachers",
-        columns: [
-            { data: 'fullname', name:'fullname'},
-            { data: 'photo', name:'photo', orderable:false, searchable:false},
-            { data: 'dni', name:'dni', orderable:false},
-            { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
-            { data: 'state', name:'state', orderable:false},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        columnDefs:[{
+            targets: [1, 3, 5],
+            searchable: false,
+            orderable: false
+        }],
+        
+        // ajax: "teachers",
+        // columns: [
+        //     { data: 'fullname', name:'fullname'},
+        //     { data: 'photo', name:'photo', orderable:false, searchable:false},
+        //     { data: 'dni', name:'dni', orderable:false},
+        //     { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
+        //     { data: 'state', name:'state', orderable:false},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
     });
 
     $('.data-table-students').DataTable({
@@ -65,6 +81,11 @@ $(document).ready(function() {
         //     { data: 'balance', name:'balance'},
         //     { data: 'action', name:'action', orderable:false, searchable:false},
         // ],
+        columnDefs:[{
+            targets: [1, 3, 6],
+            searchable: false,
+            orderable: false
+        }],
     });
     var id = $('.data-table-act-inscriptions').attr("data-id");
     // console.log(id);
@@ -106,6 +127,11 @@ $(document).ready(function() {
         //     { data: 'price', name:'price'},
         //     { data: 'action', name:'action', orderable:false, searchable:false},
         // ],
+        columnDefs:[{
+            targets: [4],
+            searchable: false,
+            orderable: false
+        }],
     });
     $('.data-table-users').DataTable({
         language: lang,

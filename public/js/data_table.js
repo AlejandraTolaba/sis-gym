@@ -55,16 +55,16 @@ $(document).ready(function() {
     $('.data-table-students').DataTable({
         language: lang,
         responsive: true,
-        ajax: "students",
-        columns: [
-            { data: 'fullname', name:'fullname'},
-            { data: 'photo', name:'photo', orderable:false, searchable:false},
-            { data: 'dni', name:'dni', orderable:false},
-            { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
-            { data: 'state', name:'state', orderable:false},
-            { data: 'balance', name:'balance'},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        // ajax: "students",
+        // columns: [
+        //     { data: 'fullname', name:'fullname'},
+        //     { data: 'photo', name:'photo', orderable:false, searchable:false},
+        //     { data: 'dni', name:'dni', orderable:false},
+        //     { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
+        //     { data: 'state', name:'state', orderable:false},
+        //     { data: 'balance', name:'balance'},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
     });
     var id = $('.data-table-act-inscriptions').attr("data-id");
     // console.log(id);

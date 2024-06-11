@@ -18,33 +18,34 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()){
-            $students = Student::all();
-            return DataTables::of($students)
-            ->addColumn('fullname', function($student){
-                return $student->name.' '.$student->lastname;
-            })
-            ->addColumn('photo', function($student){
-                if (empty($student->photo)) {
-                    return 'avatar.png';
-                }
-                $path = 'img/students/'.$student->photo;
-                return '<img src="'.$path.'" width="50px" height="50px">';
-            })
-            ->addColumn('balance', function($student){
-                return '$'.number_format($student->balance, 2, ',', '.');
-            })
-            ->addColumn('state', function($activity){
-                return ucfirst($activity->state);
-            })
-            ->setRowClass(function ($student) {
-                return $student->balance > 0 ? "text-danger" : "";
-            })
-            ->addColumn('action', 'students.actions')
-            ->rawColumns(['photo','action'])
-            ->make(true);
-        }
-        return view('students.index');
+        $students = Student::all();
+        // if ($request->ajax()){
+        //     $students = Student::all();
+        //     return DataTables::of($students)
+        //     ->addColumn('fullname', function($student){
+        //         return $student->name.' '.$student->lastname;
+        //     })
+        //     ->addColumn('photo', function($student){
+        //         if (empty($student->photo)) {
+        //             return 'avatar.png';
+        //         }
+        //         $path = 'img/students/'.$student->photo;
+        //         return '<img src="'.$path.'" width="50px" height="50px">';
+        //     })
+        //     ->addColumn('balance', function($student){
+        //         return '$'.number_format($student->balance, 2, ',', '.');
+        //     })
+        //     ->addColumn('state', function($activity){
+        //         return ucfirst($activity->state);
+        //     })
+        //     ->setRowClass(function ($student) {
+        //         return $student->balance > 0 ? "text-danger" : "";
+        //     })
+        //     ->addColumn('action', 'students.actions')
+        //     ->rawColumns(['photo','action'])
+        //     ->make(true);
+        // }
+        return view('students.index',compact('students'));
     }
 
     /**

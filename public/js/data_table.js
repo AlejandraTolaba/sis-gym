@@ -136,12 +136,17 @@ $(document).ready(function() {
     $('.data-table-users').DataTable({
         language: lang,
         responsive: true,
-        ajax: "users",
-        columns: [
-            { data: 'name', name:'name'},
-            { data: 'email', name:'email', orderable:false, searchable:false},
-            { data: 'type', name:'type', orderable:false},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        // ajax: "users",
+        // columns: [
+        //     { data: 'name', name:'name'},
+        //     { data: 'email', name:'email', orderable:false, searchable:false},
+        //     { data: 'type', name:'type', orderable:false},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
+        columnDefs:[{
+            targets: [3],
+            searchable: false,
+            orderable: false
+        }],
     });
 });

@@ -18,17 +18,18 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()){
-            $users = User::all();
-            return DataTables::of($users)
-            ->addColumn('type', function($user){
-                return $user->type == 'A' ? 'Administrador' : 'Empleado';
-            })
-            ->addColumn('action', 'users.actions')
-            ->rawColumns(['action'])
-            ->make(true);
-        }
-        return view('users.index');
+        $users = User::all();
+        // if ($request->ajax()){
+        //     $users = User::all();
+        //     return DataTables::of($users)
+        //     ->addColumn('type', function($user){
+        //         return $user->type == 'A' ? 'Administrador' : 'Empleado';
+        //     })
+        //     ->addColumn('action', 'users.actions')
+        //     ->rawColumns(['action'])
+        //     ->make(true);
+        // }
+        return view('users.index', compact('users'));
     }
 
     /**

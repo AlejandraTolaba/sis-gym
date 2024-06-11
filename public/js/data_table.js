@@ -23,13 +23,13 @@ $(document).ready(function() {
     $('.data-table-activities').DataTable({
         language: lang,
         responsive: true,
-        ajax: "activities",
-        columns: [
-            { data: 'id', name:'id'},
-            { data: 'name', name:'name'},
-            { data: 'state', name:'state'},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        // ajax: "activities",
+        // columns: [
+        //     { data: 'id', name:'id'},
+        //     { data: 'name', name:'name'},
+        //     { data: 'state', name:'state'},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
     });
 
     $('.data-table-inscriptions').DataTable({

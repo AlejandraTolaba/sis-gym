@@ -19,20 +19,21 @@ class ActivityController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()){
-            $activities = Activity::all();
-            return DataTables::of($activities)
-            ->setRowClass(function ($activity) {
-                return $activity->state == 'inactiva'  ?  'danger text-danger ': '';
-            })
-            ->addColumn('action', 'activities.actions')
-            ->addColumn('state', function($activity){
-                return ucfirst($activity->state);
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-        }
-        return view('activities.index');
+        $activities = Activity::all();
+        // if ($request->ajax()){
+        //     $activities = Activity::all();
+        //     return DataTables::of($activities)
+        //     ->setRowClass(function ($activity) {
+        //         return $activity->state == 'inactiva'  ?  'danger text-danger ': '';
+        //     })
+        //     ->addColumn('action', 'activities.actions')
+        //     ->addColumn('state', function($activity){
+        //         return ucfirst($activity->state);
+        //     })
+        //     ->rawColumns(['action'])
+        //     ->make(true);
+        // }
+        return view('activities.index',compact('activities'));
     }
 
     /**
@@ -116,28 +117,30 @@ class ActivityController extends Controller
         $plans=$request->get('plans_id');
         // dd($plans);
         $prices=$request->get('td_price');
-        // dd($prices);
+        // dd($request->get('td_price'));
         $cont = 0;
         $plans_id = [];
-        while ( $cont < count($plans) ) {
-            $data_plan = explode("_",$plans[$cont]);
-            $plan_id = $data_plan[0];
-            array_push($plans_id, $plan_id);
-            if ($activity->plans->contains('id', $plan_id)) {
-                $price = $activity->plans[$cont]->pivot->price; //precio guardado
-                if ($price !== $prices[$cont]) {
-                    $ap = ActivityPlan::where('activity_id',$id)->where('plan_id',$plan_id)->first();
-                    $ap->price = $prices[$cont];
-                    $ap->update();
-                    $cont++;
+        if ($plans) {
+            while ( $cont < count($plans) ) {
+                $data_plan = explode("_",$plans[$cont]);
+                $plan_id = $data_plan[0];
+                array_push($plans_id, $plan_id);
+                if ($activity->plans->contains('id', $plan_id)) {
+                    $price = $activity->plans[$cont]->pivot->price; //precio guardado
+                    if ($price !== $prices[$cont]) {
+                        $ap = ActivityPlan::where('activity_id',$id)->where('plan_id',$plan_id)->first();
+                        $ap->price = $prices[$cont];
+                        $ap->update();
+                        $cont++;
+                    }
+                    else{
+                        $cont++;
+                    }
                 }
                 else{
+                    $activity->plans()->attach($plan_id,['price' => $prices[$cont]]);
                     $cont++;
                 }
-            }
-            else{
-                $activity->plans()->attach($plan_id,['price' => $prices[$cont]]);
-                $cont++;
             }
         }
 

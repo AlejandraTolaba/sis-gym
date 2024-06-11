@@ -46,7 +46,7 @@
                                             <tr"> 
                                                 <td>{{ $act->id }}</td>
                                                 <td>{{ $act->name }}</td>
-                                                <td>{{ $act->state }}</td>
+                                                <td>{{ ucfirst($act->state) }}</td>
                                                 <td>
                                                 @if ($act->state !='inactiva')
                                                     <a href="{{ route('activities.edit',$act->id) }}"><button name="Editar" title="Editar planes" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>

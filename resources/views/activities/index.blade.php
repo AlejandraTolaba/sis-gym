@@ -43,7 +43,7 @@
                                     </thead>
                                     <tbody class="text-center">
                                         @foreach ($activities as $act)
-                                            <tr> 
+                                            <tr class="@if ($act->state == 'inactiva') danger text-danger @endif"> 
                                                 <td>{{ $act->id }}</td>
                                                 <td>{{ $act->name }}</td>
                                                 <td>{{ ucfirst($act->state) }}</td>

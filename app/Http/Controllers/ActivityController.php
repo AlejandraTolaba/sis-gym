@@ -181,10 +181,10 @@ class ActivityController extends Controller
         $from = $request->get('from');
         $to = $request->get('to');
         if ($from != $to) {
-            $inscriptions = $activity->inscriptions->sortKeysDesc()->all();
+            $inscriptions = $activity->inscriptions->where('registration_date','>=',$from)->where('registration_date','<=',$to)->sortKeysDesc()->all();
         }
         else{
-            $inscriptions = $activity->inscriptions->whereBetween('registration_date',[$from,$to])->all();
+            $inscriptions = $activity->inscriptions->where('registration_date',$today)->all();
         }
         $today = $today->toDateString();
         

@@ -60,7 +60,7 @@
                                                     <td>{{ $ins->id }}</td>
                                                     <td>{{ $ins->student->name }} {{ $ins->student->lastname }}</td>
                                                     <td>{{ $ins->plan->name }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($ins->registration_date)->format('d-m-Y') }}</td>
+                                                    <td>{{ $ins->registration_date->format('d-m-Y') }}</td>
                                                     <td>{{ ucfirst($ins->state) }}</td>
                                                 </tr>   
                                             @endforeach

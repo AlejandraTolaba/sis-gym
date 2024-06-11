@@ -35,6 +35,7 @@ $(document).ready(function() {
     $('.data-table-inscriptions').DataTable({
         language: lang,
         responsive: true,
+        autoWidth: false,
     });
 
     $('.data-table-teachers').DataTable({

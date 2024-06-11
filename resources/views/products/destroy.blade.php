@@ -1,6 +1,6 @@
-<div class="modal fade" id="modal-delete-{{$id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-delete-{{$prod->id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form action="{{ route('products.destroy',$id) }}" method="POST">
+        <form action="{{ route('products.destroy',$prod->id) }}" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal-content">

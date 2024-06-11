@@ -98,14 +98,14 @@ $(document).ready(function() {
     $('.data-table-products').DataTable({
         language: lang,
         responsive: true,
-        ajax: "products",
-        columns: [
-            { data: 'code', name:'code'},
-            { data: 'name', name:'name'},
-            { data: 'stock', name:'stock'},
-            { data: 'price', name:'price'},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        //ajax: "products",
+        // columns: [
+        //     { data: 'code', name:'code'},
+        //     { data: 'name', name:'name'},
+        //     { data: 'stock', name:'stock'},
+        //     { data: 'price', name:'price'},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
     });
     $('.data-table-users').DataTable({
         language: lang,

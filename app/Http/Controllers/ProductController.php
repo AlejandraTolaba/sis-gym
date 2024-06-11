@@ -15,17 +15,18 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()){
-            $products = Product::all();
-            return DataTables::of($products)
-            ->setRowClass(function ($product) {
-                return ($product->stock < 10 && $product->stock != 0)  ? ("text-info") : ($product->stock == 0 ? ("text-danger") : "");
-            })
-            ->addColumn('action', 'products.actions')
-            ->rawColumns(['action'])
-            ->make(true);
-        }
-        return view('products.index');
+        $products = Product::all();
+        // if ($request->ajax()){
+        //     $products = Product::all();
+        //     return DataTables::of($products)
+        //     ->setRowClass(function ($product) {
+        //         return ($product->stock < 10 && $product->stock != 0)  ? ("text-info") : ($product->stock == 0 ? ("text-danger") : "");
+        //     })
+        //     ->addColumn('action', 'products.actions')
+        //     ->rawColumns(['action'])
+        //     ->make(true);
+        // }
+        return view('products.index', compact('products'));
     }
 
     /**

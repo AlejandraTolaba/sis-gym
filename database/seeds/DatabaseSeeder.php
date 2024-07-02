@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
         $this->call(MovementSeeder::class);
         $this->call(BodyCheckSeeder::class);
+        $this->call(InscriptionSeeder::class);
     }
 }

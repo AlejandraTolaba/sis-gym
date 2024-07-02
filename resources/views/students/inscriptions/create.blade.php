@@ -71,7 +71,7 @@
                                                 <select id="activity_id" name='activity_id' data-placeholder="Seleccione una actividad" class="form-control activity select2 shadow-sm @if($errors->first('activity_id')) is-invalid @endif" >
                                                     <option></option>
                                                     @foreach ($activities as $activity)
-                                                        <option value="{{$activity->id}}" {{old('activity_id') == $activity->id ? 'selected' : ''}}>{{$activity->name}}</option>
+                                                        <option value="{{$activity->id}}">{{$activity->name}}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" role="alert">
@@ -120,11 +120,19 @@
                                         <div class="col-md-3 mb-3">
                                             <label for="amount">Monto</label>
                                             <div class="input-group mb-2">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">$</div>
-                                                    </div>
-                                                    <input type="number" step = "any" class="form-control" id="amount" name="amount">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">$</div>
                                                 </div>
+                                                <input type="number" 
+                                                    step = "any" 
+                                                    class="form-control bg-ligth shadow-sm @if($errors->first('amount')) is-invalid @endif" 
+                                                    id="amount" 
+                                                    name="amount"
+                                                    value="{{old('amount')}}">
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong> {{ $errors->first('amount', ':message') }} </strong>
+                                                    </span>
+                                            </div>
                                         </div>
                                     </div>                     
                                     

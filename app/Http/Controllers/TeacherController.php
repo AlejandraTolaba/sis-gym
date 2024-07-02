@@ -15,31 +15,32 @@ class TeacherController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()){
-            $teachers = Teacher::all();
-            // dd($teachers);
-            return DataTables::of($teachers)
-            ->setRowClass(function ($teacher) {
-                return $teacher->state == 'inactivo'  ?  'danger text-danger ': '';
-            })
-            ->addColumn('fullname', function($teacher){
-                return $teacher->name.' '.$teacher->lastname;
-            })
-            ->addColumn('photo', function($teacher){
-                if (empty($teacher->photo)) {
-                    return 'avatar.png';
-                }
-                $path = 'img/teachers/'.$teacher->photo;
-                return '<img src="'.$path.'" width="50px" height="50px">';
-            })
-            ->addColumn('state', function($teacher){
-                return ucfirst($teacher->state);
-            })
-            ->addColumn('action', 'teachers.actions')
-            ->rawColumns(['photo','action'])
-            ->make(true);
-        }
-        return view('teachers.index');
+        $teachers = Teacher::all();
+        // if ($request->ajax()){
+        //     $teachers = Teacher::all();
+        //     // dd($teachers);
+        //     return DataTables::of($teachers)
+        //     ->setRowClass(function ($teacher) {
+        //         return $teacher->state == 'inactivo'  ?  'danger text-danger ': '';
+        //     })
+        //     ->addColumn('fullname', function($teacher){
+        //         return $teacher->name.' '.$teacher->lastname;
+        //     })
+        //     ->addColumn('photo', function($teacher){
+        //         if (empty($teacher->photo)) {
+        //             return 'avatar.png';
+        //         }
+        //         $path = 'img/teachers/'.$teacher->photo;
+        //         return '<img src="'.$path.'" width="50px" height="50px">';
+        //     })
+        //     ->addColumn('state', function($teacher){
+        //         return ucfirst($teacher->state);
+        //     })
+        //     ->addColumn('action', 'teachers.actions')
+        //     ->rawColumns(['photo','action'])
+        //     ->make(true);
+        // }
+        return view('teachers.index',compact('teachers'));
     }
 
     /**

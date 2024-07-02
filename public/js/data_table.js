@@ -23,47 +23,69 @@ $(document).ready(function() {
     $('.data-table-activities').DataTable({
         language: lang,
         responsive: true,
-        ajax: "activities",
-        columns: [
-            { data: 'id', name:'id'},
-            { data: 'name', name:'name'},
-            { data: 'state', name:'state'},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        // ajax: "activities",
+        // columns: [
+        //     { data: 'id', name:'id'},
+        //     { data: 'name', name:'name'},
+        //     { data: 'state', name:'state'},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
+        columnDefs:[{
+            targets: [4],
+            searchable: false,
+            orderable: false
+        }],
     });
 
     $('.data-table-inscriptions').DataTable({
         language: lang,
         responsive: true,
+        autoWidth: false,
+        columnDefs:[{
+            targets: [6],
+            searchable: false,
+            orderable: false
+        }],
     });
 
     $('.data-table-teachers').DataTable({
         language: lang,
         responsive: true,
-        ajax: "teachers",
-        columns: [
-            { data: 'fullname', name:'fullname'},
-            { data: 'photo', name:'photo', orderable:false, searchable:false},
-            { data: 'dni', name:'dni', orderable:false},
-            { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
-            { data: 'state', name:'state', orderable:false},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        columnDefs:[{
+            targets: [1, 3, 5],
+            searchable: false,
+            orderable: false
+        }],
+        
+        // ajax: "teachers",
+        // columns: [
+        //     { data: 'fullname', name:'fullname'},
+        //     { data: 'photo', name:'photo', orderable:false, searchable:false},
+        //     { data: 'dni', name:'dni', orderable:false},
+        //     { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
+        //     { data: 'state', name:'state', orderable:false},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
     });
 
     $('.data-table-students').DataTable({
         language: lang,
         responsive: true,
-        ajax: "students",
-        columns: [
-            { data: 'fullname', name:'fullname'},
-            { data: 'photo', name:'photo', orderable:false, searchable:false},
-            { data: 'dni', name:'dni', orderable:false},
-            { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
-            { data: 'state', name:'state', orderable:false},
-            { data: 'balance', name:'balance'},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        // ajax: "students",
+        // columns: [
+        //     { data: 'fullname', name:'fullname'},
+        //     { data: 'photo', name:'photo', orderable:false, searchable:false},
+        //     { data: 'dni', name:'dni', orderable:false},
+        //     { data: 'phone_number', name:'phone_number', orderable:false, searchable:false},
+        //     { data: 'state', name:'state', orderable:false},
+        //     { data: 'balance', name:'balance'},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
+        columnDefs:[{
+            targets: [1, 3, 6],
+            searchable: false,
+            orderable: false
+        }],
     });
     var id = $('.data-table-act-inscriptions').attr("data-id");
     // console.log(id);
@@ -97,24 +119,34 @@ $(document).ready(function() {
     $('.data-table-products').DataTable({
         language: lang,
         responsive: true,
-        ajax: "products",
-        columns: [
-            { data: 'code', name:'code'},
-            { data: 'name', name:'name'},
-            { data: 'stock', name:'stock'},
-            { data: 'price', name:'price'},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        //ajax: "products",
+        // columns: [
+        //     { data: 'code', name:'code'},
+        //     { data: 'name', name:'name'},
+        //     { data: 'stock', name:'stock'},
+        //     { data: 'price', name:'price'},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
+        columnDefs:[{
+            targets: [4],
+            searchable: false,
+            orderable: false
+        }],
     });
     $('.data-table-users').DataTable({
         language: lang,
         responsive: true,
-        ajax: "users",
-        columns: [
-            { data: 'name', name:'name'},
-            { data: 'email', name:'email', orderable:false, searchable:false},
-            { data: 'type', name:'type', orderable:false},
-            { data: 'action', name:'action', orderable:false, searchable:false},
-        ],
+        // ajax: "users",
+        // columns: [
+        //     { data: 'name', name:'name'},
+        //     { data: 'email', name:'email', orderable:false, searchable:false},
+        //     { data: 'type', name:'type', orderable:false},
+        //     { data: 'action', name:'action', orderable:false, searchable:false},
+        // ],
+        columnDefs:[{
+            targets: [3],
+            searchable: false,
+            orderable: false
+        }],
     });
 });

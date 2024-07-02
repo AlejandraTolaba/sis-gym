@@ -1,6 +1,6 @@
-<div class="modal fade" id="modal-delete-{{$id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-delete-{{$user->id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form action="{{ route('users.destroy',$id) }}" method="POST">
+        <form action="{{ route('users.destroy',$user->id) }}" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal-content">
@@ -15,7 +15,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                    <button type="submit" class="btn btn-primary" name="Confirm-{{$user->id}}">Eliminar</button>
                 </div>
             </div>
         </form>

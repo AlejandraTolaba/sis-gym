@@ -38,11 +38,36 @@
                                         <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Estado</th>
+                                        <th>Inscripciones activas</th>
                                         <th>Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                        
+                                        @foreach ($activities as $act)
+                                            <tr class="@if ($act->state == 'inactiva') danger text-danger @endif"> 
+                                                <td>{{ $act->id }}</td>
+                                                <td>{{ $act->name }}</td>
+                                                <td>{{ ucfirst($act->state) }}</td>
+                                                <td width="110px">{{ $act->inscriptions->count() }}</td>
+                                                <td>
+                                                @if ($act->state !='inactiva')
+                                                    <a href="{{ route('activities.edit',$act->id) }}"><button name="Editar" title="Editar planes" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+                                                    <a href="{{route('showInscriptions',$act->id)}}"><button name="show" type="submit" title="Ver inscripciones" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Inscripciones</button></a>
+                                                    @if(Auth::user()->type =='A')
+                                                        <a href="#" id="delete-{{$act->id}}" name="delete-{{$act->id}}" data-target="#modal-delete-{{$act->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Desactivar</button></a>
+                                                        @include('activities.destroy')
+                                                    @endif
+                                                    @else
+                                                        <a href="{{ route('activities.edit',$act->id) }}"><button disabled name="Editar" title="Editar planes" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+                                                        <a href="{{route('showInscriptions',$act->id)}}"><button disabled name="show" type="submit" title="Ver inscripciones" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Inscripciones</button></a>
+                                                        @if(Auth::user()->type =='A')
+                                                            <a href="#" id="delete-{{$act->id}}" name="delete-{{$act->id}}" data-target="#modal-delete-{{$act->id}}" data-toggle="modal"><button class="btn btn-success btn-sm"><i class="fa fa-check"></i> Activar</button></a>
+                                                            @include('activities.destroy')
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                     </table>
                                 </div>

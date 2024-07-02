@@ -24,33 +24,32 @@ class InscriptionController extends Controller
     public function index(Request $request, $id)
     {
         $student = Student::findOrFail($id);
-        if ($request->ajax()){
-            $inscriptions = $student->inscriptions;
-            return DataTables::of($inscriptions)
-            ->addColumn('activity', function($inscription){
-                return $inscription->activity->name;
-            })
-            ->addColumn('plan', function($inscription){
-                return $inscription->plan->name;
-            })
-            ->addColumn('expiration', function($inscription){
-                return $inscription->expiration_date->format('d-m-Y');
-            })
-            ->addColumn('balance', function($inscription){
-                return '$'.number_format($inscription->balance, 2, ',', '.');
-            })
-            ->addColumn('state', function($inscription){
-                return ucfirst($inscription->state);
-            })
-            ->setRowClass(function ($inscription) {
-                return $inscription->balance > 0 ? "text-danger" : "";
-            })
-            ->addColumn('action', 'students.inscriptions.actions')
-            ->rawColumns(['photo','action'])
-            ->make(true);
-        }
-        // $activities = $inscriptions->activities;
-        // dd($inscriptions);
+        
+        // if ($request->ajax()){
+        //     $inscriptions = $student->inscriptions;
+        //     return DataTables::of($inscriptions)
+        //     ->addColumn('activity', function($inscription){
+        //         return $inscription->activity->name;
+        //     })
+        //     ->addColumn('plan', function($inscription){
+        //         return $inscription->plan->name;
+        //     })
+        //     ->addColumn('expiration', function($inscription){
+        //         return $inscription->expiration_date->format('d-m-Y');
+        //     })
+        //     ->addColumn('balance', function($inscription){
+        //         return '$'.number_format($inscription->balance, 2, ',', '.');
+        //     })
+        //     ->addColumn('state', function($inscription){
+        //         return ucfirst($inscription->state);
+        //     })
+        //     ->setRowClass(function ($inscription) {
+        //         return $inscription->balance > 0 ? "text-danger" : "";
+        //     })
+        //     ->addColumn('action', 'students.inscriptions.actions')
+        //     ->rawColumns(['photo','action'])
+        //     ->make(true);
+        // }
             
         return view('students.inscriptions.index',compact('student'));
     }

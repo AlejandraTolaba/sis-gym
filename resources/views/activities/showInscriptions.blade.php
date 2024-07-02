@@ -38,7 +38,7 @@
                                     </div>
                                     
                                     <div class="col-md-3">
-                                        <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                        <button class="btn btn-primary" name="filter"><i class="fa fa-search"></i> Buscar</button>
                                     </div>
                                 </div> <!-- end row-->
                             </form>
@@ -60,7 +60,7 @@
                                                     <td>{{ $ins->id }}</td>
                                                     <td>{{ $ins->student->name }} {{ $ins->student->lastname }}</td>
                                                     <td>{{ $ins->plan->name }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($ins->registration_date)->format('d-m-Y') }}</td>
+                                                    <td>{{ $ins->registration_date->format('d-m-Y') }}</td>
                                                     <td>{{ ucfirst($ins->state) }}</td>
                                                 </tr>   
                                             @endforeach

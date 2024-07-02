@@ -55,7 +55,14 @@ class SaleController extends Controller
                 $p->update();
             }
             // dd($data_products);
-            $sale->products()->attach($data_products[0],['quantity' => $quantity[$cont], 'price' => $data_products[4]]);
+            if ($quantity) {
+                $sale->products()->attach($data_products[0],['quantity' => $quantity[$cont], 'price' => $data_products[4]]);
+            }
+            else{
+                $sale->products()->attach($data_products[0],['quantity' => 1, 'price' => $data_products[4]]);
+                $sale->total += $data_products[4];
+                $sale->update();
+            }
             $cont = $cont+1;
         }
         $movement= new Movement();

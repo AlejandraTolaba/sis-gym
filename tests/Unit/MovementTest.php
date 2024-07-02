@@ -39,4 +39,22 @@ class MovementTest extends TestCase
                 'amount'=>25000.0
             ]);
     }
+
+    public function testFilterMovementsByDate()
+    {
+        $this->seed();
+        $user = factory(User::class)->create([
+            'type' => 'A',
+        ]);
+
+        $this->actingAs($user)
+            ->visit('movements')
+            ->see('Movimientos')
+            ->type(now()->format('d-m-Y'),'from')
+            ->type(now()->format('d-m-Y'),'to')
+            ->press('Buscar')
+                ->seeInElement("table",now()->format('d-m-Y'))
+                ->seeInElement("table",now()->format('d-m-Y'))
+                ->dontSeeInElement("table",'02-06-2024');
+    }
 }

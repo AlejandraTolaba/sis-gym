@@ -55,7 +55,7 @@
                                                         <td class="@if ($ins->balance > 0) text-danger @endif">${{ number_format($ins->balance, 2, ',', '.') }}</td>
                                                         <td>{{ ucfirst($ins->state) }}</td>
                                                         <td>
-                                                            <a href="{{ route('inscriptions.show',$ins->id) }}"><button title="Actualizar saldo" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Saldo</button></a>
+                                                            <a href="{{ route('inscriptions.show',$ins->id) }}"><button title="Actualizar saldo" type="submit" class="btn btn-warning btn-sm" @if ($ins->balance == 0) disabled @endif ><i class="fas fa-pencil-alt"></i> Saldo</button></a>
                                                             @if(Auth::user()->type =='A')
                                                                 <a href="{{ route('inscriptions.editExpiration',$ins->id) }}"><button title="Actualizar vencimiento" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Vencimiento</button></a>
                                                                 <a href="" id="delete-{{$ins->id}}" name="delete-{{$ins->id}}" data-target="#modal-delete-{{$ins->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$ins->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>

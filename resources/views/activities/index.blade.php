@@ -38,6 +38,7 @@
                                         <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Estado</th>
+                                        <th>Inscripciones activas</th>
                                         <th>Opciones</th>
                                     </tr>
                                     </thead>
@@ -47,6 +48,7 @@
                                                 <td>{{ $act->id }}</td>
                                                 <td>{{ $act->name }}</td>
                                                 <td>{{ ucfirst($act->state) }}</td>
+                                                <td width="110px">{{ $act->inscriptions->count() }}</td>
                                                 <td>
                                                 @if ($act->state !='inactiva')
                                                     <a href="{{ route('activities.edit',$act->id) }}"><button name="Editar" title="Editar planes" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>

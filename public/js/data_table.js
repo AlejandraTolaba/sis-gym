@@ -31,7 +31,7 @@ $(document).ready(function() {
         //     { data: 'action', name:'action', orderable:false, searchable:false},
         // ],
         columnDefs:[{
-            targets: [3],
+            targets: [4],
             searchable: false,
             orderable: false
         }],

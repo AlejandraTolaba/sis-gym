@@ -19,7 +19,10 @@ class ActivityController extends Controller
      */
     public function index(Request $request)
     {
-        $activities = Activity::all();
+        $activities = Activity::with(['inscriptions' => function($query) {
+                            $query->select(['id', 'state', 'activity_id'])->where('state','activa');
+                        }])->get();
+        // dd($activities);
         // if ($request->ajax()){
         //     $activities = Activity::all();
         //     return DataTables::of($activities)

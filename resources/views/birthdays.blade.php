@@ -25,35 +25,42 @@
                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body">
                             @if ($students->isNotEmpty() || $teachers->isNotEmpty())
-                            <div class="card-deck justify-content-center align-items-center">
-                                @foreach ( $students as $student )
-                                    <div class="row row-cols-1 row-cols-md-3">
-                                        <div class="col mb-4">
-                                            <div class="card" style="width: 170px;">
-                                                <img src="{{asset('img/students/'.$student->photo)}}" class="card-img-top" alt="...">
-                                                <div class="card-body text-center">
-                                                    <h5>{{ $student->name }} {{ $student->lastname }}</h5>
-                                                    <p class="card-text">{{ \Carbon\Carbon::createFromDate($student->birthdate)->age }} años</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                                @foreach ( $teachers as $teacher )
-                                    <div class="row row-cols-1 row-cols-md-3">
-                                        <div class="col mb-4">
-                                            <div class="card" style="width: 170px;">
-                                                <img src="{{asset('img/teachers/'.$teacher->photo)}}" class="card-img-top" alt="...">
-                                                <div class="card-body text-center">
-                                                    <h5>{{ $teacher->name }} {{ $teacher->lastname }}</h5>
-                                                    <p class="card-text">{{ \Carbon\Carbon::createFromDate($teacher->birthdate)->age }} años</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                                
+                                <div class="col-md-8 offset-md-2">
+                                    <table class="table table-bordered table-condensed table-hover text-center">
+                                        <tbody>
+                                            @foreach ( $students as $student )
+                                                <tr>
+                                                    <td>
+                                                        <div class="media align-items-center">
+                                                                <div class="media-left mr-2">
+                                                                    <img src="{{asset('img/students/'.$student->photo)}}" class="media-object" alt="..." style="border:1px solid #b0b8b9;" height="100px" width="100px">
+                                                                </div>
+                                                            <div class="media-body">
+                                                                <h5>{{ $student->name }} {{ $student->lastname }}</h5>
+                                                                <p>{{ \Carbon\Carbon::createFromDate($student->birthdate)->age }} años</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>   
+                                            @endforeach
+                                            @foreach ( $teachers as $teacher )
+                                                <tr>
+                                                    <td>
+                                                        <div class="media align-items-center">
+                                                                <div class="media-left mr-2">
+                                                                    <img src="{{asset('img/teachers/'.$teacher->photo)}}" class="media-object" alt="..." style="border:1px solid #b0b8b9;" height="100px" width="100px">
+                                                                </div>
+                                                            <div class="media-body">
+                                                                <h5>{{ $teacher->name }} {{ $teacher->lastname }}</h5>
+                                                                <p>{{ \Carbon\Carbon::createFromDate($teacher->birthdate)->age }} años</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>   
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             @else
                                 <div class="alert alert-secondary alert-important text-center">
                                     No hay cumpleaños

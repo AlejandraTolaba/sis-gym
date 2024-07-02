@@ -24,7 +24,9 @@ class MovementSeeder extends Seeder
                 'method_of_payment_id' => $methods_of_payment_id[$i],
                 'concept' => $concepts[$i],
                 'type' => $types[$i],
-                'amount' => $amounts[$i]
+                'amount' => $amounts[$i],
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
             ]);
         }
     }

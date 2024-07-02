@@ -66,7 +66,20 @@ class ActivityTest extends TestCase
 
     public function testFilterInscriptionsByDate()
     {
-        $this->assertTrue(true);
+        $this->seed();
+        $user = factory(User::class)->create([
+            'type' => 'A',
+        ]);
+
+        $this->actingAs($user)
+            ->visit('activity/1/inscriptions/index')
+            ->see('Inscripciones de Zumba')
+            ->type('2023-04-01','from')
+            ->type('2023-07-01','to')
+            ->press('Buscar')
+                ->seeInElement("table",'28-04-2023')
+                ->seeInElement("table",'02-06-2023')
+                ->dontSeeInElement("table",'13-07-2023');
     }
 
     public function testChangeStateActivity()

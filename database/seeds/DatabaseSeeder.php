@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TeacherSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(MovementSeeder::class);
+        $this->call(BodyCheckSeeder::class);
     }
 }

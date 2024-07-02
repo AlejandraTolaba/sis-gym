@@ -19,7 +19,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">{{ $teacher->state == 'activo' ? 'Desactivar' : 'Activar' }}</button>
+                    <button type="submit" class="btn btn-primary" name="Confirm-{{$teacher->id}}">{{ $teacher->state == 'activo' ? 'Desactivar' : 'Activar' }}</button>
                 </div>
             </div>
         </form>

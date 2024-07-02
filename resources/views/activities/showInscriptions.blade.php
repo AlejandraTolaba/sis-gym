@@ -38,7 +38,7 @@
                                     </div>
                                     
                                     <div class="col-md-3">
-                                        <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                        <button class="btn btn-primary" name="filter"><i class="fa fa-search"></i> Buscar</button>
                                     </div>
                                 </div> <!-- end row-->
                             </form>

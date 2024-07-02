@@ -69,7 +69,7 @@
                                                         <td>
                                                             <a href="{{ route('bodychecks.edit',$bc->id) }}"><button title="Editar ficha" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
                                                             @if(Auth::user()->type =='A')
-                                                                <a href="" id="Eliminar-{{$bc->id}}" data-target="#modal-delete-{{$bc->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$bc->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
+                                                                <a href="" id="delete-{{$bc->id}}" name="delete-{{$bc->id}}" data-target="#modal-delete-{{$bc->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$bc->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
                                                                 @include('students.bodychecks.destroy')
                                                             @endif
                                                         </td>

@@ -48,7 +48,7 @@
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->type == 'A' ? 'Administrador' : 'Empleado' }}</td>
                                                 <td>
-                                                    <a href="" id="Eliminar-{{$user->id}}" data-target="#modal-delete-{{$user->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$user->id}}" title="Eliminar usuario"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
+                                                    <a href="" id="delete-{{$user->id}}" id="delete-{{$user->id}}" data-target="#modal-delete-{{$user->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$user->id}}" title="Eliminar usuario"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
                                                     @include('users.destroy')
                                                 </td>
                                             </tr>

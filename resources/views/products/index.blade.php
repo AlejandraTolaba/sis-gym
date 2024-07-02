@@ -51,7 +51,7 @@
                                                 <td>${{ number_format($prod->price, 2, ',', '.') }}</td>
                                                 <td>
                                                     <a href="{{ route('products.edit',$prod->id) }}"><button name="Editar" title="Editar producto" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
-                                                    <a href="" id="Eliminar-{{$prod->id}}" data-target="#modal-delete-{{$prod->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$prod->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
+                                                    <a href="" id="delete-{{$prod->id}}" name="delete-{{$prod->id}}" data-target="#modal-delete-{{$prod->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$prod->id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
                                                     @include('products.destroy')
                                                 </td>
                                             </tr>

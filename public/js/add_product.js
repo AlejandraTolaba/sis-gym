@@ -53,11 +53,13 @@ $('.select2_multiple').on("select2:select", function (e) {
 $('.select2_multiple').on("select2:unselect", function (e) {
     data_product = e.params.data.id.split('_');
     sub = $('#subtotal_'+data_product[0]).text();
-    array_id.pop(data_product[0]);
+    // array_id.pop(data_product[0]);
     $('#row'+data_product[0]).remove();
     // console.log(sub);
+    total = $('#input_total').val();
     total -= parseFloat(sub);
-    $('#total').text(total.toFixed(2));
+    // console.log(total);
+    $('#input_total').val(total.toFixed(2));
     if ($("#table tr").length -1 <= 1) {
         $('#products_table').addClass('d-none');
     }

@@ -13,6 +13,7 @@ use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\DataTables;
+use App\Event\InscriptionExpired;
 
 class InscriptionController extends Controller
 {
@@ -50,7 +51,7 @@ class InscriptionController extends Controller
         //     ->rawColumns(['photo','action'])
         //     ->make(true);
         // }
-            
+        event(new InscriptionExpired($student->inscriptions));
         return view('students.inscriptions.index',compact('student'));
     }
 

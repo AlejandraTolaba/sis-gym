@@ -27,7 +27,7 @@ class MovementController extends Controller
             $movements = Movement::whereDate('created_at',$today)->with(['method_of_payment:id,name'])->orderBy('id','desc')->get();
         }
         $today = $today->toDateString();
-        return view('movements.index', compact('today','movements','total_incomes','total_expenses','total','from','to'));
+        return view('movements.index', compact('today','movements','from','to'));
     }
 
     /**

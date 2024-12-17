@@ -1,0 +1,3 @@
+<a href="{{ route('products.edit',$id) }}"><button name="Editar" title="Editar producto" type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button></a>
+<a href="" id="Eliminar-{{$id}}" data-target="#modal-delete-{{$id}}" data-toggle="modal"><button class="btn btn-danger btn-sm" name="Eliminar-{{$id}}"><i class="fa fa-trash-alt"></i> Eliminar</button></a>
+@include('products.destroy')
